@@ -1,0 +1,18 @@
+{
+  "expo": {
+    "extra": {
+      "eas": {
+        "projectId": "d00748b7-5234-40a4-8ac4-f54990df5887"
+      }
+    },
+    "android": {
+      "package": "com.mattlarsen0.personalwebsite"
+    },
+    "ios": {
+      "bundleIdentifier": "com.mattlarsen0.personalwebsite",
+      "infoPlist": {
+        "ITSAppUsesNonExemptEncryption": false
+      }
+    }
+  }
+}

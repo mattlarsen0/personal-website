@@ -1,0 +1,28 @@
+{
+  "name": "personal-website",
+  "version": "1.0.0",
+  "description": "My website",
+  "homepage": "https://github.com/mattlarsen0/personal-website#readme",
+  "bugs": {
+    "url": "https://github.com/mattlarsen0/personal-website/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mattlarsen0/personal-website.git"
+  },
+  "license": "ISC",
+  "author": "",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "devDependencies": {
+    "expo": "^55.0.15",
+    "react": "^19.2.5",
+    "react-native": "^0.85.2",
+    "expo-dev-client": "~55.0.27"
+  },
+  "dependencies": {
+  }
+}
