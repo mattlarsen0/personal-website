@@ -4,8 +4,3 @@ compatibility_date = "2026-05-05"
 pages_build_output_dir = "./dist"
 compatibility_flags = [ "nodejs_compat" ]
 [env.production]
-
-[build]
-command = "npm run build-web"
-cwd = "build_cwd"
-watch_dir = "./dist"
