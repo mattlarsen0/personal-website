@@ -3,12 +3,12 @@ import Resume from "@/components/resume/resume";
 import useStyles from "@/components/styles/styles";
 import TechList from "@/components/techList";
 import { Link } from "expo-router";
-import { Text, View } from "react-native";
+import { ScrollView, Text, View } from "react-native";
 
 export default function Index() {
   const styles = useStyles();
   return (
-    <View style={styles.container}>
+    <ScrollView style={styles.container}>
       <Text style={styles.text}>
         Welcome to my website!
         See my resume below!
@@ -45,6 +45,6 @@ export default function Index() {
           ]}
         />
       </View>
-    </View>
+    </ScrollView>
   );
 }
