@@ -4,7 +4,7 @@ export default function RootLayout() {
   return (
     <Drawer>
       <Drawer.Screen
-        name="index"
+        name="(home)/index"
         options={{
           drawerLabel: 'Home',
           title: 'Home',
@@ -14,8 +14,7 @@ export default function RootLayout() {
         name="(snake3d)/index"
         options={{
           drawerLabel: 'Snake 3D',
-          title: 'Snake 3D',
-          label: 'TEST!!!'
+          title: 'Snake 3D'
         }}
       />
     </Drawer>

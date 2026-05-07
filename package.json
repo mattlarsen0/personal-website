@@ -13,6 +13,7 @@
     "build-ios": "expo export --platform ios"
   },
   "dependencies": {
+    "@expo-google-fonts/roboto": "^0.4.3",
     "@expo/vector-icons": "^15.1.1",
     "@react-navigation/bottom-tabs": "^7.15.11",
     "@react-navigation/drawer": "^7.9.10",
@@ -20,7 +21,7 @@
     "@react-navigation/native": "^7.2.2",
     "expo": "~55.0.21",
     "expo-constants": "~55.0.15",
-    "expo-font": "~55.0.6",
+    "expo-font": "~55.0.7",
     "expo-haptics": "~55.0.14",
     "expo-image": "~55.0.9",
     "expo-linking": "~55.0.14",
