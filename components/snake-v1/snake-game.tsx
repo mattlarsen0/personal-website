@@ -10,73 +10,150 @@ export default function SnakeGame() {
 
 const playAreaSize = 100;
 const goalContents = (<Text>🧇</Text>);
-const playArea = [playAreaSize][playAreaSize];
-const startPosition = [playArea/2, playArea/2];
-const initalSnakeLength = 3;
+const startPosition = [playAreaSize/2, playAreaSize/2];
+const xMax = playAreaSize;
+const xMin = 0;
+const yMax = playAreaSize;
+const yMin = 0;
+const initialSnakeLength = 3;
 const interval = 100;
-const DIRECTIONS = {
-  UP: "up",
-  DOWN: "down",
-  LEFT: "left",
-  RIGHT: "right"
-};
+const snakeMovementSpeed = 1;
+const NumberOfGoals = 1;
+
+enum Direction {
+  Up,
+  Down,
+  Left,
+  Right,
+}
+
+enum TileType {
+  Snake,
+  Goal,
+  Wall,
+  SnakeHead,
+  SnakeTail,
+  Empty
+}
+
+const DeathTiles = [TileType.Wall, TileType.Snake, TileType.SnakeTail, TileType.SnakeHead];
 
 type GameState = {
+  activeTimeout: number;
   length: number;
   position: number[];  // X & Y coordinates
-  direction: string;
+  direction: Direction;
+  playArea: TileType[][]
 }
 
 const startGame = () => {
-  var gameState: GameState = {
-    length: initalSnakeLength,
+  let gameState: GameState = {
+    length: initialSnakeLength,
     position: startPosition,
-    direction: DIRECTIONS.RIGHT,
+    direction: Direction.Right,
+    playArea: [],
+    activeTimeout: 0
   }
-  var expected = Date.now() + interval;
 
+  // fill top and bottom with walls
+  gameState.playArea[0] = Array(playAreaSize).fill(TileType.Wall);
+  gameState.playArea[playAreaSize-1] = Array(playAreaSize).fill(TileType.Wall);
+
+  // fill remaining play area
+  for (let x = 1; x < playAreaSize-1; x++) {
+    gameState.playArea[x] = Array(playAreaSize).fill(TileType.Empty);
+    gameState.playArea[x][0] = TileType.Wall; // Vertical wall on left
+    gameState.playArea[x][playAreaSize-1] = TileType.Wall; // Vertical wall on right
+  }
+
+  startTicking(gameState);
+};
+
+const startTicking = (gameState: GameState) => {
+  let expectedTickLength = Date.now() + interval;
   const tick = () => {
-      var dt = Date.now() - expected; // the drift (positive for overshooting)
-      if (dt > interval) {
-          onPause();
+      let timeElapsed = Date.now() - expectedTickLength;
+      if (timeElapsed > interval) {
+          onPause(gameState);
           return;
       }
 
       onTick(gameState);
 
-      expected += interval;
-      setTimeout(tick, Math.max(0, interval - dt)); // take into account drift
+      expectedTickLength += interval;
+      gameState.activeTimeout = setTimeout(tick, Math.max(0, interval - timeElapsed)); // take into account drift
   }
-  setTimeout(tick, interval);
-};
+  gameState.activeTimeout = setTimeout(tick, interval);
+}
 
-const onPause = () => {
+const onPause = (gameState: GameState) => {
   // stop the game loop
+  clearTimeout(gameState.activeTimeout);
 }
 
-const onResume = () => {
-
+const onResume = (gameState: GameState) => {
+  startTicking(gameState);
 }
 
-const onTick = (gameState) => {
+const onTick = (gameState: GameState) => {
   // move snake
   switch (gameState.direction) {
-    case DIRECTIONS.UP:
-      gameState.position[1] += 1;
+    case Direction.Up:
+      gameState.position[1] += snakeMovementSpeed;
       break;
-    case DIRECTIONS.DOWN:
-      gameState.position[1] -= 1;
+    case Direction.Down:
+      gameState.position[1] -= snakeMovementSpeed;
       break;
-    case DIRECTIONS.LEFT:
-      gameState.position[0] -= 1;
+    case Direction.Left:
+      gameState.position[0] -= snakeMovementSpeed;
       break;
-    case DIRECTIONS.RIGHT:
-      gameState.position[0] += 1;
+    case Direction.Right:
+      gameState.position[0] += snakeMovementSpeed;
       break;
   }
 
   // check for collisions
+  if (gameState.position[0] < xMin || gameState.position[0] > xMax || 
+      gameState.position[1] < yMin || gameState.position[1] > yMax ||
+      gameState.playArea[gameState.position[0]][gameState.position[1]] in DeathTiles) {
+    endGame();
+    return;
+  }
 
-  // check for waffles
+  // check for reward
+  if (gameState.playArea[gameState.position[0]][gameState.position[1]] === TileType.Goal) {
+    grantReward(gameState);
+  }
+}
 
+const grantReward = (gameState: GameState) => {
+    // lengthen snake
+    gameState.length += 1;
+    
+    // clear old waffles (if any remain)
+    gameState.playArea.forEach((column) => {
+      column.forEach((tile) => {
+        if (tile === TileType.Goal) {
+          tile = TileType.Empty;
+        }
+      });
+    });
+
+    // add waffles
+    for (let i = 0; NumberOfGoals > 0 && i < NumberOfGoals * 2; i++) {
+        let x = Math.floor(Math.random() * (playAreaSize - 1)) + 1; // avoid walls when generating random coordinates
+        let y = Math.floor(Math.random() * (playAreaSize - 1)) + 1; 
+
+        if (gameState.playArea[x][y] === TileType.Empty) {
+          gameState.playArea[x][y] = TileType.Goal;
+        }
+    }
+}
+
+const renderFrame = (gameState: GameState) => {
+
+} 
+
+const endGame = () => {
+  // end the game and show score
 }
