@@ -2,6 +2,7 @@ import { Roboto_400Regular } from '@expo-google-fonts/roboto/400Regular';
 import { useFonts } from '@expo-google-fonts/roboto/useFonts';
 import { Drawer } from "expo-router/drawer";
 import { setOptions } from 'expo-splash-screen';
+import { View, Text } from 'react-native';
 
 export default function RootLayout() {
   let [fontsLoaded] = useFonts({
@@ -13,6 +14,10 @@ export default function RootLayout() {
     duration: 1000,
     fade: true,
   });
+
+  if (!fontsLoaded) {
+    return <View><Text>LOADING</Text></View>;
+  }
     
   return (
     <Drawer>
