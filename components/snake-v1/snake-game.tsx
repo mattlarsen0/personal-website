@@ -1,13 +1,14 @@
 import useStyles from "@/components/styles/styles";
 import { Text, View, Button } from "react-native";
 import { FlatList } from "react-native-gesture-handler";
+import { useState } from "react";
 
-const playAreaSize = 100;
+const PlayAreaSize = 30;
 const goalContents = (<Text>🧇</Text>);
-const startPosition = [playAreaSize / 2, playAreaSize / 2];
-const xMax = playAreaSize;
+const startPosition = [PlayAreaSize / 2, PlayAreaSize / 2];
+const xMax = PlayAreaSize;
 const xMin = 0;
-const yMax = playAreaSize;
+const yMax = PlayAreaSize;
 const yMin = 0;
 const initialSnakeLength = 3;
 const interval = 100;
@@ -50,29 +51,32 @@ const initGameState = () => {
   }
 
   // fill top and bottom with walls
-  gameState.playArea[0] = Array(playAreaSize).fill(TileType.Wall);
-  gameState.playArea[playAreaSize - 1] = Array(playAreaSize).fill(TileType.Wall);
+  gameState.playArea[0] = Array(PlayAreaSize).fill(TileType.Wall);
+  gameState.playArea[PlayAreaSize - 1] = Array(PlayAreaSize).fill(TileType.Wall);
 
   // fill remaining play area
-  for (let x = 1; x < playAreaSize - 1; x++) {
-    gameState.playArea[x] = Array(playAreaSize).fill(TileType.Empty);
+  for (let x = 1; x < PlayAreaSize - 1; x++) {
+    gameState.playArea[x] = Array(PlayAreaSize).fill(TileType.Empty);
     gameState.playArea[x][0] = TileType.Wall; // Vertical wall on left
-    gameState.playArea[x][playAreaSize - 1] = TileType.Wall; // Vertical wall on right
+    gameState.playArea[x][PlayAreaSize - 1] = TileType.Wall; // Vertical wall on right
   }
 
   return gameState;
 };
 
-const startTicking = (gameState: GameState) => {
+const startTicking = (gameState: GameState, setState: Function) => {
   let expectedTickLength = Date.now() + interval;
   const tick = () => {
     let timeElapsed = Date.now() - expectedTickLength;
     if (timeElapsed > interval) {
-      onPause(gameState);
+      onPause(gameState, setState);
       return;
     }
 
     onTick(gameState);
+
+    // update state to trigger re-render
+    setState(gameState);
 
     expectedTickLength += interval;
     gameState.activeTimeout = setTimeout(tick, Math.max(0, interval - timeElapsed)); // take into account drift
@@ -80,13 +84,13 @@ const startTicking = (gameState: GameState) => {
   gameState.activeTimeout = setTimeout(tick, interval);
 }
 
-const onPause = (gameState: GameState) => {
+const onPause = (gameState: GameState, setState: Function) => {
   // stop the game loop
   clearTimeout(gameState.activeTimeout);
 }
 
-const onResume = (gameState: GameState) => {
-  startTicking(gameState);
+const onResume = (gameState: GameState, setState: Function) => {
+  startTicking(gameState, setState);
 }
 
 const onTick = (gameState: GameState) => {
@@ -135,8 +139,8 @@ const grantReward = (gameState: GameState) => {
 
   // add waffles
   for (let i = 0; NumberOfGoals > 0 && i < NumberOfGoals * 2; i++) {
-    let x = Math.floor(Math.random() * (playAreaSize - 1)) + 1; // avoid walls when generating random coordinates
-    let y = Math.floor(Math.random() * (playAreaSize - 1)) + 1;
+    let x = Math.floor(Math.random() * (PlayAreaSize - 1)) + 1; // avoid walls when generating random coordinates
+    let y = Math.floor(Math.random() * (PlayAreaSize - 1)) + 1;
 
     if (gameState.playArea[x][y] === TileType.Empty) {
       gameState.playArea[x][y] = TileType.Goal;
@@ -150,9 +154,8 @@ const endGame = () => {
 
 export default function SnakeGame() {
   const styles = useStyles();
-  const gameState = initGameState();
-
-  const tiles = gameState.playArea.map((column) => {
+  const [gameState, setGameState] = useState(initGameState);
+  const tiles = gameState.playArea.map((column, columnIndex) => {
     const columnTiles = column.map((tile) => {
       switch (tile) {
         case TileType.Wall:
@@ -166,28 +169,31 @@ export default function SnakeGame() {
         case TileType.Goal:
           return goalContents;
       }
+    });
 
-      return (
+    return (
+      <View key={columnIndex} style={{ flexDirection: "row" }}>
         <FlatList
-          key={`column-${columnTiles}`}
-          data={columnTiles.map((item, index) => {
+          data={columnTiles.map((item, rowIndex) => {
             return {
-              key: index.toString(),
+              key: `row-${rowIndex}`,
               value: item
             }
           })}
           renderItem={({ item }) => <Text key={item.key}>{item.value}</Text>}
         />
-      )
-    });
-
-    return (
-      <View key="snake-game" style={styles.container}>
-        <Button title="Start Game" onPress={() => startTicking(gameState)} />
-        <Button title="Pause Game" onPress={() => onPause(gameState)} />
-        <Button title="Resume Game" onPress={() => onResume(gameState)} />
-        {tiles}
       </View>
-    );
-  });
+    )
+  }) || [];
+
+  return (
+    <View style={styles.container}>
+      <Button title="Start Game" onPress={() => startTicking(gameState, setGameState)} />
+      <Button title="Pause Game" onPress={() => onPause(gameState, setGameState)} />
+      <Button title="Resume Game" onPress={() => onResume(gameState, setGameState)} />
+      <View style={{ flexDirection: "column" }}>
+        <FlatList data={tiles} renderItem={({ item }) => item}  />
+      </View>
+    </View>
+  );
 }

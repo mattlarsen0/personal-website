@@ -1,4 +1,5 @@
-import { Text, View } from "react-native";
+import SnakeGame from "@/components/snake-v1/snake-game";
+import { View } from "react-native";
 
 export default function Snake3d() {
   return (
@@ -9,7 +10,7 @@ export default function Snake3d() {
         alignItems: "center",
       }}
     >
-      <Text>SNAKE!</Text>
+      <SnakeGame />
     </View>
   );
 }
