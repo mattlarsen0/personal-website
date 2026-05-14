@@ -1,7 +1,7 @@
 import useStyles from "@/components/styles/styles";
 import { Text, View, Button, ListRenderItem } from "react-native";
-import { FlatList } from "react-native-gesture-handler";
-import { useState } from "react";
+import { FlatList, ScrollView } from "react-native-gesture-handler";
+import { useEffect, useState } from "react";
 import { wrap } from "@/utils";
 
 const PlayAreaSize = 30;
@@ -12,7 +12,7 @@ const SnakeXMin = 1;
 const SnakeYMax = PlayAreaSize - 1;
 const SnakeYMin = 1;
 const InitialSnakeLength = 3;
-const GameTickInterval = 100;
+const GameTickInterval = 1000;
 const SnakeMovementSpeed = 1;
 const NumberOfGoals = 1;
 
@@ -32,7 +32,7 @@ enum TileType {
   Empty
 }
 
-const DeathTiles = [TileType.Wall, TileType.Snake, TileType.SnakeTail, TileType.SnakeHead];
+const DeathTiles = [TileType.Snake, TileType.SnakeTail, TileType.SnakeHead];
 
 type GameState = {
   activeTimeout: number;
@@ -205,23 +205,11 @@ const onTick = (gameState: GameState) => {
   }
 
   // wrap snake around if it goes out of bounds
-  if (gameState.position[0] <= SnakeXMin) {
-    gameState.position[0] = SnakeXMax;
-  }
-  if (gameState.position[0] >= SnakeXMax) {
-    gameState.position[0] = SnakeXMin;
-  }
-  if (gameState.position[1] <= SnakeYMin) {
-    gameState.position[1] = SnakeYMax;
-  }
-  if (gameState.position[1] >= SnakeYMax) {
-    gameState.position[1] = SnakeYMin;
-  }
+  gameState.position[0] = wrap(gameState.position[0], SnakeXMin, SnakeXMax);
+  gameState.position[1] = wrap(gameState.position[1], SnakeYMin, SnakeYMax);
 
   // check for collision
-  if (gameState.position[0] < SnakeXMin || gameState.position[0] > SnakeXMax ||
-    gameState.position[1] < SnakeYMin || gameState.position[1] > SnakeYMax ||
-    gameState.playArea[gameState.position[0]][gameState.position[1]] in DeathTiles) {
+  if (gameState.playArea[gameState.position[0]][gameState.position[1]] in DeathTiles) {
     endGame();
     return;
   }
@@ -258,7 +246,21 @@ const endGame = () => {
 
 export default function SnakeGame() {
   const styles = useStyles();
-  const [gameState, setGameState] = useState(initGameState);
+  const [gameState, setGameState] = useState({} as GameState);
+  const [isLoading, setIsLoading] = useState(true);
+  useEffect(() => {
+    setGameState(initGameState());
+    setIsLoading(false);
+  }, []);
+
+  if (isLoading) {
+    return (
+      <View style={styles.container}>
+        <Text>LOADING</Text>
+      </View>
+    );
+  }
+
   const tiles = gameState.playArea.map((column, columnIndex) => {
     const columnTiles = column.map((tile, rowIndex) => {
       const key = `tile-${columnIndex}-${rowIndex}`;
@@ -307,13 +309,13 @@ export default function SnakeGame() {
   });
 
   return (
-    <View style={styles.container}>
+    <ScrollView style={styles.container}>
       <Button title="Start Game" onPress={() => startTicking(gameState, setGameState)} />
       <Button title="Pause Game" onPress={() => onPause(gameState, setGameState)} />
       <Button title="Resume Game" onPress={() => onResume(gameState, setGameState)} />
       <View style={{ display: "flex", flexDirection: "row" }}>
         <FlatList data={tiles} renderItem={({ item }) => item} horizontal={true} />
       </View>
-    </View>
+    </ScrollView>
   );
 }
