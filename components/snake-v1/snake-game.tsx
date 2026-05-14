@@ -1,5 +1,5 @@
 import useStyles from "@/components/styles/styles";
-import { Text, View, Button } from "react-native";
+import { Text, View, Button, ListRenderItem } from "react-native";
 import { FlatList } from "react-native-gesture-handler";
 import { useState } from "react";
 
@@ -156,43 +156,59 @@ export default function SnakeGame() {
   const styles = useStyles();
   const [gameState, setGameState] = useState(initGameState);
   const tiles = gameState.playArea.map((column, columnIndex) => {
-    const columnTiles = column.map((tile) => {
+    const columnTiles = column.map((tile, rowIndex) => {
+      const key = `tile-${columnIndex}-${rowIndex}`;
       switch (tile) {
         case TileType.Wall:
-          return <Text>X</Text>;
+          return {
+            key: key,
+            value: <Text>X</Text>
+          }
         case TileType.Snake:
-          return <Text>O</Text>
+          return {
+            key: key,
+            value: <Text>O</Text>
+          };
         case TileType.SnakeHead:
-          return <Text>:D</Text>;
+          return {
+            key: key,
+            value: <Text>:D</Text>
+          };
         case TileType.SnakeTail:
-          return <Text>0</Text>;
+          return {
+            key: key,
+            value: <Text>0</Text>
+          };
         case TileType.Goal:
-          return goalContents;
+          return {
+            key: key,
+            value: goalContents
+          };
+        case TileType.Empty:
+          return {
+            key: key,
+            value: <Text>.</Text>
+          };
       }
     });
-
+    
     return (
-      <View key={columnIndex} style={{ flexDirection: "row" }}>
+      <View style={{ display: "flex", flexDirection: "column" }}>
         <FlatList
-          data={columnTiles.map((item, rowIndex) => {
-            return {
-              key: `row-${rowIndex}`,
-              value: item
-            }
-          })}
-          renderItem={({ item }) => <Text key={item.key}>{item.value}</Text>}
+          data={columnTiles}
+          renderItem={({ item }) => item.value}
         />
       </View>
     )
-  }) || [];
+  });
 
   return (
     <View style={styles.container}>
       <Button title="Start Game" onPress={() => startTicking(gameState, setGameState)} />
       <Button title="Pause Game" onPress={() => onPause(gameState, setGameState)} />
       <Button title="Resume Game" onPress={() => onResume(gameState, setGameState)} />
-      <View style={{ flexDirection: "column" }}>
-        <FlatList data={tiles} renderItem={({ item }) => item}  />
+      <View style={{ display: "flex", flexDirection: "row" }}>
+        <FlatList data={tiles} renderItem={({ item }) => item} horizontal={true} />
       </View>
     </View>
   );
