@@ -168,7 +168,7 @@ const startTicking = (gameState: GameState, setState: Function) => {
 
     expectedTickLength += GameTickInterval;
     gameState.activeTimeout = setTimeout(tick, Math.max(0, GameTickInterval - timeElapsed)); // take into account drift
-    setState(gameState);
+    setState({...gameState});
   }
   gameState.activeTimeout = setTimeout(tick, GameTickInterval);
 }
@@ -177,7 +177,7 @@ const onPause = (gameState: GameState, setState: Function) => {
   // stop the game loop
   clearTimeout(gameState.activeTimeout);
   gameState.activeTimeout = 0;
-  setState(gameState);
+  setState({...gameState});
 }
 
 const onResume = (gameState: GameState, setState: Function) => {
@@ -244,24 +244,8 @@ const endGame = () => {
   // end the game and show score
 }
 
-export default function SnakeGame() {
-  const styles = useStyles();
-  const [gameState, setGameState] = useState({} as GameState);
-  const [isLoading, setIsLoading] = useState(true);
-  useEffect(() => {
-    setGameState(initGameState());
-    setIsLoading(false);
-  }, []);
-
-  if (isLoading) {
-    return (
-      <View style={styles.container}>
-        <Text>LOADING</Text>
-      </View>
-    );
-  }
-
-  const tiles = gameState.playArea.map((column, columnIndex) => {
+function renderTiles(gameState: GameState) {
+  const tiles = gameState?.playArea?.map((column, columnIndex) => {
     const columnTiles = column.map((tile, rowIndex) => {
       const key = `tile-${columnIndex}-${rowIndex}`;
       switch (tile) {
@@ -299,7 +283,7 @@ export default function SnakeGame() {
     });
     
     return (
-      <View style={{ display: "flex", flexDirection: "column" }}>
+      <View key={`column-view-${columnIndex}`} style={{ display: "flex", flexDirection: "column" }}>
         <FlatList
           data={columnTiles}
           renderItem={({ item }) => item.value}
@@ -307,6 +291,32 @@ export default function SnakeGame() {
       </View>
     )
   });
+
+  return tiles;
+}
+
+export default function SnakeGame() {
+  const styles = useStyles();
+  const [gameState, setGameState] = useState({} as GameState);
+  const [isLoading, setIsLoading] = useState(true);
+  const [tiles, setTiles] = useState([] as React.ReactElement[]);
+
+  useEffect(() => {
+    setGameState(initGameState());
+    setIsLoading(false);
+  }, []);
+
+  useEffect(() => {
+    setTiles(renderTiles(gameState));
+  }, [gameState]);
+
+  if (isLoading) {
+    return (
+      <View style={styles.container}>
+        <Text>LOADING</Text>
+      </View>
+    );
+  }
 
   return (
     <ScrollView style={styles.container}>
