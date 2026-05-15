@@ -9,7 +9,7 @@ import HR from "@/components/utils/hr";
 export default function Index() {
   const styles = useStyles();
   return (
-    <View style={styles.layoutContainer}>
+    <View style={styles.container}>
       <ScrollView style={{ width: '95%' }}>
         <Text style={styles.titleText}>
           Welcome to my website!

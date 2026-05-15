@@ -13,7 +13,6 @@ type Styles = {
   h2: TextStyle;
   h3: TextStyle;
   list: ViewStyle;
-  layoutContainer: ViewStyle;
   centerText: TextStyle;
 }
 
@@ -32,7 +31,6 @@ const useStyles = (refreshStyles?: boolean) => {
     h2: {},
     h3: {},
     list: {},
-    layoutContainer: {},
     centerText: {}
   } as Styles);
 
@@ -49,12 +47,6 @@ const useStyles = (refreshStyles?: boolean) => {
     };
     
     const newStyles = StyleSheet.create({
-      layoutContainer: {
-        flex: 1,
-        alignItems: "center",
-        backgroundColor: colorScheme === "dark" ? blackTextColor : whiteTextColor,
-        color: colorScheme === "dark" ? whiteTextColor : blackTextColor,
-      },
       container: {
         flex: 1,
         alignItems: "center",
@@ -62,7 +54,8 @@ const useStyles = (refreshStyles?: boolean) => {
         color: colorScheme === "dark" ? whiteTextColor : blackTextColor,
       },
       centerText: {
-        ...textStyles
+        ...textStyles,
+        verticalAlign: 'middle'
       },
       text: {
         ...textStyles,
@@ -85,16 +78,27 @@ const useStyles = (refreshStyles?: boolean) => {
           fontFamily: "SpaceMono-Regular",
       },
       snakeButtons: {
+        borderRadius: 2,
+        borderColor: '#98f542',
+        borderWidth: 2,
+        width: 150,
+        height: 150,
+        justifyContent: 'center',
+        alignItems: 'center',
+        verticalAlign: 'middle'
       },
       snakeButtonText: {
         ...textStyles,
+        padding: 20
       },
       snakeButtonSpacer: {
-        display: "flex",
         justifyContent: "center",
         alignItems: "center",
-        padding: 10,
-        borderColor: 'black', // Makes the outline visible
+        flex: 1,
+        borderColor: 'red', // Makes the outline visible
+        borderWidth: 2,
+        margin: 10,
+        padding: 10
       },
       h1: {
         ...textStyles,

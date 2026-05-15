@@ -12,7 +12,7 @@ const SnakeXMin = 1;
 const SnakeYMax = PlayAreaSize - 2;
 const SnakeYMin = 1;
 const InitialSnakeLength = 3;
-const GameTickInterval = 1000;
+const GameTickInterval = 500;
 const SnakeMovementSpeed = 1;
 const NumberOfGoals = 1;
 
@@ -359,40 +359,42 @@ export default function SnakeGame() {
     )
   }
 
-  var zeroWidthSpace = "\u200B";
-
   return (
-    <ScrollView contentContainerStyle={styles.container}>
-      {gameStatusButton}
+    <ScrollView contentContainerStyle={{...styles.container, flexDirection: 'column'}}>
+      <View>
+        <Text style={{...styles.text, padding: 20}}>
+          {gameStatusButton}
+        </Text>
+      </View>
       <View style={{ flexDirection: "row" }}>
-        <FlatList data={tiles} renderItem={({ item }) => item} horizontal={true} />
+        <Text style={styles.text}>
+          <FlatList data={tiles} renderItem={({ item }) => item} horizontal={true} />
+        </Text>
       </View>
-      <View style={{ flexDirection: "row", alignContent: "center" }}>  
-        <View style={styles.snakeButtonSpacer}>
-          <Text>{zeroWidthSpace}</Text>
+      <View style={{ flexDirection: "column", alignContent: "center" }}>
+        <View style={{ flexDirection: "row", alignContent: "center" }}>  
+          <View style={styles.snakeButtonSpacer} />
+          <Pressable onPressIn={() => changeDirection(Direction.Up)} style={styles.snakeButtons}>
+            <Text style={styles.snakeButtonText}>Up</Text>
+          </Pressable>
+          <View style={styles.snakeButtonSpacer} />
         </View>
-        <Pressable onPressIn={() => changeDirection(Direction.Up)} style={styles.snakeButtons}>
-          <Text>Up</Text>
-        </Pressable>
-      </View>
-      <View style={{ flexDirection: "row", alignContent: "center" }}>
-        <Pressable onPressIn={() => changeDirection(Direction.Left)} style={styles.snakeButtons}>
-          <Text>Left</Text>
-        </Pressable>
-        <View style={styles.snakeButtonSpacer}>
-          <Text>{zeroWidthSpace}</Text>
+        <View style={{ flexDirection: "row", alignContent: "center" }}>
+          <Pressable onPressIn={() => changeDirection(Direction.Left)} style={styles.snakeButtons}>
+            <Text style={styles.snakeButtonText}>Left</Text>
+          </Pressable>
+          <View style={styles.snakeButtonSpacer} />
+          <Pressable onPressIn={() => changeDirection(Direction.Right)} style={styles.snakeButtons}>
+            <Text style={styles.snakeButtonText}>Right</Text>
+          </Pressable>
         </View>
-        <Pressable onPressIn={() => changeDirection(Direction.Right)} style={styles.snakeButtons}>
-          <Text>Right</Text>
-        </Pressable>
-      </View>
-      <View style={{ display: "flex", flexDirection: "row", alignContent: "center" }}>  
-        <View style={styles.snakeButtonSpacer}>
-          <Text>test</Text>
+        <View style={{ display: "flex", flexDirection: "row", alignContent: "center" }}>  
+          <View style={styles.snakeButtonSpacer} />
+          <Pressable onPressIn={() => changeDirection(Direction.Down)} style={styles.snakeButtons}>
+            <Text style={styles.snakeButtonText}>Down</Text>
+          </Pressable>
+          <View style={styles.snakeButtonSpacer} />
         </View>
-        <Pressable onPressIn={() => changeDirection(Direction.Down)} style={styles.snakeButtons}>
-          <Text>Down</Text>
-        </Pressable>
       </View>
     </ScrollView>
   );
