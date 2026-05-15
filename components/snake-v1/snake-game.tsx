@@ -185,15 +185,6 @@ const onTick = (gameState: GameState, direction: Direction) => {
   // wrap snake around if it goes out of bounds
   gameState.position = wrapPosition(gameState.position);
 
-  // new head position
-  setTileAtPosition(gameState, gameState.position, TileType.SnakeHead);
-
-  // check for collision
-  if (getTileAtPosition(gameState, gameState.position) in DeathTiles) {
-    endGame();
-    return;
-  }
-
   // check for reward
   if (getTileAtPosition(gameState, gameState.position) === TileType.Goal) {
     grantReward(gameState);
@@ -222,6 +213,15 @@ const onTick = (gameState: GameState, direction: Direction) => {
     // set new tail position
     gameState.snakeTailPosition = newTailPosition;
     setTileAtPosition(gameState, gameState.snakeTailPosition, TileType.SnakeTail);
+  }
+
+  // new head position
+  setTileAtPosition(gameState, gameState.position, TileType.SnakeHead);
+
+  // check for collision
+  if (getTileAtPosition(gameState, gameState.position) in DeathTiles) {
+    endGame();
+    return;
   }
 }
 
