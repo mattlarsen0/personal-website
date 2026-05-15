@@ -38,8 +38,9 @@ type GameState = {
   activeTimeout: number;
   snakeLength: number;
   position: number[];  // X & Y coordinates
-  direction: Direction;
-  playArea: TileType[][]
+  playArea: TileType[][],
+  snakeTailPosition: number[]; // X & Y coordinates
+  direction: Direction
 }
 
 const addSnakeToPlayArea = (gameState: GameState) => {
@@ -75,14 +76,13 @@ const addSnakeToPlayArea = (gameState: GameState) => {
 
     x = wrap(x, SnakeXMin, SnakeXMax);
     y = wrap(y, SnakeYMin, SnakeYMax);
-    
+
     gameState.playArea[x][y] = tile;
   }
 }
 
 const removeSnakeFromPlayArea = (gameState: GameState) => {
   for (let i = 0; i < gameState.snakeLength; i++) {
-
     let x, y;
     switch (gameState.direction) {
       case Direction.Up:
@@ -126,9 +126,10 @@ const initGameState = () => {
   let gameState: GameState = {
     snakeLength: InitialSnakeLength,
     position: StartPosition,
-    direction: Direction.Right,
     playArea: [],
-    activeTimeout: 0
+    activeTimeout: 0,
+    direction: Direction.Right,
+    snakeTailPosition: [StartPosition[0] - InitialSnakeLength + 1, StartPosition[1]]
   }
 
   // fill top and bottom with walls
@@ -168,7 +169,7 @@ const startTicking = (gameState: GameState, setState: Function) => {
 
     expectedTickLength += GameTickInterval;
     gameState.activeTimeout = setTimeout(tick, Math.max(0, GameTickInterval - timeElapsed)); // take into account drift
-    setState({...gameState});
+    setState({ ...gameState });
   }
   gameState.activeTimeout = setTimeout(tick, GameTickInterval);
 }
@@ -177,7 +178,7 @@ const onPause = (gameState: GameState, setState: Function) => {
   // stop the game loop
   clearTimeout(gameState.activeTimeout);
   gameState.activeTimeout = 0;
-  setState({...gameState});
+  setState({ ...gameState });
 }
 
 const onResume = (gameState: GameState, setState: Function) => {
@@ -185,10 +186,26 @@ const onResume = (gameState: GameState, setState: Function) => {
 }
 
 const onTick = (gameState: GameState) => {
-  // remove snake from play area to prepare for movement
-  removeSnakeFromPlayArea(gameState);
+  // change old end of body to new tail
+  switch (gameState.direction) {
+    case Direction.Up:
+      gameState.playArea[gameState.snakeTailPosition[0]][gameState.snakeTailPosition[1] + 1] = TileType.SnakeTail;
+      break;
+    case Direction.Down:
+      gameState.playArea[gameState.snakeTailPosition[0]][gameState.snakeTailPosition[1] - 1] = TileType.SnakeTail;
+      break;
+    case Direction.Left:
+      gameState.playArea[gameState.snakeTailPosition[0] + 1][gameState.snakeTailPosition[1]] = TileType.SnakeTail;
+      break;
+    case Direction.Right:
+      gameState.playArea[gameState.snakeTailPosition[0] - 1][gameState.snakeTailPosition[1]] = TileType.SnakeTail;
+      break;
+  }
 
-  // move snake
+  // old head to body
+  gameState.playArea[gameState.position[0]][gameState.position[1]] = TileType.Snake;
+
+  // move snake forward
   switch (gameState.direction) {
     case Direction.Up:
       gameState.position[1] += SnakeMovementSpeed;
@@ -217,10 +234,10 @@ const onTick = (gameState: GameState) => {
   // check for reward
   if (gameState.playArea[gameState.position[0]][gameState.position[1]] === TileType.Goal) {
     grantReward(gameState);
+  } else {
+    // remove tail of snake
+    gameState.playArea[gameState.snakeTailPosition[0]][gameState.snakeTailPosition[1]] = TileType.Empty;
   }
-
-  // update play area with new snake position
-  addSnakeToPlayArea(gameState);
 }
 
 const grantReward = (gameState: GameState) => {
@@ -271,13 +288,13 @@ function renderTiles(gameState: GameState, styles: ReturnType<typeof useStyles>)
         default:
           throw new Error(`Unexpected tile type ${tile} at coordinates (${columnIndex}, ${rowIndex})`);
       }
-      
+
       return {
         key: key,
         value: <View style={styles.snakeTiles}>{tileContents}</View>
       };
     });
-    
+
     return (
       <View key={`column-view-${columnIndex}`} style={{ display: "flex", flexDirection: "column" }}>
         <FlatList
@@ -314,11 +331,33 @@ export default function SnakeGame() {
     );
   }
 
+  const changeDirection = (newDirection: Direction) => {
+    // prevent snake from reversing
+    if (gameState.direction === Direction.Up && newDirection === Direction.Down) {
+      return;
+    }
+    if (gameState.direction === Direction.Down && newDirection === Direction.Up) {
+      return;
+    }
+    if (gameState.direction === Direction.Left && newDirection === Direction.Right) {
+      return;
+    }
+    if (gameState.direction === Direction.Right && newDirection === Direction.Left) {
+      return;
+    }
+
+    setGameState({ ...gameState, direction: newDirection });
+  };
+
   return (
     <ScrollView style={styles.container}>
       <Button title="Start Game" onPress={() => startTicking(gameState, setGameState)} />
       <Button title="Pause Game" onPress={() => onPause(gameState, setGameState)} />
       <Button title="Resume Game" onPress={() => onResume(gameState, setGameState)} />
+      <Button title="Up" onPress={() => changeDirection(Direction.Up)} />
+      <Button title="Down" onPress={() => changeDirection(Direction.Down)} />
+      <Button title="Left" onPress={() => changeDirection(Direction.Left)} />
+      <Button title="Right" onPress={() => changeDirection(Direction.Right)} />
       <View style={{ display: "flex", flexDirection: "row" }}>
         <FlatList data={tiles} renderItem={({ item }) => item} horizontal={true} />
       </View>
