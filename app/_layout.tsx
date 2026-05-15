@@ -1,4 +1,3 @@
-import { Roboto_400Regular } from '@expo-google-fonts/roboto/400Regular';
 import { useFonts } from '@expo-google-fonts/roboto/useFonts';
 import { Drawer } from "expo-router/drawer";
 import { setOptions } from 'expo-splash-screen';
@@ -6,7 +5,9 @@ import { View, Text } from 'react-native';
 
 export default function RootLayout() {
   let [fontsLoaded] = useFonts({
-      Roboto_400Regular
+      'Merriweather-VariableFont': require('@/assets/fonts/Merriweather-VariableFont.ttf'),
+      'Oswald-VariableFont': require('@/assets/fonts/Oswald-VariableFont.ttf'),
+      'SpaceMono-Regular': require('@/assets/fonts/SpaceMono-Regular.ttf'),
   });
 
   // Set the animation options. This is optional.

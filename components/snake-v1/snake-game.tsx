@@ -1,11 +1,11 @@
 import useStyles from "@/components/styles/styles";
-import { Text, View, Button, ListRenderItem } from "react-native";
+import { Text, View, Button } from "react-native";
 import { FlatList, ScrollView } from "react-native-gesture-handler";
 import { useEffect, useState } from "react";
 import { wrap } from "@/utils";
 
 const PlayAreaSize = 30;
-const goalContents = (<Text>🧇</Text>);
+const goalContents = <Text>🧇</Text>;
 const StartPosition = [14, 14];
 const SnakeXMax = PlayAreaSize - 1;
 const SnakeXMin = 1;
@@ -244,42 +244,38 @@ const endGame = () => {
   // end the game and show score
 }
 
-function renderTiles(gameState: GameState) {
+function renderTiles(gameState: GameState, styles: ReturnType<typeof useStyles>) {
   const tiles = gameState?.playArea?.map((column, columnIndex) => {
     const columnTiles = column.map((tile, rowIndex) => {
       const key = `tile-${columnIndex}-${rowIndex}`;
+      let tileContents;
       switch (tile) {
         case TileType.Wall:
-          return {
-            key: key,
-            value: <Text>X</Text>
-          }
+          tileContents = <Text>X</Text>;
+          break;
         case TileType.Snake:
-          return {
-            key: key,
-            value: <Text>O</Text>
-          };
+          tileContents = <Text>O</Text>;
+          break;
         case TileType.SnakeHead:
-          return {
-            key: key,
-            value: <Text>:D</Text>
-          };
+          tileContents = <Text>:D</Text>;
+          break;
         case TileType.SnakeTail:
-          return {
-            key: key,
-            value: <Text>0</Text>
-          };
+          tileContents = <Text>0</Text>;
+          break;
         case TileType.Goal:
-          return {
-            key: key,
-            value: goalContents
-          };
+          tileContents = goalContents;
+          break;
         case TileType.Empty:
-          return {
-            key: key,
-            value: <Text>.</Text>
-          };
+          tileContents = <Text>.</Text>;
+          break;
+        default:
+          throw new Error(`Unexpected tile type ${tile} at coordinates (${columnIndex}, ${rowIndex})`);
       }
+      
+      return {
+        key: key,
+        value: <View style={styles.snakeTiles}>{tileContents}</View>
+      };
     });
     
     return (
@@ -307,8 +303,8 @@ export default function SnakeGame() {
   }, []);
 
   useEffect(() => {
-    setTiles(renderTiles(gameState));
-  }, [gameState]);
+    setTiles(renderTiles(gameState, styles));
+  }, [gameState, styles]);
 
   if (isLoading) {
     return (

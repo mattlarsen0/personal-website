@@ -7,7 +7,6 @@
     "icon": "./assets/images/icon.png",
     "scheme": "personalwebsite",
     "userInterfaceStyle": "automatic",
-    "newArchEnabled": true,
     "ios": {
       "supportsTablet": true
     },
@@ -18,7 +17,6 @@
         "backgroundImage": "./assets/images/android-icon-background.png",
         "monochromeImage": "./assets/images/android-icon-monochrome.png"
       },
-      "edgeToEdgeEnabled": true,
       "predictiveBackGestureEnabled": false
     },
     "web": {
@@ -39,7 +37,53 @@
           }
         }
       ],
-      "expo-font"
+      [
+        "expo-font",
+        {
+          "fonts": [
+            "./assets/fonts/Merriweather-VariableFont.ttf",
+            "./assets/fonts/Oswald-VariableFont.ttf",
+            "./assets/fonts/SpaceMono-Regular.ttf"
+          ],
+          "android": {
+            "fonts": [
+              {
+                "fontFamily": "Merriweather-VariableFont",
+                "fontDefinitions": [
+                  {
+                    "path": "./assets/fonts/Merriweather-VariableFont.ttf",
+                    "weight": 400
+                  }
+                ]
+              },
+              {
+                "fontFamily": "Oswald-VariableFont",
+                "fontDefinitions": [
+                  {
+                    "path": "./assets/fonts/Oswald-VariableFont.ttf",
+                    "weight": 400
+                  }
+                ]
+              },
+              {
+                "fontFamily": "SpaceMono-Regular",
+                "fontDefinitions": [
+                  {
+                    "path": "./assets/fonts/SpaceMono-Regular.ttf",
+                    "weight": 400
+                  }
+                ]
+              }
+            ]
+          },
+          "ios": {
+            "fonts": [
+              "./assets/fonts/Merriweather-VariableFont.ttf",
+              "./assets/fonts/Oswald-VariableFont.ttf",
+              "./assets/fonts/SpaceMono-Regular.ttf"
+            ]
+          }
+        }]
     ],
     "experiments": {
       "typedRoutes": true,
