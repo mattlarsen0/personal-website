@@ -1,25 +1,42 @@
+import useStyles from '@/components/styles/styles';
 import { useFonts } from '@expo-google-fonts/roboto/useFonts';
 import { Drawer } from "expo-router/drawer";
-import { setOptions } from 'expo-splash-screen';
-import { View, Text } from 'react-native';
+import * as SplashScreen from 'expo-splash-screen';
+import { useEffect } from 'react';
+import { View, Text, Platform } from 'react-native';
+
+SplashScreen.preventAutoHideAsync();
 
 export default function RootLayout() {
-  let [fontsLoaded] = useFonts({
-      'Merriweather-VariableFont': require('@/assets/fonts/Merriweather-VariableFont.ttf'),
-      'Oswald-VariableFont': require('@/assets/fonts/Oswald-VariableFont.ttf'),
+  const styles = useStyles();
+  let [fontsLoaded, error] = useFonts({
+      'Merriweather-Light': require('@/assets/fonts/Merriweather-Light.ttf'),
+      'Oswald-Regular': require('@/assets/fonts/Oswald-Regular.ttf'),
       'SpaceMono-Regular': require('@/assets/fonts/SpaceMono-Regular.ttf'),
   });
-
-  // Set the animation options. This is optional.
-  setOptions({
+    
+  SplashScreen.setOptions({
     duration: 1000,
     fade: true,
   });
 
-  if (!fontsLoaded) {
-    return <View><Text>LOADING</Text></View>;
+  useEffect(() => {
+    if (fontsLoaded) {
+      SplashScreen.hideAsync();
+    } else if (error) {
+      console.warn('Error loading fonts:', error);
+      SplashScreen.hideAsync();
+    }
+  }, [fontsLoaded, error]);
+
+  if (!fontsLoaded && Platform.OS === 'web') {
+    return (
+      <View>
+        <Text>LOADING</Text>
+      </View>
+    )
   }
-    
+
   return (
     <Drawer>
       <Drawer.Screen

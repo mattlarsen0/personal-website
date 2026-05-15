@@ -5,41 +5,74 @@ type Styles = {
   container: ViewStyle;
   text: TextStyle;
   snakeTiles: ViewStyle;
+  snakeButtons: ViewStyle;
+  snakeButtonText: TextStyle;
+  snakeButtonSpacer: ViewStyle;
+  titleText: TextStyle;
+  h1: TextStyle;
+  h2: TextStyle;
+  h3: TextStyle;
+  list: ViewStyle;
+  layoutContainer: ViewStyle;
+  centerText: TextStyle;
 }
 
 const useStyles = (refreshStyles?: boolean) => {
-  const [styles, setStyles] = useState({ container: {}, text: {}, snakeTiles: {} } as Styles);
+  const [stylesInit, setStylesInit] = useState(false);
+  const [styles, setStyles] = useState({
+    init: false, 
+    container: {}, 
+    text: {},
+    snakeTiles: {},
+    snakeButtons: {},
+    snakeButtonText: {},
+    snakeButtonSpacer: {},
+    titleText: {},
+    h1: {},
+    h2: {},
+    h3: {},
+    list: {},
+    layoutContainer: {},
+    centerText: {}
+  } as Styles);
 
   const whiteTextColor = '#e7e7e7';
   const blackTextColor = '#030303';
-  let [fontsLoaded] = useFonts({
-      'Merriweather-VariableFont': require('@/assets/fonts/Merriweather-VariableFont.ttf'),
-      'Oswald-VariableFont': require('@/assets/fonts/Oswald-VariableFont.ttf'),
-      'SpaceMono-Regular': require('@/assets/fonts/SpaceMono-Regular.ttf'),
-  });
-
-  if (!styles.text || refreshStyles) {
+  if (!stylesInit || refreshStyles) {
     const colorScheme = Appearance.getColorScheme();
+    const textStyles: TextStyle = {
+      fontFamily: "Merriweather-Light",
+      color: colorScheme === "dark" ? whiteTextColor : blackTextColor,
+      fontSize: 14,
+      textAlign: "center",
+      verticalAlign: "middle",
+    };
     
     const newStyles = StyleSheet.create({
-      container: {
+      layoutContainer: {
         flex: 1,
-        justifyContent: "center",
         alignItems: "center",
         backgroundColor: colorScheme === "dark" ? blackTextColor : whiteTextColor,
+        color: colorScheme === "dark" ? whiteTextColor : blackTextColor,
+      },
+      container: {
+        flex: 1,
+        alignItems: "center",
+        backgroundColor: colorScheme === "dark" ? blackTextColor : whiteTextColor,
+        color: colorScheme === "dark" ? whiteTextColor : blackTextColor,
+      },
+      centerText: {
+        ...textStyles
       },
       text: {
-        fontFamily: fontsLoaded ? "Oswald-VariableFont" : "Arial",
-        color: colorScheme === "dark" ? whiteTextColor : blackTextColor,
-        fontSize: 12,
-        textAlign: "center",
+        ...textStyles,
+        textAlign: "left",
         verticalAlign: "middle",
       },
       titleText: {
-        fontFamily: fontsLoaded ? "Merriweather-VariableFont" : "Arial",
-        color: colorScheme === "dark" ? whiteTextColor : blackTextColor,
+        ...textStyles,
+        fontFamily: "Oswald-Regular",
         fontSize: 24,
-        textAlign: "center",
         verticalAlign: "middle",
       },
       snakeTiles: {
@@ -49,10 +82,44 @@ const useStyles = (refreshStyles?: boolean) => {
           justifyContent: "center",
           verticalAlign: "middle",
           alignItems: "center",
-          fontFamily: fontsLoaded ? "SpaceMono-Regular" : "Arial",
-      }
+          fontFamily: "SpaceMono-Regular",
+      },
+      snakeButtons: {
+      },
+      snakeButtonText: {
+        ...textStyles,
+      },
+      snakeButtonSpacer: {
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        padding: 10,
+        borderColor: 'black', // Makes the outline visible
+      },
+      h1: {
+        ...textStyles,
+        fontSize: 40,
+        fontWeight: '700',
+        fontFamily: "Oswald-Regular",
+      },
+      h2: {
+        ...textStyles,
+        fontSize: 34,
+        fontWeight: '600',
+        fontFamily: "Oswald-Regular",
+      },
+      h3: {
+        ...textStyles,
+        fontSize: 22,
+        fontWeight: '500',
+        fontFamily: "Oswald-Regular",
+      },
+      list: {
+        margin: 10,
+      },
     });
     setStyles({...newStyles});
+    setStylesInit(true);
   }
 
   return styles;

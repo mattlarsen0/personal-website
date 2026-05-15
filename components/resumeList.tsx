@@ -1,10 +1,12 @@
 import { FlatList, Text } from "react-native";
+import useStyles from "./styles/styles";
 
 type ResumeListProps = {
   data: string[];
 };
 
 export default function ResumeList(props: ResumeListProps) {
+  const styles = useStyles();
   return (
         <FlatList
             data={props.data.map(item => {
@@ -12,8 +14,8 @@ export default function ResumeList(props: ResumeListProps) {
                     key: item
                 }
             })}
-            renderItem={({item}) => <Text>• {item.key}</Text>}
-            style={{ margin: 10 }}
+            renderItem={({item}) => <Text style={styles.text}>• {item.key}</Text>}
+            style={styles.list}
         />
   );
 }

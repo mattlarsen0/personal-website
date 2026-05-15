@@ -1,5 +1,5 @@
 import useStyles from "@/components/styles/styles";
-import { Text, View, Button } from "react-native";
+import { Text, View, Pressable } from "react-native";
 import { FlatList, ScrollView } from "react-native-gesture-handler";
 import { useEffect, useRef, useState } from "react";
 import { wrap } from "@/utils";
@@ -35,11 +35,12 @@ enum TileType {
 const DeathTiles = [TileType.Snake, TileType.SnakeTail, TileType.SnakeHead];
 
 type GameState = {
-  activeTimeout: number,
-  snakeLength: number,
-  position: number[],  // X & Y coordinates
-  playArea: TileType[][],
-  snakeTailPosition: number[] // X & Y coordinates
+  activeTimeout: number;
+  snakeLength: number;
+  position: number[];  // X & Y coordinates
+  playArea: TileType[][];
+  snakeTailPosition: number[]; // X & Y coordinates
+  gameStarted: boolean;
 }
 
 const addSnakeToPlayArea = (gameState: GameState, direction: Direction) => {
@@ -99,7 +100,8 @@ const initGameState = () => {
     position: StartPosition,
     playArea: [],
     activeTimeout: 0,
-    snakeTailPosition: [StartPosition[0] - InitialSnakeLength + 1, StartPosition[1]]
+    snakeTailPosition: [StartPosition[0] - InitialSnakeLength + 1, StartPosition[1]],
+    gameStarted: false,
   }
 
   // fill top and bottom with walls
@@ -185,6 +187,13 @@ const onTick = (gameState: GameState, direction: Direction) => {
   // wrap snake around if it goes out of bounds
   gameState.position = wrapPosition(gameState.position);
 
+  // check for collision
+  if (getTileAtPosition(gameState, gameState.position) in DeathTiles) {
+    endGame();
+    gameState = initGameState();
+    return;
+  }
+
   // check for reward
   if (getTileAtPosition(gameState, gameState.position) === TileType.Goal) {
     grantReward(gameState);
@@ -217,12 +226,6 @@ const onTick = (gameState: GameState, direction: Direction) => {
 
   // new head position
   setTileAtPosition(gameState, gameState.position, TileType.SnakeHead);
-
-  // check for collision
-  if (getTileAtPosition(gameState, gameState.position) in DeathTiles) {
-    endGame();
-    return;
-  }
 }
 
 const grantReward = (gameState: GameState) => {
@@ -334,18 +337,62 @@ export default function SnakeGame() {
 
     directionRef.current = newDirection;
   };
+  
+  let gameStatusButton;
+  if (!gameState) {
+    gameStatusButton = (
+      <Pressable onPressOut={() => startTicking(gameState, setGameState, directionRef)}>+
+        <Text>Start Game</Text>
+      </Pressable>
+    )
+  } else if (gameState.activeTimeout) {
+    gameStatusButton = (
+      <Pressable onPressOut={() => onPause(gameState, setGameState)}>
+        <Text>Pause Game</Text>
+      </Pressable>
+    )
+  } else {
+    gameStatusButton = (
+      <Pressable onPressOut={() => onResume(gameState, setGameState, directionRef)}>
+        <Text>Resume Game</Text>
+      </Pressable>
+    )
+  }
+
+  var zeroWidthSpace = "\u200B";
 
   return (
-    <ScrollView style={styles.container}>
-      <Button title="Start Game" onPress={() => startTicking(gameState, setGameState, directionRef)} />
-      <Button title="Pause Game" onPress={() => onPause(gameState, setGameState)} />
-      <Button title="Resume Game" onPress={() => onResume(gameState, setGameState, directionRef)} />
-      <Button title="Up" onPress={() => changeDirection(Direction.Up)} />
-      <Button title="Down" onPress={() => changeDirection(Direction.Down)} />
-      <Button title="Left" onPress={() => changeDirection(Direction.Left)} />
-      <Button title="Right" onPress={() => changeDirection(Direction.Right)} />
-      <View style={{ display: "flex", flexDirection: "row" }}>
+    <ScrollView contentContainerStyle={styles.container}>
+      {gameStatusButton}
+      <View style={{ flexDirection: "row" }}>
         <FlatList data={tiles} renderItem={({ item }) => item} horizontal={true} />
+      </View>
+      <View style={{ flexDirection: "row", alignContent: "center" }}>  
+        <View style={styles.snakeButtonSpacer}>
+          <Text>{zeroWidthSpace}</Text>
+        </View>
+        <Pressable onPressIn={() => changeDirection(Direction.Up)} style={styles.snakeButtons}>
+          <Text>Up</Text>
+        </Pressable>
+      </View>
+      <View style={{ flexDirection: "row", alignContent: "center" }}>
+        <Pressable onPressIn={() => changeDirection(Direction.Left)} style={styles.snakeButtons}>
+          <Text>Left</Text>
+        </Pressable>
+        <View style={styles.snakeButtonSpacer}>
+          <Text>{zeroWidthSpace}</Text>
+        </View>
+        <Pressable onPressIn={() => changeDirection(Direction.Right)} style={styles.snakeButtons}>
+          <Text>Right</Text>
+        </Pressable>
+      </View>
+      <View style={{ display: "flex", flexDirection: "row", alignContent: "center" }}>  
+        <View style={styles.snakeButtonSpacer}>
+          <Text>test</Text>
+        </View>
+        <Pressable onPressIn={() => changeDirection(Direction.Down)} style={styles.snakeButtons}>
+          <Text>Down</Text>
+        </Pressable>
       </View>
     </ScrollView>
   );
