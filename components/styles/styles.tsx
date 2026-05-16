@@ -4,10 +4,6 @@ import { Appearance, StyleSheet, TextStyle, ViewStyle } from "react-native";
 type Styles = {
   container: ViewStyle;
   text: TextStyle;
-  snakeTiles: ViewStyle;
-  snakeButtons: ViewStyle;
-  snakeButtonText: TextStyle;
-  snakeButtonSpacer: ViewStyle;
   titleText: TextStyle;
   h1: TextStyle;
   h2: TextStyle;
@@ -19,13 +15,8 @@ type Styles = {
 const useStyles = (refreshStyles?: boolean) => {
   const [stylesInit, setStylesInit] = useState(false);
   const [styles, setStyles] = useState({
-    init: false, 
     container: {}, 
     text: {},
-    snakeTiles: {},
-    snakeButtons: {},
-    snakeButtonText: {},
-    snakeButtonSpacer: {},
     titleText: {},
     h1: {},
     h2: {},
@@ -67,38 +58,6 @@ const useStyles = (refreshStyles?: boolean) => {
         fontFamily: "Oswald-Regular",
         fontSize: 24,
         verticalAlign: "middle",
-      },
-      snakeTiles: {
-          height: 25,
-          width: 25,
-          display: "flex",
-          justifyContent: "center",
-          verticalAlign: "middle",
-          alignItems: "center",
-          fontFamily: "SpaceMono-Regular",
-      },
-      snakeButtons: {
-        borderRadius: 2,
-        borderColor: '#98f542',
-        borderWidth: 2,
-        width: 150,
-        height: 150,
-        justifyContent: 'center',
-        alignItems: 'center',
-        verticalAlign: 'middle'
-      },
-      snakeButtonText: {
-        ...textStyles,
-        padding: 20
-      },
-      snakeButtonSpacer: {
-        justifyContent: "center",
-        alignItems: "center",
-        flex: 1,
-        borderColor: 'red', // Makes the outline visible
-        borderWidth: 2,
-        margin: 10,
-        padding: 10
       },
       h1: {
         ...textStyles,

@@ -3,6 +3,7 @@ import { Text, View, Pressable } from "react-native";
 import { FlatList, ScrollView } from "react-native-gesture-handler";
 import { useEffect, useRef, useState } from "react";
 import { wrap } from "@/utils";
+import useSnakeStyles from "../styles/snakeStyles";
 
 const PlayAreaSize = 30;
 const goalContents = <Text>🧇</Text>;
@@ -40,7 +41,7 @@ type GameState = {
   position: number[];  // X & Y coordinates
   playArea: TileType[][];
   snakeTailPosition: number[]; // X & Y coordinates
-  gameStarted: boolean;
+  gameRunning: boolean;
 }
 
 const addSnakeToPlayArea = (gameState: GameState, direction: Direction) => {
@@ -101,7 +102,7 @@ const initGameState = () => {
     playArea: [],
     activeTimeout: 0,
     snakeTailPosition: [StartPosition[0] - InitialSnakeLength + 1, StartPosition[1]],
-    gameStarted: false,
+    gameRunning: false,
   }
 
   // fill top and bottom with walls
@@ -143,6 +144,8 @@ const startTicking = (gameState: GameState, setState: Function, directionRef: Re
   if (gameState.activeTimeout) {
     return;
   }
+
+  gameState.gameRunning = true;
 
   const tick = () => {
     onTick(gameState, directionRef.current);
@@ -249,7 +252,7 @@ const endGame = () => {
   // end the game and show score
 }
 
-function renderTiles(gameState: GameState, styles: ReturnType<typeof useStyles>) {
+function renderTiles(gameState: GameState, snakeStyles: ReturnType<typeof useSnakeStyles>) {
   const tiles = gameState?.playArea?.map((column, columnIndex) => {
     const columnTiles = column.map((tile, rowIndex) => {
       const key = `tile-${columnIndex}-${rowIndex}`;
@@ -279,7 +282,7 @@ function renderTiles(gameState: GameState, styles: ReturnType<typeof useStyles>)
 
       return {
         key: key,
-        value: <View style={styles.snakeTiles}>{tileContents}</View>
+        value: <View style={snakeStyles.tiles}>{tileContents}</View>
       };
     });
 
@@ -298,9 +301,11 @@ function renderTiles(gameState: GameState, styles: ReturnType<typeof useStyles>)
 
 export default function SnakeGame() {
   const styles = useStyles();
+  const snakeStyles = useSnakeStyles();
   const [gameState, setGameState] = useState({} as GameState);
   const [isLoading, setIsLoading] = useState(true);
   const [tiles, setTiles] = useState([] as React.ReactElement[]);
+  const [showInstructions, setShowInstructions] = useState(true);
   const directionRef = useRef(Direction.Right);
 
   useEffect(() => {
@@ -309,7 +314,7 @@ export default function SnakeGame() {
   }, []);
 
   useEffect(() => {
-    setTiles(renderTiles(gameState, styles));
+    setTiles(renderTiles(gameState, snakeStyles));
   }, [gameState, styles]);
 
   if (isLoading) {
@@ -337,11 +342,15 @@ export default function SnakeGame() {
 
     directionRef.current = newDirection;
   };
-  
+  const upTouch = () => changeDirection(Direction.Up);
+  const downTouch = () => changeDirection(Direction.Down);
+  const rightTouch = () => changeDirection(Direction.Right);
+  const leftTouch = () => changeDirection(Direction.Left);
+
   let gameStatusButton;
-  if (!gameState) {
+  if (!gameState.gameRunning) {
     gameStatusButton = (
-      <Pressable onPressOut={() => startTicking(gameState, setGameState, directionRef)}>+
+      <Pressable onPressOut={() => startTicking(gameState, setGameState, directionRef)}>
         <Text>Start Game</Text>
       </Pressable>
     )
@@ -359,41 +368,55 @@ export default function SnakeGame() {
     )
   }
 
+  let instructions;
+  if (showInstructions) {
+    instructions = (
+      <View style={{  alignItems: 'center'}}>
+        <Text style={styles.h1}>S-N-A-K-E-3-D</Text>
+        <Text style={styles.h3}>Collect the waffles to grow longer! Touch or hover over the control to change direction!</Text>
+        <Pressable onPressIn={() => setShowInstructions(false)} style={snakeStyles.buttons}>
+          <Text style={snakeStyles.buttonText}>Hide Instructions</Text>
+        </Pressable>
+      </View>
+    );
+  }
+
   return (
     <ScrollView contentContainerStyle={{...styles.container, flexDirection: 'column'}}>
+      {instructions}
       <View>
         <Text style={{...styles.text, padding: 20}}>
           {gameStatusButton}
         </Text>
       </View>
-      <View style={{ flexDirection: "row" }}>
-        <Text style={styles.text}>
+      <View style={{ flexDirection: "row", padding: 20 }}>
+        <Text style={styles.centerText}>
           <FlatList data={tiles} renderItem={({ item }) => item} horizontal={true} />
         </Text>
       </View>
-      <View style={{ flexDirection: "column", alignContent: "center" }}>
-        <View style={{ flexDirection: "row", alignContent: "center" }}>  
-          <View style={styles.snakeButtonSpacer} />
-          <Pressable onPressIn={() => changeDirection(Direction.Up)} style={styles.snakeButtons}>
-            <Text style={styles.snakeButtonText}>Up</Text>
+      <View style={{ flexDirection: "column" }}>
+        <View style={{ flexDirection: "row" }}>  
+          <View style={snakeStyles.buttonSpacer} />
+          <Pressable onHoverIn={upTouch} onPressIn={upTouch} style={snakeStyles.buttons}>
+            <Text style={snakeStyles.buttonText}>Up</Text>
           </Pressable>
-          <View style={styles.snakeButtonSpacer} />
+          <View style={snakeStyles.buttonSpacer} />
         </View>
-        <View style={{ flexDirection: "row", alignContent: "center" }}>
-          <Pressable onPressIn={() => changeDirection(Direction.Left)} style={styles.snakeButtons}>
-            <Text style={styles.snakeButtonText}>Left</Text>
+        <View style={{ flexDirection: "row" }}>
+          <Pressable onHoverIn={leftTouch} onPressIn={leftTouch} style={snakeStyles.buttons}>
+            <Text style={snakeStyles.buttonText}>Left</Text>
           </Pressable>
-          <View style={styles.snakeButtonSpacer} />
-          <Pressable onPressIn={() => changeDirection(Direction.Right)} style={styles.snakeButtons}>
-            <Text style={styles.snakeButtonText}>Right</Text>
+          <View style={snakeStyles.buttonSpacer} />
+          <Pressable onHoverIn={rightTouch} onPressIn={rightTouch} style={snakeStyles.buttons}>
+            <Text style={snakeStyles.buttonText}>Right</Text>
           </Pressable>
         </View>
-        <View style={{ display: "flex", flexDirection: "row", alignContent: "center" }}>  
-          <View style={styles.snakeButtonSpacer} />
-          <Pressable onPressIn={() => changeDirection(Direction.Down)} style={styles.snakeButtons}>
-            <Text style={styles.snakeButtonText}>Down</Text>
+        <View style={{ display: "flex", flexDirection: "row" }}>  
+          <View style={snakeStyles.buttonSpacer} />
+          <Pressable onHoverIn={downTouch} onPressIn={downTouch} style={snakeStyles.buttons}>
+            <Text style={snakeStyles.buttonText}>Down</Text>
           </Pressable>
-          <View style={styles.snakeButtonSpacer} />
+          <View style={snakeStyles.buttonSpacer} />
         </View>
       </View>
     </ScrollView>
