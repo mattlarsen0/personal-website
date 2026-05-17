@@ -89,7 +89,7 @@ const addGoals = (gameState: GameState) => {
     const y = Math.floor(Math.random() * (PlayAreaSize - 1)) + 1;
 
     if (gameState.playArea[x][y] === TileType.Empty) {
-      gameState.playArea[x][y] = TileType.Goal;
+      setTileAtPosition(gameState, [x, y], TileType.Goal);
       goalsAdded++;
     }
   }
@@ -150,7 +150,9 @@ const startTicking = (gameState: GameState, setState: Function, directionRef: Re
   const tick = () => {
     onTick(gameState, directionRef.current);
 
-    gameState.activeTimeout = setTimeout(tick, GameTickInterval);
+    if (gameState.gameRunning) {
+      gameState.activeTimeout = setTimeout(tick, GameTickInterval);
+    }
     setState({ ...gameState });
   }
   gameState.activeTimeout = setTimeout(tick, GameTickInterval);
@@ -190,15 +192,17 @@ const onTick = (gameState: GameState, direction: Direction) => {
   // wrap snake around if it goes out of bounds
   gameState.position = wrapPosition(gameState.position);
 
+  const newTile = getTileAtPosition(gameState, gameState.position);
+
   // check for collision
-  if (getTileAtPosition(gameState, gameState.position) in DeathTiles) {
-    endGame();
+  if (DeathTiles.includes(newTile)) {
+    endGame(gameState);
     gameState = initGameState();
     return;
   }
 
   // check for reward
-  if (getTileAtPosition(gameState, gameState.position) === TileType.Goal) {
+  if (newTile === TileType.Goal) {
     grantReward(gameState);
   } else {
     // remove tail of snake
@@ -248,8 +252,8 @@ const grantReward = (gameState: GameState) => {
   addGoals(gameState);
 }
 
-const endGame = () => {
-  // end the game and show score
+const endGame = (gameState: GameState) => {
+  clearTimeout(gameState.activeTimeout);
 }
 
 function renderTiles(gameState: GameState, snakeStyles: ReturnType<typeof useSnakeStyles>) {
@@ -285,7 +289,6 @@ function renderTiles(gameState: GameState, snakeStyles: ReturnType<typeof useSna
         value: <View style={snakeStyles.tiles}>{tileContents}</View>
       };
     });
-
     return (
       <View key={`column-view-${columnIndex}`} style={{ display: "flex", flexDirection: "column" }}>
         <FlatList
@@ -305,7 +308,6 @@ export default function SnakeGame() {
   const [gameState, setGameState] = useState({} as GameState);
   const [isLoading, setIsLoading] = useState(true);
   const [tiles, setTiles] = useState([] as React.ReactElement[]);
-  const [showInstructions, setShowInstructions] = useState(true);
   const directionRef = useRef(Direction.Right);
 
   useEffect(() => {
