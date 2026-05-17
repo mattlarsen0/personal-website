@@ -368,24 +368,14 @@ export default function SnakeGame() {
     )
   }
 
-  let instructions;
-  if (showInstructions) {
-    instructions = (
+  return (
+    <ScrollView contentContainerStyle={{...styles.container, flexDirection: 'column'}}>
       <View style={{  alignItems: 'center'}}>
         <Text style={styles.h1}>S-N-A-K-E-3-D</Text>
         <Text style={styles.h3}>Collect the waffles to grow longer! Touch or hover over the control to change direction!</Text>
-        <Pressable onPressIn={() => setShowInstructions(false)} style={snakeStyles.buttons}>
-          <Text style={snakeStyles.buttonText}>Hide Instructions</Text>
-        </Pressable>
       </View>
-    );
-  }
-
-  return (
-    <ScrollView contentContainerStyle={{...styles.container, flexDirection: 'column'}}>
-      {instructions}
-      <View>
-        <Text style={{...styles.text, padding: 20}}>
+      <View style={snakeStyles.gameStatusButtons}>
+        <Text style={snakeStyles.buttonText}>
           {gameStatusButton}
         </Text>
       </View>
@@ -397,23 +387,23 @@ export default function SnakeGame() {
       <View style={{ flexDirection: "column" }}>
         <View style={{ flexDirection: "row" }}>  
           <View style={snakeStyles.buttonSpacer} />
-          <Pressable onHoverIn={upTouch} onPressIn={upTouch} style={snakeStyles.buttons}>
+          <Pressable onHoverIn={upTouch} onPressIn={upTouch} style={snakeStyles.controlButtons}>
             <Text style={snakeStyles.buttonText}>Up</Text>
           </Pressable>
           <View style={snakeStyles.buttonSpacer} />
         </View>
         <View style={{ flexDirection: "row" }}>
-          <Pressable onHoverIn={leftTouch} onPressIn={leftTouch} style={snakeStyles.buttons}>
+          <Pressable onHoverIn={leftTouch} onPressIn={leftTouch} style={snakeStyles.controlButtons}>
             <Text style={snakeStyles.buttonText}>Left</Text>
           </Pressable>
           <View style={snakeStyles.buttonSpacer} />
-          <Pressable onHoverIn={rightTouch} onPressIn={rightTouch} style={snakeStyles.buttons}>
+          <Pressable onHoverIn={rightTouch} onPressIn={rightTouch} style={snakeStyles.controlButtons}>
             <Text style={snakeStyles.buttonText}>Right</Text>
           </Pressable>
         </View>
         <View style={{ display: "flex", flexDirection: "row" }}>  
           <View style={snakeStyles.buttonSpacer} />
-          <Pressable onHoverIn={downTouch} onPressIn={downTouch} style={snakeStyles.buttons}>
+          <Pressable onHoverIn={downTouch} onPressIn={downTouch} style={snakeStyles.controlButtons}>
             <Text style={snakeStyles.buttonText}>Down</Text>
           </Pressable>
           <View style={snakeStyles.buttonSpacer} />

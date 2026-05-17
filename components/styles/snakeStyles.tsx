@@ -1,13 +1,13 @@
 import { useState } from "react";
 import { StyleSheet, TextStyle, ViewStyle } from "react-native";
 import useStyles from "./styles";
-import { red } from "react-native-reanimated/lib/typescript/Colors";
 
 type SnakeStyles = {
   tiles: ViewStyle;
-  buttons: ViewStyle;
   buttonText: TextStyle;
   buttonSpacer: ViewStyle;
+  controlButtons: ViewStyle;
+  gameStatusButtons: ViewStyle;
 }
 
 const useSnakeStyles = (refreshStyles?: boolean) => {
@@ -15,7 +15,6 @@ const useSnakeStyles = (refreshStyles?: boolean) => {
   const styles = useStyles();
   const [snakeStyles, setSnakeStyles] = useState({
     tiles: {},
-    buttons: {},
     buttonText: {},
     buttonSpacer: {},
   } as SnakeStyles);
@@ -32,10 +31,24 @@ const useSnakeStyles = (refreshStyles?: boolean) => {
           alignItems: "center",
           fontFamily: "SpaceMono-Regular",
       },
-      buttons: {
-        borderRadius: 2,
-        borderColor: '#98f542',
-        borderWidth: 2,
+      gameStatusButtons: {
+        borderRadius: 3,
+        borderColor: '#285fab',
+        backgroundColor: '#fcca0d',
+        borderWidth: 4,
+        width: 150,
+        height: 75,
+        justifyContent: 'center',
+        alignItems: 'center',
+        verticalAlign: 'middle',
+        margin: 5,
+        padding: 5
+      },
+      controlButtons: {
+        borderRadius: 3,
+        borderWidth: 4,
+        borderColor: '#838383',
+        backgroundColor: '#B3B3B3',
         width: 75,
         height: 75,
         justifyContent: 'center',
@@ -47,7 +60,6 @@ const useSnakeStyles = (refreshStyles?: boolean) => {
       buttonText: {
         ...styles.text,
         padding: 20,
-        color: 'red'
       },
       buttonSpacer: {
         justifyContent: "center",
