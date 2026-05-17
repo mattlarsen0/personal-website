@@ -125,11 +125,11 @@ const initGameState = () => {
   return gameState;
 };
 
-function getTileAtPosition (gameState: GameState, position: number[]) {
+function getTileAtPosition(gameState: GameState, position: number[]) {
   return gameState.playArea[position[0]][position[1]];
 }
 
-function setTileAtPosition (gameState: GameState, position: number[], tileType: TileType) {
+function setTileAtPosition(gameState: GameState, position: number[], tileType: TileType) {
   gameState.playArea[position[0]][position[1]] = tileType;
 }
 
@@ -217,7 +217,7 @@ const onTick = (gameState: GameState, direction: Direction) => {
         return position;
       }
     })
-    
+
     if (!newTailPosition) {
       throw new Error("Failed to find new tail position");
     }
@@ -347,37 +347,31 @@ export default function SnakeGame() {
   const rightTouch = () => changeDirection(Direction.Right);
   const leftTouch = () => changeDirection(Direction.Left);
 
-  let gameStatusButton;
+  let gameStatusText;
+  let gameStatusAction;
   if (!gameState.gameRunning) {
-    gameStatusButton = (
-      <Pressable onPressOut={() => startTicking(gameState, setGameState, directionRef)}>
-        <Text>Start Game</Text>
-      </Pressable>
-    )
+    gameStatusText = "Start Game";
+    gameStatusAction = () => startTicking(gameState, setGameState, directionRef)
   } else if (gameState.activeTimeout) {
-    gameStatusButton = (
-      <Pressable onPressOut={() => onPause(gameState, setGameState)}>
-        <Text>Pause Game</Text>
-      </Pressable>
-    )
+    gameStatusText = "Pause Game";
+    gameStatusAction = () => onPause(gameState, setGameState);
   } else {
-    gameStatusButton = (
-      <Pressable onPressOut={() => onResume(gameState, setGameState, directionRef)}>
-        <Text>Resume Game</Text>
-      </Pressable>
-    )
+    gameStatusText = "Resume Game";
+    gameStatusAction = () => onResume(gameState, setGameState, directionRef);
   }
-
+  
   return (
-    <ScrollView contentContainerStyle={{...styles.container, flexDirection: 'column'}}>
-      <View style={{  alignItems: 'center'}}>
+    <ScrollView contentContainerStyle={{ ...styles.container, flexDirection: 'column' }}>
+      <View style={{ alignItems: 'center' }}>
         <Text style={styles.h1}>S-N-A-K-E-3-D</Text>
         <Text style={styles.h3}>Collect the waffles to grow longer! Touch or hover over the control to change direction!</Text>
       </View>
-      <View style={snakeStyles.gameStatusButtons}>
-        <Text style={snakeStyles.buttonText}>
-          {gameStatusButton}
-        </Text>
+      <View>
+        <Pressable onPressOut={gameStatusAction}>
+          <View style={snakeStyles.gameStatusButtons}>
+            <Text>{gameStatusText}</Text>
+          </View>
+        </Pressable>
       </View>
       <View style={{ flexDirection: "row", padding: 20 }}>
         <Text style={styles.centerText}>
@@ -385,7 +379,7 @@ export default function SnakeGame() {
         </Text>
       </View>
       <View style={{ flexDirection: "column" }}>
-        <View style={{ flexDirection: "row" }}>  
+        <View style={{ flexDirection: "row" }}>
           <View style={snakeStyles.buttonSpacer} />
           <Pressable onHoverIn={upTouch} onPressIn={upTouch} style={snakeStyles.controlButtons}>
             <Text style={snakeStyles.buttonText}>Up</Text>
@@ -401,7 +395,7 @@ export default function SnakeGame() {
             <Text style={snakeStyles.buttonText}>Right</Text>
           </Pressable>
         </View>
-        <View style={{ display: "flex", flexDirection: "row" }}>  
+        <View style={{ display: "flex", flexDirection: "row" }}>
           <View style={snakeStyles.buttonSpacer} />
           <Pressable onHoverIn={downTouch} onPressIn={downTouch} style={snakeStyles.controlButtons}>
             <Text style={snakeStyles.buttonText}>Down</Text>
