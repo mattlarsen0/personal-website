@@ -5,18 +5,6 @@ import { useEffect, useRef, useState } from "react";
 import { wrap } from "@/utils";
 import useSnakeStyles from "../styles/snakeStyles";
 
-const PlayAreaSize = 30;
-const goalContents = <Text>🧇</Text>;
-const StartPosition = [14, 14];
-const SnakeXMax = PlayAreaSize - 2; // minus 2, for walls and 0-indexing
-const SnakeXMin = 1;
-const SnakeYMax = PlayAreaSize - 2;
-const SnakeYMin = 1;
-const InitialSnakeLength = 3;
-const GameTickInterval = 500;
-const SnakeMovementSpeed = 1;
-const NumberOfGoals = 1;
-
 enum Direction {
   Up,
   Down,
@@ -33,45 +21,65 @@ enum TileType {
   Empty
 }
 
+enum GameStatus {
+  Running,
+  Win,
+  Lost,
+  Paused,
+  Initiated
+}
+
+const PlayAreaSize = 30;
+const goalContents = <Text>🧇</Text>;
+const StartPosition = [14, 14];
+const SnakeXMax = PlayAreaSize - 2; // minus 2, for walls and 0-indexing
+const SnakeXMin = 1;
+const SnakeYMax = PlayAreaSize - 2;
+const SnakeYMin = 1;
+const InitialSnakeLength = 20;
+const GameTickInterval = 500;
+const SnakeMovementSpeed = 1;
+const NumberOfGoals = 1;
+const DefaultDirection = Direction.Right;
+
 const DeathTiles = [TileType.Snake, TileType.SnakeTail, TileType.SnakeHead];
 
 type GameState = {
   activeTimeout: number;
-  snakeLength: number;
-  position: number[];  // X & Y coordinates
   playArea: TileType[][];
-  snakeTailPosition: number[]; // X & Y coordinates
-  gameRunning: boolean;
+  snakeBody: number[][]; // Array of XY coordinates
+  status: GameStatus
 }
 
 const addSnakeToPlayArea = (gameState: GameState, direction: Direction) => {
-  for (let i = 0; i < gameState.snakeLength; i++) {
+  for (let i = 0; i < InitialSnakeLength; i++) {
     let tile;
     if (i === 0) {
       tile = TileType.SnakeHead;
-    } else if (i === gameState.snakeLength - 1) {
+    } else if (i === InitialSnakeLength - 1) {
       tile = TileType.SnakeTail;
     } else {
       tile = TileType.Snake;
     }
 
     let x, y;
+    const snakeHeadPosition = i === 0 ? StartPosition : gameState.snakeBody[0];
     switch (direction) {
       case Direction.Up:
-        x = gameState.position[0];
-        y = gameState.position[1] + i;
+        x = snakeHeadPosition[0];
+        y = snakeHeadPosition[1] + i;
         break;
       case Direction.Down:
-        x = gameState.position[0];
-        y = gameState.position[1] - i;
+        x = snakeHeadPosition[0];
+        y = snakeHeadPosition[1] - i;
         break;
       case Direction.Left:
-        x = gameState.position[0] + i;
-        y = gameState.position[1];
+        x = snakeHeadPosition[0] + i;
+        y = snakeHeadPosition[1];
         break;
       case Direction.Right:
-        x = gameState.position[0] - i;
-        y = gameState.position[1];
+        x = snakeHeadPosition[0] - i;
+        y = snakeHeadPosition[1];
         break;
     }
 
@@ -79,6 +87,7 @@ const addSnakeToPlayArea = (gameState: GameState, direction: Direction) => {
     y = wrap(y, SnakeYMin, SnakeYMax);
 
     gameState.playArea[x][y] = tile;
+    gameState.snakeBody.push([x, y]);
   }
 }
 
@@ -97,12 +106,10 @@ const addGoals = (gameState: GameState) => {
 
 const initGameState = () => {
   let gameState: GameState = {
-    snakeLength: InitialSnakeLength,
-    position: StartPosition,
     playArea: [],
     activeTimeout: 0,
-    snakeTailPosition: [StartPosition[0] - InitialSnakeLength + 1, StartPosition[1]],
-    gameRunning: false,
+    snakeBody: [],
+    status: GameStatus.Initiated
   }
 
   // fill top and bottom with walls
@@ -145,12 +152,12 @@ const startTicking = (gameState: GameState, setState: Function, directionRef: Re
     return;
   }
 
-  gameState.gameRunning = true;
+  gameState.status = GameStatus.Running;
 
   const tick = () => {
     onTick(gameState, directionRef.current);
 
-    if (gameState.gameRunning) {
+    if (gameState.status === GameStatus.Running) {
       gameState.activeTimeout = setTimeout(tick, GameTickInterval);
     }
     setState({ ...gameState });
@@ -162,6 +169,7 @@ const onPause = (gameState: GameState, setState: Function) => {
   // stop the game loop
   clearTimeout(gameState.activeTimeout);
   gameState.activeTimeout = 0;
+  gameState.status = GameStatus.Paused;
   setState({ ...gameState });
 }
 
@@ -170,76 +178,59 @@ const onResume = (gameState: GameState, setState: Function, directionRef: React.
 }
 
 const onTick = (gameState: GameState, direction: Direction) => {
+  const snakeHeadPosition = gameState.snakeBody[0];
+
   // old head to body
-  setTileAtPosition(gameState, gameState.position, TileType.Snake);
+  setTileAtPosition(gameState, snakeHeadPosition, TileType.Snake);
 
   // move snake forward
+  let newSnakeHeadPosition = [...snakeHeadPosition]
   switch (direction) {
     case Direction.Up:
-      gameState.position[1] -= SnakeMovementSpeed;
+      newSnakeHeadPosition[1] -= SnakeMovementSpeed;
       break;
     case Direction.Down:
-      gameState.position[1] += SnakeMovementSpeed;
+      newSnakeHeadPosition[1] += SnakeMovementSpeed;
       break;
     case Direction.Left:
-      gameState.position[0] -= SnakeMovementSpeed;
+      newSnakeHeadPosition[0] -= SnakeMovementSpeed;
       break;
     case Direction.Right:
-      gameState.position[0] += SnakeMovementSpeed;
+      newSnakeHeadPosition[0] += SnakeMovementSpeed;
       break;
   }
 
   // wrap snake around if it goes out of bounds
-  gameState.position = wrapPosition(gameState.position);
+  newSnakeHeadPosition = wrapPosition(newSnakeHeadPosition);
 
-  const newTile = getTileAtPosition(gameState, gameState.position);
+  const newTile = getTileAtPosition(gameState, newSnakeHeadPosition);
 
   // check for collision
   if (DeathTiles.includes(newTile)) {
     endGame(gameState);
-    gameState = initGameState();
     return;
   }
 
   // check for reward
   if (newTile === TileType.Goal) {
-    grantReward(gameState);
+    moveRewards(gameState);
   } else {
+    const snakeTailPosition = gameState.snakeBody[gameState.snakeBody.length - 1];
     // remove tail of snake
-    setTileAtPosition(gameState, gameState.snakeTailPosition, TileType.Empty);
+    setTileAtPosition(gameState, snakeTailPosition, TileType.Empty);
+    gameState.snakeBody.pop();
 
-    // find old end of body
-    const possibleBodyPositions = [
-      wrapPosition([gameState.snakeTailPosition[0] + 1, gameState.snakeTailPosition[1]]),
-      wrapPosition([gameState.snakeTailPosition[0] - 1, gameState.snakeTailPosition[1]]),
-      wrapPosition([gameState.snakeTailPosition[0], gameState.snakeTailPosition[1] + 1]),
-      wrapPosition([gameState.snakeTailPosition[0], gameState.snakeTailPosition[1] - 1]),
-    ];
-
-    const newTailPosition = possibleBodyPositions.find((position) => {
-      if (getTileAtPosition(gameState, position) === TileType.Snake) {
-        return position;
-      }
-    })
-
-    if (!newTailPosition) {
-      throw new Error("Failed to find new tail position");
-    }
-
-    // set new tail position
-    gameState.snakeTailPosition = newTailPosition;
-    setTileAtPosition(gameState, gameState.snakeTailPosition, TileType.SnakeTail);
+    // set old "end of body" to tail
+    const newSnakeTailPosition = gameState.snakeBody[gameState.snakeBody.length - 1];
+    setTileAtPosition(gameState, newSnakeTailPosition, TileType.SnakeTail);
   }
 
   // new head position
-  setTileAtPosition(gameState, gameState.position, TileType.SnakeHead);
+  setTileAtPosition(gameState, newSnakeHeadPosition, TileType.SnakeHead);
+    gameState.snakeBody.unshift(newSnakeHeadPosition);
 }
-
-const grantReward = (gameState: GameState) => {
-  // lengthen snake
-  gameState.snakeLength += 1;
-
-  // clear old waffles (if any remain)
+  
+const clearRewards = (gameState: GameState) => {
   gameState.playArea.forEach((column) => {
     column.forEach((tile) => {
       if (tile === TileType.Goal) {
@@ -248,11 +239,17 @@ const grantReward = (gameState: GameState) => {
     });
   });
 
+}
+
+const moveRewards = (gameState: GameState) => {
+  clearRewards(gameState);
+
   // add waffles
   addGoals(gameState);
 }
 
 const endGame = (gameState: GameState) => {
+  gameState.status = GameStatus.Lost;
   clearTimeout(gameState.activeTimeout);
 }
 
@@ -308,7 +305,7 @@ export default function SnakeGame() {
   const [gameState, setGameState] = useState({} as GameState);
   const [isLoading, setIsLoading] = useState(true);
   const [tiles, setTiles] = useState([] as React.ReactElement[]);
-  const directionRef = useRef(Direction.Right);
+  const directionRef = useRef(DefaultDirection);
 
   useEffect(() => {
     setGameState(initGameState());
@@ -351,19 +348,37 @@ export default function SnakeGame() {
 
   let gameStatusText;
   let gameStatusAction;
-  if (!gameState.gameRunning) {
+  if (gameState.status === GameStatus.Initiated) {
     gameStatusText = "Start Game";
     gameStatusAction = () => startTicking(gameState, setGameState, directionRef)
-  } else if (gameState.activeTimeout) {
+  } else if (gameState.status === GameStatus.Running) {
     gameStatusText = "Pause Game";
     gameStatusAction = () => onPause(gameState, setGameState);
-  } else {
+  } else if (gameState.status === GameStatus.Paused) {
     gameStatusText = "Resume Game";
     gameStatusAction = () => onResume(gameState, setGameState, directionRef);
+  } else if (gameState.status === GameStatus.Lost) {
+    gameStatusText = "Restart Game";
+    gameStatusAction = () => {
+      const newGameState = initGameState();
+      setGameState(newGameState);
+      directionRef.current = DefaultDirection;
+      startTicking(newGameState, setGameState, directionRef);
+    };
   }
   
+  let gameOverScreen;
+  if (gameState.status == GameStatus.Lost) {
+    gameOverScreen = (
+      <View style={snakeStyles.gameOver}>
+        <Text style={snakeStyles.buttonText}>Game Over</Text>
+      </View>
+    )
+  }
+
   return (
     <ScrollView contentContainerStyle={{ ...styles.container, flexDirection: 'column' }}>
+      {gameOverScreen}
       <View style={{ alignItems: 'center' }}>
         <Text style={styles.h1}>S-N-A-K-E-3-D</Text>
         <Text style={styles.h3}>Collect the waffles to grow longer! Touch or hover over the control to change direction!</Text>

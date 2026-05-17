@@ -8,6 +8,7 @@ type SnakeStyles = {
   buttonSpacer: ViewStyle;
   controlButtons: ViewStyle;
   gameStatusButtons: ViewStyle;
+  gameOver: ViewStyle;
 }
 
 const useSnakeStyles = (refreshStyles?: boolean) => {
@@ -69,6 +70,13 @@ const useSnakeStyles = (refreshStyles?: boolean) => {
         margin: 10,
         padding: 10
       },
+      gameOver: {
+        position: "absolute",
+        top: 0,
+        left: 0,
+        right: 0,
+        bottom: 0,
+      }
     });
 
     setSnakeStyles({...newStyles});
