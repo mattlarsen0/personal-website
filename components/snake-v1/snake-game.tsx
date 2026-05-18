@@ -1,5 +1,5 @@
 import useStyles from "@/components/styles/styles";
-import { Text, View, Pressable } from "react-native";
+import { Text, View, Pressable, AppState } from "react-native";
 import { FlatList, ScrollView } from "react-native-gesture-handler";
 import { useEffect, useRef, useState } from "react";
 import { wrap } from "@/utils";
@@ -400,6 +400,7 @@ export default function SnakeGame() {
   const [isLoading, setIsLoading] = useState(true);
   const [tiles, setTiles] = useState([] as React.ReactElement[]);
   const directionRef = useRef(DefaultDirection);
+  const appState = useRef(AppState.currentState);
 
   useEffect(() => {
     setGameState(initGameState());
@@ -409,6 +410,18 @@ export default function SnakeGame() {
   useEffect(() => {
     setTiles(renderTiles(gameState, snakeStyles));
   }, [gameState, snakeStyles]);
+
+  useEffect(() => {
+    const subscription = AppState.addEventListener('change', nextAppState => {
+      if (gameState.status === GameStatus.Running && nextAppState.match(/inactive|background/)) {
+          onPause(gameState, setGameState);
+      }
+    });
+
+    return () => {
+      subscription.remove();
+    };
+  }, [gameState]);
 
   if (isLoading) {
     return (
