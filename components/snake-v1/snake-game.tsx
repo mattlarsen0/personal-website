@@ -46,6 +46,7 @@ const MattHighScore = 5;
 const TickTimeModifier = 10; // ms
 const MinimumSpeed = 100; // ms
 const DeathTiles = [TileType.Snake, TileType.SnakeTail, TileType.SnakeHead];
+const WinTiles = [TileType.Wall, TileType.Snake, TileType.SnakeTail, TileType.SnakeHead];
 
 type GameState = {
   activeTimeout: number;
@@ -243,7 +244,7 @@ const onTick = (gameState: GameState, direction: Direction) => {
 
   // check for collision
   if (DeathTiles.includes(newTile)) {
-    endGame(gameState);
+    endGame(gameState, GameStatus.Lost);
     return;
   }
 
@@ -262,6 +263,11 @@ const onTick = (gameState: GameState, direction: Direction) => {
     setTileAtPosition(gameState, newSnakeTailPosition, TileType.SnakeTail);
   }
 
+  // check for win
+  if (gameState.playArea.every(x => x.every(y => WinTiles.includes(y)))) {
+    endGame(gameState, GameStatus.Win);
+  }
+
   // new head position
   setTileAtPosition(gameState, newSnakeHeadPosition, TileType.SnakeHead);
   gameState.snakeBody.unshift(newSnakeHeadPosition);
@@ -276,7 +282,6 @@ const clearRewards = (gameState: GameState) => {
       }
     });
   });
-
 }
 
 const moveRewards = (gameState: GameState) => {
@@ -286,9 +291,9 @@ const moveRewards = (gameState: GameState) => {
   addGoals(gameState);
 }
 
-const endGame = (gameState: GameState) => {
+const endGame = (gameState: GameState, status: GameStatus) => {
   clearTimeout(gameState.activeTimeout);
-  gameState.status = GameStatus.Lost;
+  gameState.status = status;
   if (gameState.score > gameState.highScore) {
     // Inconceivable!
     gameState.highScore = gameState.score
@@ -408,11 +413,17 @@ export default function SnakeGame() {
     };
   }
   
-  let gameOverScreen;
+  let gameStatusScreen;
   if (gameState.status === GameStatus.Lost) {
-    gameOverScreen = (
-      <View style={snakeStyles.gameOver}>
-        <Text style={snakeStyles.gameOverText}>GAME OVER</Text>
+    gameStatusScreen = (
+      <View style={snakeStyles.postGameStatus}>
+        <Text style={snakeStyles.postGameText}>GAME OVER</Text>
+      </View>
+    )
+  } else if (gameState.status === GameStatus.Win) {
+    gameStatusScreen = (
+      <View style={snakeStyles.postGameStatus}>
+        <Text style={snakeStyles.postGameText}>WIN!</Text>
       </View>
     )
   }
@@ -445,7 +456,7 @@ export default function SnakeGame() {
         </View>
       </View>
       <View style={{ flexDirection: "row", padding: 20 }}>
-        {gameOverScreen}
+        {gameStatusScreen}
         <Text style={styles.centerText}>
           <FlatList data={tiles} renderItem={({ item }) => item} horizontal={true} />
         </Text>

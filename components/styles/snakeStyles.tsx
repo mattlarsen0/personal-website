@@ -8,8 +8,8 @@ type SnakeStyles = {
   buttonSpacer: ViewStyle;
   controlButtons: ViewStyle;
   gameStatusButtons: ViewStyle;
-  gameOver: ViewStyle;
-  gameOverText: TextStyle;
+  postGameStatus: ViewStyle;
+  postGameText: TextStyle;
   scoreText: TextStyle;
   gameStatusButtonText: TextStyle;
   scoreValue: TextStyle;
@@ -80,7 +80,7 @@ const initStyles = (styles: ReturnType<typeof useStyles>) => {
         margin: 10,
         padding: 10
       },
-      gameOver: {
+      postGameStatus: {
         position: "absolute",
         top: 0,
         left: 0,
@@ -91,7 +91,7 @@ const initStyles = (styles: ReturnType<typeof useStyles>) => {
         alignItems: 'center',
         zIndex: 1,
       },
-      gameOverText: {
+      postGameText: {
         ...styles.text,
         padding: 20,
         backgroundColor: '#001452',
