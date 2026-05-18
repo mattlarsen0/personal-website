@@ -53,7 +53,8 @@ type GameState = {
   snakeBody: number[][]; // Array of XY coordinates
   status: GameStatus,
   score: number,
-  highScore: number
+  highScore: number,
+  currentDirection: Direction
 }
 
 const addSnakeToPlayArea = (gameState: GameState, direction: Direction) => {
@@ -138,7 +139,8 @@ const initGameState = () => {
     snakeBody: [],
     status: GameStatus.Initiated,
     score: 0,
-    highScore: MattHighScore
+    highScore: MattHighScore,
+    currentDirection: DefaultDirection
   }
 
   // fill top and bottom with walls
@@ -153,7 +155,7 @@ const initGameState = () => {
   }
 
   // add initial snake
-  addSnakeToPlayArea(gameState, Direction.Right);
+  addSnakeToPlayArea(gameState, DefaultDirection);
 
   // add initial goals
   addGoals(gameState);
@@ -189,7 +191,6 @@ const startTicking = (gameState: GameState, setState: Function, directionRef: Re
 
   const tick = () => {
     const tickSpeed = getTickSpeed(gameState);
-    console.log('speed' + tickSpeed);
     onTick(gameState, directionRef.current);
 
     if (gameState.status === GameStatus.Running) {
@@ -263,7 +264,8 @@ const onTick = (gameState: GameState, direction: Direction) => {
 
   // new head position
   setTileAtPosition(gameState, newSnakeHeadPosition, TileType.SnakeHead);
-    gameState.snakeBody.unshift(newSnakeHeadPosition);
+  gameState.snakeBody.unshift(newSnakeHeadPosition);
+  gameState.currentDirection = direction;
 }
   
 const clearRewards = (gameState: GameState) => {
@@ -364,27 +366,26 @@ export default function SnakeGame() {
     );
   }
 
-  const changeDirection = (newDirection: Direction) => {
+  const changeDirection = (gameState: GameState, newDirection: Direction) => {
     // prevent snake from reversing
-    if (directionRef.current === Direction.Up && newDirection === Direction.Down) {
+    if (gameState.currentDirection === Direction.Up && newDirection === Direction.Down) {
       return;
     }
-    if (directionRef.current === Direction.Down && newDirection === Direction.Up) {
+    if (gameState.currentDirection === Direction.Down && newDirection === Direction.Up) {
       return;
     }
-    if (directionRef.current === Direction.Left && newDirection === Direction.Right) {
+    if (gameState.currentDirection === Direction.Left && newDirection === Direction.Right) {
       return;
     }
-    if (directionRef.current === Direction.Right && newDirection === Direction.Left) {
+    if (gameState.currentDirection === Direction.Right && newDirection === Direction.Left) {
       return;
     }
-
     directionRef.current = newDirection;
   };
-  const upTouch = () => changeDirection(Direction.Up);
-  const downTouch = () => changeDirection(Direction.Down);
-  const rightTouch = () => changeDirection(Direction.Right);
-  const leftTouch = () => changeDirection(Direction.Left);
+  const upTouch = () => changeDirection(gameState, Direction.Up);
+  const downTouch = () => changeDirection(gameState, Direction.Down);
+  const rightTouch = () => changeDirection(gameState, Direction.Right);
+  const leftTouch = () => changeDirection(gameState, Direction.Left);
 
   let gameStatusText;
   let gameStatusAction;
