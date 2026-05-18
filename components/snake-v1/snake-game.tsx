@@ -5,6 +5,7 @@ import { useEffect, useRef, useState } from "react";
 import { wrap } from "@/utils";
 import useSnakeStyles from "../styles/snakeStyles";
 import Icon from "@/components/icon";
+import { Link } from "expo-router";
 
 enum Direction {
   Up,
@@ -432,6 +433,9 @@ export default function SnakeGame() {
   }
 
   const changeDirection = (gameState: GameState, newDirection: Direction) => {
+    if (gameState.status !== GameStatus.Running) {
+      return;
+    }
     // prevent snake from reversing
     if (gameState.currentDirection === Direction.Up && newDirection === Direction.Down) {
       return;
@@ -493,6 +497,7 @@ export default function SnakeGame() {
       <View style={{ alignItems: 'center' }}>
         <Text style={styles.h1}>S-N-A-K-E</Text>
         <Text style={styles.h3}>Collect the WAFFLES to grow longer! Touch or hover to change direction! Can YOU beat Matt&apos;s HIGH SCORE?</Text>
+        <Link style={styles.link} href='https://github.com/mattlarsen0/personal-website/blob/main/app/(snake3d)/index.tsx'>Read my code for this game!</Link>
       </View>
       <View style={{ flexDirection: "row", width: '100%', justifyContent: 'center' }}>
         <Pressable onPressOut={gameStatusAction}>

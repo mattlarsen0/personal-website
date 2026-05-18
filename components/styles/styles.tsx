@@ -9,6 +9,7 @@ type Styles = {
   h3: TextStyle;
   list: ViewStyle;
   centerText: TextStyle;
+  link: TextStyle;
 }
 
 const useStyles = () => {
@@ -80,6 +81,12 @@ const useStyles = () => {
       list: {
         margin: 10,
       },
+      link: {
+        ...textStyles,
+        color: '#285fab',
+        textDecorationLine: 'underline',
+        fontFamily: "Oswald-Regular",
+      }
     });
     setStyles({...newStyles});
     setStylesInit(true);

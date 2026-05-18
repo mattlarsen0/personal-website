@@ -4,7 +4,7 @@ import useStyles from '../styles/styles';
 import HR from "../utils/hr";
   
 export default function Resume() {
-    const styles = useStyles(false);
+    const styles = useStyles();
     
     return (
         <View style={{flexDirection: 'column', width: 750 }}>
