@@ -12,11 +12,19 @@ type SnakeStyles = {
   gameOverText: TextStyle;
   scoreText: TextStyle;
   gameStatusButtonText: TextStyle;
+  scoreValue: TextStyle;
 }
 
 const gradiusBlue = '#285fab';
 
 const initStyles = (styles: ReturnType<typeof useStyles>) => {
+    const scoreText =  {
+      fontFamily: styles.titleText.fontFamily,
+      color: gradiusBlue,
+      flex: 1,
+      paddingRight: 5,
+    };
+
     return StyleSheet.create({
       tiles: {
           height: 15,
@@ -39,7 +47,7 @@ const initStyles = (styles: ReturnType<typeof useStyles>) => {
         alignItems: 'center',
         verticalAlign: 'middle',
         margin: 5,
-        padding: 5
+        padding: 5,
       },
       gameStatusButtonText: {
         ...styles.text,
@@ -92,11 +100,11 @@ const initStyles = (styles: ReturnType<typeof useStyles>) => {
         borderColor: gradiusBlue,
         fontFamily: styles.titleText.fontFamily,
       },
-      scoreText: {
-        fontFamily: styles.titleText.fontFamily,
-        color: gradiusBlue,
-        flex: 1,
-        paddingRight: 5
+      scoreText: scoreText,
+      scoreValue: {
+        ...scoreText,
+        paddingRight: 0,
+        textAlign: 'right'
       }
     });
 }

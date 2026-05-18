@@ -37,13 +37,14 @@ const SnakeXMax = PlayAreaSize - 2; // minus 2, for walls and 0-indexing
 const SnakeXMin = 1;
 const SnakeYMax = PlayAreaSize - 2;
 const SnakeYMin = 1;
-const InitialSnakeLength = 10;
+const InitialSnakeLength = 3;
 const GameTickInterval = 500;
 const SnakeMovementSpeed = 1;
 const NumberOfGoals = 1;
 const DefaultDirection = Direction.Right;
 const MattHighScore = 5;
-
+const TickTimeModifier = 10; // ms
+const MinimumSpeed = 100; // ms
 const DeathTiles = [TileType.Snake, TileType.SnakeTail, TileType.SnakeHead];
 
 type GameState = {
@@ -175,6 +176,10 @@ function wrapPosition(position: number[]) {
   ];
 }
 
+const getTickSpeed = (gameState: GameState) => {
+  return Math.max(GameTickInterval - ((gameState.snakeBody.length - InitialSnakeLength) * TickTimeModifier), MinimumSpeed);
+}
+
 const startTicking = (gameState: GameState, setState: Function, directionRef: React.RefObject<Direction>) => {
   if (gameState.activeTimeout) {
     return;
@@ -183,10 +188,12 @@ const startTicking = (gameState: GameState, setState: Function, directionRef: Re
   gameState.status = GameStatus.Running;
 
   const tick = () => {
+    const tickSpeed = getTickSpeed(gameState);
+    console.log('speed' + tickSpeed);
     onTick(gameState, directionRef.current);
 
     if (gameState.status === GameStatus.Running) {
-      gameState.activeTimeout = setTimeout(tick, GameTickInterval);
+      gameState.activeTimeout = setTimeout(tick, tickSpeed);
     }
     setState({ ...gameState });
   }
@@ -415,7 +422,7 @@ export default function SnakeGame() {
         <Text style={styles.h1}>S-N-A-K-E-3-D</Text>
         <Text style={styles.h3}>Collect the WAFFLES to grow longer! Touch or hover to change direction! Can YOU beat Matt&apos;s HIGH SCORE?</Text>
       </View>
-      <View style={{ flexDirection: "row" }}>
+      <View style={{ flexDirection: "row", width: '100%', justifyContent: 'center' }}>
         <Pressable onPressOut={gameStatusAction}>
           <View style={snakeStyles.gameStatusButtons}>
             <Text style={snakeStyles.gameStatusButtonText}>{gameStatusText}</Text>
@@ -424,11 +431,15 @@ export default function SnakeGame() {
         <View style={{ justifyContent: "center" }}>
           <View style={{flexDirection: 'row' }}>
             <Text style={snakeStyles.scoreText}>SCORE</Text>
-            <Text style={snakeStyles.scoreText}>{`${gameState.score}`.padStart(5, '0')}</Text>          
+            <Text style={snakeStyles.scoreValue}>{`${gameState.score}`.padStart(7, '0')}</Text>          
           </View>
           <View style={{flexDirection: 'row' }}>
             <Text style={snakeStyles.scoreText}>HI</Text>
-            <Text style={snakeStyles.scoreText}>{`${gameState.highScore}`.padStart(5, '0')}</Text>
+            <Text style={snakeStyles.scoreValue}>{`${gameState.highScore}`.padStart(7, '0')}</Text>
+          </View>
+          <View style={{flexDirection: 'row' }}>
+            <Text style={snakeStyles.scoreText}>SPEED</Text>
+            <Text style={snakeStyles.scoreValue}>{5 * (gameState.snakeBody.length - InitialSnakeLength + 1)} MPH</Text>
           </View>
         </View>
       </View>
