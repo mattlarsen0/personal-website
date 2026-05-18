@@ -31,7 +31,7 @@ enum GameStatus {
 }
 
 const PlayAreaSize = 20;
-const goalContents = <Text>🧇</Text>;
+const GoalContents = <Text>🧇</Text>;
 const StartPosition = [10, 10];
 const SnakeXMax = PlayAreaSize - 2; // minus 2, for walls and 0-indexing
 const SnakeXMin = 1;
@@ -44,7 +44,9 @@ const NumberOfGoals = 1;
 const DefaultDirection = Direction.Right;
 const MattHighScore = 28;
 const TickTimeModifier = 10; // ms
-const MinimumSpeed = 100; // ms
+const MinimumTickInterval = 100; // ms
+const SpeedInterval = 5;
+const MaxSpeed = ((GameTickInterval - MinimumTickInterval) / TickTimeModifier) * SpeedInterval;
 const DeathTiles = [TileType.Snake, TileType.SnakeTail, TileType.SnakeHead];
 const WinTiles = [TileType.Wall, TileType.Snake, TileType.SnakeTail, TileType.SnakeHead];
 
@@ -180,7 +182,7 @@ function wrapPosition(position: number[]) {
 }
 
 const getTickSpeed = (gameState: GameState) => {
-  return Math.max(GameTickInterval - ((gameState.snakeBody.length - InitialSnakeLength) * TickTimeModifier), MinimumSpeed);
+  return Math.max(GameTickInterval - ((gameState.snakeBody.length - InitialSnakeLength) * TickTimeModifier), MinimumTickInterval);
 }
 
 const startTicking = (gameState: GameState, setState: Function, directionRef: React.RefObject<Direction>) => {
@@ -302,7 +304,7 @@ const endGame = (gameState: GameState, status: GameStatus) => {
 
 function renderTiles(gameState: GameState, snakeStyles: ReturnType<typeof useSnakeStyles>) {
   if (!gameState || !gameState.snakeBody) {
-    return;
+    return [];
   }
 
   let headRotation = '';
@@ -360,7 +362,7 @@ function renderTiles(gameState: GameState, snakeStyles: ReturnType<typeof useSna
           tileContents = <Text style={{transform: [{ rotate: tailRotation }]}}>♠️</Text>;
           break;
         case TileType.Goal:
-          tileContents = goalContents;
+          tileContents = GoalContents;
           break;
         case TileType.Empty:
           tileContents = <Text>.</Text>;
@@ -385,6 +387,10 @@ function renderTiles(gameState: GameState, snakeStyles: ReturnType<typeof useSna
   });
 
   return tiles;
+}
+
+const getSnakeSpeed = (gameState: GameState) => {
+  return Math.min(SpeedInterval * (gameState.snakeBody.length - InitialSnakeLength + 1), MaxSpeed);
 }
 
 export default function SnakeGame() {
@@ -484,19 +490,19 @@ export default function SnakeGame() {
         <View style={{ justifyContent: "center" }}>
           <View style={{flexDirection: 'row' }}>
             <Text style={snakeStyles.scoreText}>SCORE</Text>
-            <Text style={snakeStyles.scoreValue}>{`${gameState.score}`.padStart(7, '0')}</Text>          
+            <Text style={snakeStyles.scoreValue}>{`${gameState.score}`.padStart(8, '0')}</Text>          
           </View>
           <View style={{flexDirection: 'row' }}>
             <Text style={snakeStyles.scoreText}>HI</Text>
-            <Text style={snakeStyles.scoreValue}>{`${gameState.highScore}`.padStart(7, '0')}</Text>
+            <Text style={snakeStyles.scoreValue}>{`${gameState.highScore}`.padStart(8, '0')}</Text>
           </View>
           <View style={{flexDirection: 'row' }}>
             <Text style={snakeStyles.scoreText}>SPEED</Text>
-            <Text style={snakeStyles.scoreValue}>{5 * (gameState.snakeBody.length - InitialSnakeLength + 1)} MPH</Text>
+            <Text style={snakeStyles.scoreValue}>{getSnakeSpeed(gameState)} MPH</Text>
           </View>
         </View>
       </View>
-      <View style={snakeStyles.snakeTileContainer}>
+      <View>
         {gameStatusScreen}
         <Text style={styles.centerText}>
           <FlatList data={tiles} renderItem={({ item }) => item} horizontal={true} />
