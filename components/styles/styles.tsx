@@ -2,7 +2,6 @@ import { useState } from "react";
 import { Appearance, StyleSheet, TextStyle, ViewStyle } from "react-native";
 type Styles = {
   container: ViewStyle;
-  containerNoFlex: ViewStyle;
   text: TextStyle;
   titleText: TextStyle;
   h1: TextStyle;
@@ -16,7 +15,6 @@ const useStyles = () => {
   const [stylesInit, setStylesInit] = useState(false);
   const [styles, setStyles] = useState({
     container: {}, 
-    containerNoFlex: {},
     text: {},
     titleText: {},
     h1: {},

@@ -37,7 +37,7 @@ const SnakeXMax = PlayAreaSize - 2; // minus 2, for walls and 0-indexing
 const SnakeXMin = 1;
 const SnakeYMax = PlayAreaSize - 2;
 const SnakeYMin = 1;
-const InitialSnakeLength = 3;
+const InitialSnakeLength = 10;
 const GameTickInterval = 500;
 const SnakeMovementSpeed = 1;
 const NumberOfGoals = 1;
@@ -97,13 +97,35 @@ const addSnakeToPlayArea = (gameState: GameState, direction: Direction) => {
 
 const addGoals = (gameState: GameState) => {
   let goalsAdded = 0;
-  for (let i = 0; goalsAdded < NumberOfGoals && i < NumberOfGoals * 10; i++) {
-    const x = Math.floor(Math.random() * (PlayAreaSize - 1)) + 1; // avoid walls when generating random coordinates
-    const y = Math.floor(Math.random() * (PlayAreaSize - 1)) + 1;
+  for (let i = 0; goalsAdded < NumberOfGoals && i < NumberOfGoals * 2; i++) {
+    const emptyX = Math.floor(Math.random() * (PlayAreaSize - 1)) + 1; // avoid walls when generating random coordinates
+    const emptyY = Math.floor(Math.random() * (PlayAreaSize - 1)) + 1;
 
-    if (gameState.playArea[x][y] === TileType.Empty) {
-      setTileAtPosition(gameState, [x, y], TileType.Goal);
+    if (gameState.playArea[emptyX][emptyY] === TileType.Empty) {
+      setTileAtPosition(gameState, [emptyX, emptyY], TileType.Goal);
       goalsAdded++;
+    }
+  }
+
+  if (goalsAdded < NumberOfGoals) {
+    // scan for first empty tile
+    for (let i = 0; goalsAdded < NumberOfGoals && i < NumberOfGoals; i++) {
+      let emptyX, emptyY;
+      const foundTile = gameState.playArea.find((x, xIndex) => {
+        return x.find((y, yIndex) => {
+          if (y === TileType.Empty)
+          {
+            emptyX = xIndex;
+            emptyY = yIndex;
+            return y;
+          }
+        });
+      })
+
+      if (foundTile && emptyX && emptyY) {
+        setTileAtPosition(gameState, [emptyX, emptyY], TileType.Goal);
+        goalsAdded++
+      }
     }
   }
 }
