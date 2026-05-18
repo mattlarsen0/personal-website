@@ -42,7 +42,7 @@ const GameTickInterval = 500;
 const SnakeMovementSpeed = 1;
 const NumberOfGoals = 1;
 const DefaultDirection = Direction.Right;
-const MattHighScore = 5;
+const MattHighScore = 28;
 const TickTimeModifier = 10; // ms
 const MinimumSpeed = 100; // ms
 const DeathTiles = [TileType.Snake, TileType.SnakeTail, TileType.SnakeHead];
@@ -301,22 +301,63 @@ const endGame = (gameState: GameState, status: GameStatus) => {
 }
 
 function renderTiles(gameState: GameState, snakeStyles: ReturnType<typeof useSnakeStyles>) {
+  if (!gameState || !gameState.snakeBody) {
+    return;
+  }
+
+  let headRotation = '';
+  switch (gameState.currentDirection) {
+    case Direction.Up:
+      headRotation = '180deg'
+      break;
+    case Direction.Down:
+      headRotation = '0deg'
+      break;
+    case Direction.Left:
+      headRotation = '90deg'
+      break;
+    case Direction.Right:
+      headRotation = '-90deg'
+      break;
+  }
+  let tailRotation = '';
+  const tail = gameState.snakeBody[gameState.snakeBody.length - 1];
+  const preTail = gameState.snakeBody[gameState.snakeBody.length - 2];
+
+  // find direction pretail is in
+  const diffX = tail[0] - preTail[0];
+  const diffY = tail[1] - preTail[1];
+
+  if (diffX > 0) {
+    // left
+    tailRotation = '90deg';
+  } else if (diffX < 0) {
+    // right
+    tailRotation = '-90deg';
+  } else if (diffY > 0) {
+    // up
+    tailRotation = '180deg';
+  } else if (diffY < 0) {
+    // down
+    tailRotation = '0deg';
+  }
+
   const tiles = gameState?.playArea?.map((column, columnIndex) => {
     const columnTiles = column.map((tile, rowIndex) => {
       const key = `tile-${columnIndex}-${rowIndex}`;
       let tileContents;
       switch (tile) {
         case TileType.Wall:
-          tileContents = <Text>X</Text>;
+          tileContents = <Text>🌲</Text>;
           break;
         case TileType.Snake:
-          tileContents = <Text>O</Text>;
+          tileContents = <Text>🟩</Text>;
           break;
         case TileType.SnakeHead:
-          tileContents = <Text>:D</Text>;
+          tileContents = <Text style={{transform: [{ rotate: headRotation }]}}>🔰</Text>;
           break;
         case TileType.SnakeTail:
-          tileContents = <Text>0</Text>;
+          tileContents = <Text style={{transform: [{ rotate: tailRotation }]}}>♠️</Text>;
           break;
         case TileType.Goal:
           tileContents = goalContents;
@@ -431,7 +472,7 @@ export default function SnakeGame() {
   return (
     <ScrollView contentContainerStyle={{ ...styles.container, flexDirection: 'column' }}>
       <View style={{ alignItems: 'center' }}>
-        <Text style={styles.h1}>S-N-A-K-E-3-D</Text>
+        <Text style={styles.h1}>S-N-A-K-E</Text>
         <Text style={styles.h3}>Collect the WAFFLES to grow longer! Touch or hover to change direction! Can YOU beat Matt&apos;s HIGH SCORE?</Text>
       </View>
       <View style={{ flexDirection: "row", width: '100%', justifyContent: 'center' }}>
@@ -455,7 +496,7 @@ export default function SnakeGame() {
           </View>
         </View>
       </View>
-      <View style={{ flexDirection: "row", padding: 20 }}>
+      <View style={snakeStyles.snakeTileContainer}>
         {gameStatusScreen}
         <Text style={styles.centerText}>
           <FlatList data={tiles} renderItem={({ item }) => item} horizontal={true} />
