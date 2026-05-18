@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Appearance, StyleSheet, TextStyle, ViewStyle } from "react-native";
 type Styles = {
   container: ViewStyle;
+  containerNoFlex: ViewStyle;
   text: TextStyle;
   titleText: TextStyle;
   h1: TextStyle;
@@ -15,6 +16,7 @@ const useStyles = () => {
   const [stylesInit, setStylesInit] = useState(false);
   const [styles, setStyles] = useState({
     container: {}, 
+    containerNoFlex: {},
     text: {},
     titleText: {},
     h1: {},
@@ -35,14 +37,15 @@ const useStyles = () => {
       textAlign: "center",
       verticalAlign: "middle",
     };
+
+    const containerStyles: ViewStyle = {
+      flex: 1,
+      alignItems: "center",
+      backgroundColor: colorScheme === "dark" ? blackTextColor : whiteTextColor
+    };
     
     const newStyles = StyleSheet.create({
-      container: {
-        flex: 1,
-        alignItems: "center",
-        backgroundColor: colorScheme === "dark" ? blackTextColor : whiteTextColor,
-        color: colorScheme === "dark" ? whiteTextColor : blackTextColor,
-      },
+      container: containerStyles,
       centerText: {
         ...textStyles,
         verticalAlign: 'middle'

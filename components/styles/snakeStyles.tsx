@@ -10,7 +10,11 @@ type SnakeStyles = {
   gameStatusButtons: ViewStyle;
   gameOver: ViewStyle;
   gameOverText: TextStyle;
+  scoreText: TextStyle;
+  gameStatusButtonText: TextStyle;
 }
+
+const gradiusBlue = '#285fab';
 
 const initStyles = (styles: ReturnType<typeof useStyles>) => {
     return StyleSheet.create({
@@ -37,6 +41,11 @@ const initStyles = (styles: ReturnType<typeof useStyles>) => {
         margin: 5,
         padding: 5
       },
+      gameStatusButtonText: {
+        ...styles.text,
+        color: gradiusBlue,
+        fontFamily: styles.titleText.fontFamily,
+      },
       controlButtons: {
         borderRadius: 6,
         borderWidth: 4,
@@ -48,11 +57,12 @@ const initStyles = (styles: ReturnType<typeof useStyles>) => {
         alignItems: 'center',
         verticalAlign: 'middle',
         margin: 5,
-        padding: 5,
+        padding: 5
       },
       buttonText: {
         ...styles.text,
         padding: 20,
+        color: '#141414',
       },
       buttonSpacer: {
         justifyContent: "center",
@@ -79,7 +89,14 @@ const initStyles = (styles: ReturnType<typeof useStyles>) => {
         backgroundColor: '#001452',
         borderRadius: 6,
         borderWidth: 4,
-        borderColor: '#285fab',
+        borderColor: gradiusBlue,
+        fontFamily: styles.titleText.fontFamily,
+      },
+      scoreText: {
+        fontFamily: styles.titleText.fontFamily,
+        color: gradiusBlue,
+        flex: 1,
+        paddingRight: 5
       }
     });
 }
