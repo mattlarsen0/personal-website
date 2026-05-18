@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { StyleSheet, TextStyle, ViewStyle } from "react-native";
 import useStyles from "./styles";
 
@@ -9,19 +9,11 @@ type SnakeStyles = {
   controlButtons: ViewStyle;
   gameStatusButtons: ViewStyle;
   gameOver: ViewStyle;
+  gameOverText: TextStyle;
 }
 
-const useSnakeStyles = (refreshStyles?: boolean) => {
-  const [stylesInit, setStylesInit] = useState(false);
-  const styles = useStyles();
-  const [snakeStyles, setSnakeStyles] = useState({
-    tiles: {},
-    buttonText: {},
-    buttonSpacer: {},
-  } as SnakeStyles);
-
-  if (!stylesInit || refreshStyles) {
-    const newStyles = StyleSheet.create({
+const initStyles = (styles: ReturnType<typeof useStyles>) => {
+    return StyleSheet.create({
       tiles: {
           height: 15,
           width: 15,
@@ -33,7 +25,7 @@ const useSnakeStyles = (refreshStyles?: boolean) => {
           fontFamily: "SpaceMono-Regular",
       },
       gameStatusButtons: {
-        borderRadius: 3,
+        borderRadius: 6,
         borderColor: '#285fab',
         backgroundColor: '#fcca0d',
         borderWidth: 4,
@@ -46,7 +38,7 @@ const useSnakeStyles = (refreshStyles?: boolean) => {
         padding: 5
       },
       controlButtons: {
-        borderRadius: 3,
+        borderRadius: 6,
         borderWidth: 4,
         borderColor: '#838383',
         backgroundColor: '#B3B3B3',
@@ -56,7 +48,7 @@ const useSnakeStyles = (refreshStyles?: boolean) => {
         alignItems: 'center',
         verticalAlign: 'middle',
         margin: 5,
-        padding: 5
+        padding: 5,
       },
       buttonText: {
         ...styles.text,
@@ -76,12 +68,35 @@ const useSnakeStyles = (refreshStyles?: boolean) => {
         left: 0,
         right: 0,
         bottom: 0,
+        justifyContent: 'center',
+        alignContent: 'center',
+        alignItems: 'center',
+        zIndex: 1,
+      },
+      gameOverText: {
+        ...styles.text,
+        padding: 20,
+        backgroundColor: '#001452',
+        borderRadius: 6,
+        borderWidth: 4,
+        borderColor: '#285fab',
       }
     });
+}
 
-    setSnakeStyles({...newStyles});
+const useSnakeStyles = () => {
+  const [, setStylesInit] = useState(false);
+  const styles = useStyles();
+  const [snakeStyles, setSnakeStyles] = useState({
+    tiles: {},
+    buttonText: {},
+    buttonSpacer: {},
+  } as SnakeStyles);
+
+  useEffect(() => {
+    setSnakeStyles({...initStyles(styles)});
     setStylesInit(true);
-  }
+  }, [styles])
 
   return snakeStyles;
 };

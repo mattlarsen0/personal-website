@@ -29,14 +29,14 @@ enum GameStatus {
   Initiated
 }
 
-const PlayAreaSize = 30;
+const PlayAreaSize = 20;
 const goalContents = <Text>🧇</Text>;
-const StartPosition = [14, 14];
+const StartPosition = [10, 10];
 const SnakeXMax = PlayAreaSize - 2; // minus 2, for walls and 0-indexing
 const SnakeXMin = 1;
 const SnakeYMax = PlayAreaSize - 2;
 const SnakeYMin = 1;
-const InitialSnakeLength = 20;
+const InitialSnakeLength = 3;
 const GameTickInterval = 500;
 const SnakeMovementSpeed = 1;
 const NumberOfGoals = 1;
@@ -314,7 +314,7 @@ export default function SnakeGame() {
 
   useEffect(() => {
     setTiles(renderTiles(gameState, snakeStyles));
-  }, [gameState, styles]);
+  }, [gameState, snakeStyles]);
 
   if (isLoading) {
     return (
@@ -368,17 +368,16 @@ export default function SnakeGame() {
   }
   
   let gameOverScreen;
-  if (gameState.status == GameStatus.Lost) {
+  if (gameState.status === GameStatus.Lost) {
     gameOverScreen = (
       <View style={snakeStyles.gameOver}>
-        <Text style={snakeStyles.buttonText}>Game Over</Text>
+        <Text style={snakeStyles.gameOverText}>Game Over</Text>
       </View>
     )
   }
 
   return (
     <ScrollView contentContainerStyle={{ ...styles.container, flexDirection: 'column' }}>
-      {gameOverScreen}
       <View style={{ alignItems: 'center' }}>
         <Text style={styles.h1}>S-N-A-K-E-3-D</Text>
         <Text style={styles.h3}>Collect the waffles to grow longer! Touch or hover over the control to change direction!</Text>
@@ -391,6 +390,7 @@ export default function SnakeGame() {
         </Pressable>
       </View>
       <View style={{ flexDirection: "row", padding: 20 }}>
+        {gameOverScreen}
         <Text style={styles.centerText}>
           <FlatList data={tiles} renderItem={({ item }) => item} horizontal={true} />
         </Text>

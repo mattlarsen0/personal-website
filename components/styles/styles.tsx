@@ -1,4 +1,3 @@
-import { useFonts } from '@expo-google-fonts/roboto/useFonts';
 import { useState } from "react";
 import { Appearance, StyleSheet, TextStyle, ViewStyle } from "react-native";
 type Styles = {
@@ -12,7 +11,7 @@ type Styles = {
   centerText: TextStyle;
 }
 
-const useStyles = (refreshStyles?: boolean) => {
+const useStyles = () => {
   const [stylesInit, setStylesInit] = useState(false);
   const [styles, setStyles] = useState({
     container: {}, 
@@ -27,7 +26,7 @@ const useStyles = (refreshStyles?: boolean) => {
 
   const whiteTextColor = '#e7e7e7';
   const blackTextColor = '#030303';
-  if (!stylesInit || refreshStyles) {
+  if (!stylesInit) {
     const colorScheme = Appearance.getColorScheme();
     const textStyles: TextStyle = {
       fontFamily: "Merriweather-Light",

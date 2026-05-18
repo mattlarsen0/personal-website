@@ -1,4 +1,3 @@
-import useStyles from '@/components/styles/styles';
 import { useFonts } from '@expo-google-fonts/roboto/useFonts';
 import { Drawer } from "expo-router/drawer";
 import * as SplashScreen from 'expo-splash-screen';
@@ -8,7 +7,6 @@ import { View, Text, Platform } from 'react-native';
 SplashScreen.preventAutoHideAsync();
 
 export default function RootLayout() {
-  const styles = useStyles();
   let [fontsLoaded, error] = useFonts({
       'Merriweather-Light': require('@/assets/fonts/Merriweather-Light.ttf'),
       'Oswald-Regular': require('@/assets/fonts/Oswald-Regular.ttf'),
