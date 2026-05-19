@@ -32,7 +32,7 @@ const useStyles = () => {
     const textStyles: TextStyle = {
       fontFamily: "Merriweather-Light",
       color: colorScheme === "dark" ? whiteTextColor : blackTextColor,
-      fontSize: 14,
+      fontSize: 16,
       textAlign: "center",
       verticalAlign: "middle",
     };

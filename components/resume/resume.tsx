@@ -1,4 +1,4 @@
-import { StyleProp, Text, TextStyle, View } from "react-native";
+import { Text, View } from "react-native";
 import ResumeList from "../resumeList";
 import useStyles from '../styles/styles';
 import HR from "../utils/hr";

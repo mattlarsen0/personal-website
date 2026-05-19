@@ -167,15 +167,15 @@ const initGameState = () => {
   return gameState;
 };
 
-function getTileAtPosition(gameState: GameState, position: number[]) {
+const getTileAtPosition = (gameState: GameState, position: number[]) => {
   return gameState.playArea[position[0]][position[1]];
-}
+};
 
-function setTileAtPosition(gameState: GameState, position: number[], tileType: TileType) {
+const setTileAtPosition = (gameState: GameState, position: number[], tileType: TileType) => {
   gameState.playArea[position[0]][position[1]] = tileType;
-}
+};
 
-function wrapPosition(position: number[]) {
+const wrapPosition = (position: number[]) => {
   return [
     wrap(position[0], SnakeXMin, SnakeXMax),
     wrap(position[1], SnakeYMin, SnakeYMax)
@@ -186,7 +186,7 @@ const getTickSpeed = (gameState: GameState) => {
   return Math.max(GameTickInterval - ((gameState.snakeBody.length - InitialSnakeLength) * TickTimeModifier), MinimumTickInterval);
 }
 
-const startTicking = (gameState: GameState, setState: Function, directionRef: React.RefObject<Direction>) => {
+const startTicking = (gameState: GameState, setGameState: Function, directionRef: React.RefObject<Direction>, setTiles: Function, snakeStyles: ReturnType<typeof useSnakeStyles>) => {
   if (gameState.activeTimeout) {
     return;
   }
@@ -200,7 +200,8 @@ const startTicking = (gameState: GameState, setState: Function, directionRef: Re
     if (gameState.status === GameStatus.Running) {
       gameState.activeTimeout = setTimeout(tick, tickSpeed);
     }
-    setState({ ...gameState });
+    setGameState({ ...gameState });
+    setTiles(renderTiles(gameState, snakeStyles));
   }
   gameState.activeTimeout = setTimeout(tick, GameTickInterval);
 }
@@ -213,8 +214,8 @@ const onPause = (gameState: GameState, setState: Function) => {
   setState({ ...gameState });
 }
 
-const onResume = (gameState: GameState, setState: Function, directionRef: React.RefObject<Direction>) => {
-  startTicking(gameState, setState, directionRef);
+const onResume = (gameState: GameState, setState: Function, directionRef: React.RefObject<Direction>, setTiles: Function, snakeStyles: ReturnType<typeof useSnakeStyles>) => {
+  startTicking(gameState, setState, directionRef, setTiles, snakeStyles);
 }
 
 const onTick = (gameState: GameState, direction: Direction) => {
@@ -303,7 +304,7 @@ const endGame = (gameState: GameState, status: GameStatus) => {
   }
 }
 
-function renderTiles(gameState: GameState, snakeStyles: ReturnType<typeof useSnakeStyles>) {
+const renderTiles = (gameState: GameState, snakeStyles: ReturnType<typeof useSnakeStyles>) => {
   if (!gameState || !gameState.snakeBody) {
     return [];
   }
@@ -401,16 +402,13 @@ export default function SnakeGame() {
   const [isLoading, setIsLoading] = useState(true);
   const [tiles, setTiles] = useState([] as React.ReactElement[]);
   const directionRef = useRef(DefaultDirection);
-  const appState = useRef(AppState.currentState);
 
   useEffect(() => {
-    setGameState(initGameState());
-    setIsLoading(false);
+    if (!isLoading) {
+      setGameState(initGameState());
+      setIsLoading(false);
+    }
   }, []);
-
-  useEffect(() => {
-    setTiles(renderTiles(gameState, snakeStyles));
-  }, [gameState, snakeStyles]);
 
   useEffect(() => {
     const subscription = AppState.addEventListener('change', nextAppState => {
@@ -460,7 +458,7 @@ export default function SnakeGame() {
   let gameStatusAction;
   if (gameState.status === GameStatus.Initiated) {
     gameStatusText = "START GAME";
-    gameStatusAction = () => startTicking(gameState, setGameState, directionRef)
+    gameStatusAction = () => startTicking(gameState, setGameState, directionRef, setTiles, snakeStyles)
   } else if (gameState.status === GameStatus.Running) {
     gameStatusText = "PAUSE GAME";
     gameStatusAction = () => onPause(gameState, setGameState);
@@ -473,7 +471,7 @@ export default function SnakeGame() {
       const newGameState = initGameState();
       setGameState(newGameState);
       directionRef.current = DefaultDirection;
-      startTicking(newGameState, setGameState, directionRef);
+      startTicking(newGameState, setGameState, directionRef, setTiles, snakeStyles);
     };
   }
   

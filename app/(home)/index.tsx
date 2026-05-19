@@ -4,18 +4,22 @@ import useStyles from "@/components/styles/styles";
 import TechList from "@/components/techList";
 import { Link } from "expo-router";
 import { ScrollView, Text, View } from "react-native";
-import HR from "@/components/utils/hr";
 
 export default function Index() {
   const styles = useStyles();
   return (
     <View style={styles.container}>
       <ScrollView style={{ width: '95%' }}>
+        <Text style={styles.titleText}>Welcome to my website built with React Native!</Text>
+        <Text style={styles.titleText}>Checkout my code here:&nbsp;<Link style={styles.link} href='https://github.com/mattlarsen0/personal-website/'>https://github.com/mattlarsen0/personal-website/</Link></Text>
         <Text style={styles.titleText}>
-          Welcome to my website!
-          See my resume below!
-          Hire Me (Contact): <Link href="mailto:matt.larsen0@gmail.com">matt.larsen0@gmail.com</Link>
+          Download it for android here:&nbsp;
+          <Link style={styles.link} href='https://www.github.com'>
+            <Icon name="download" />
+          </Link>
         </Text>
+        <Text style={styles.titleText}>Hire Me (Contact):&nbsp;<Link style={styles.link} href="mailto:matt.larsen0@gmail.com">matt.larsen0@gmail.com</Link></Text>
+        <Text style={styles.titleText}>Read my resume below and try out S-N-A-K-E game!</Text>
         <View style={{alignItems: 'center', margin: 20}}>
           <Resume/>
         </View>
@@ -27,10 +31,10 @@ export default function Index() {
             style={styles.text}
             data={[
               <Link key="0" href="https://reactnative.dev/">
-                <Icon name="react"/> React Native
+                <Icon name="react"/>React Native
               </Link>,
               <Link key="1" href="https://expo.dev/">
-                <Icon name="mobile"/> Expo
+                <Icon name="mobile"/>Expo
               </Link>,
               <Link key="2" href="https://www.typescriptlang.org/">
                 <Icon name="check-double" />TypeScript

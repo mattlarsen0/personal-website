@@ -17,7 +17,8 @@
         "backgroundImage": "./assets/images/android-icon-background.png",
         "monochromeImage": "./assets/images/android-icon-monochrome.png"
       },
-      "predictiveBackGestureEnabled": false
+      "predictiveBackGestureEnabled": false,
+      "package": "com.mattlarsen0.personalwebsite"
     },
     "web": {
       "output": "static",
@@ -83,11 +84,18 @@
               "./assets/fonts/SpaceMono-Regular.ttf"
             ]
           }
-        }]
+        }
+      ]
     ],
     "experiments": {
       "typedRoutes": true,
       "reactCompiler": true
+    },
+    "extra": {
+      "router": {},
+      "eas": {
+        "projectId": "d00748b7-5234-40a4-8ac4-f54990df5887"
+      }
     }
   }
 }
