@@ -38,14 +38,15 @@ export default function RootLayout() {
     )
   }
   const colorScheme = Appearance.getColorScheme();
-  const drawerBackground = colorScheme === "dark" ? '#2c2c2c' : '#2c2c2c';
+  const darkMode = colorScheme === "dark";
+  const drawerBackground = darkMode ? '#2c2c2c' : '#2c2c2c';
   const screenOptions: DrawerNavigationOptions = {
     drawerStyle: {
       backgroundColor: drawerBackground,
       width: 250,
     },
     drawerActiveTintColor: '#4f5aff',
-    drawerInactiveTintColor: String(styles.text.color),
+    drawerInactiveTintColor: String(styles.container.backgroundColor),
     drawerActiveBackgroundColor: '#363636',
     drawerInactiveBackgroundColor: '#363636',
     drawerLabelStyle: {
