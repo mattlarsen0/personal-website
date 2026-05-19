@@ -1,14 +1,14 @@
 import SnakeGame from "@/components/snake-v1/snake-game";
-import { View } from "react-native";
 import useStyles from "@/hooks/styles/useStyles";
+import PageLayoutView from "@/components/pageLayoutView";
 
 export default function Snake3d() {
   const styles = useStyles();
   return (
-    <View
+    <PageLayoutView
       style={styles.container}
     >
       <SnakeGame />
-    </View>
+    </PageLayoutView>
   );
 }

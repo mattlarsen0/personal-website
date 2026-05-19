@@ -4,11 +4,12 @@ import useStyles from "@/hooks/styles/useStyles";
 import TechList from "@/components/techList";
 import { Link } from "expo-router";
 import { ScrollView, Text, View } from "react-native";
+import PageLayoutView from "@/components/pageLayoutView";
 
 export default function Index() {
   const styles = useStyles();
   return (
-    <View style={styles.container}>
+    <PageLayoutView style={styles.container}>
       <ScrollView style={{ width: '95%' }}>
         <Text style={styles.titleText}>Welcome to my website built with React Native!</Text>
         <Text style={styles.titleText}>Checkout my code here:&nbsp;<Link style={styles.link} href='https://github.com/mattlarsen0/personal-website/'>https://github.com/mattlarsen0/personal-website/</Link></Text>
@@ -52,6 +53,6 @@ export default function Index() {
           />
           </View>
       </ScrollView>
-    </View>
+    </PageLayoutView>
   );
 }
