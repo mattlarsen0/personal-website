@@ -1,6 +1,6 @@
 import FontAwesome5 from '@expo/vector-icons/FontAwesome5';
 import { View } from 'react-native';
-import useStyles from './styles/styles';
+import useStyles from '../hooks/styles/useStyles';
 
 type IconProps = {
   name: string;

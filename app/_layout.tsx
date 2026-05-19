@@ -1,4 +1,4 @@
-import useStyles from '@/components/styles/styles';
+import useStyles from '@/hooks/styles/useStyles';
 import { useFonts } from '@expo-google-fonts/roboto/useFonts';
 import { DrawerNavigationOptions } from '@react-navigation/drawer';
 import { Drawer } from "expo-router/drawer";

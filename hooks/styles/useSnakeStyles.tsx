@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { StyleSheet, TextStyle, ViewStyle } from "react-native";
-import useStyles from "./styles";
+import useStyles from "./useStyles";
 
 type SnakeStyles = {
   tiles: ViewStyle;

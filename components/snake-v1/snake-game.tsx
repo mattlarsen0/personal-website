@@ -1,9 +1,9 @@
-import useStyles from "@/components/styles/styles";
+import useStyles from "@/hooks/styles/useStyles";
 import { Text, View, Pressable, AppState } from "react-native";
 import { FlatList, ScrollView } from "react-native-gesture-handler";
 import { useEffect, useRef, useState } from "react";
 import { wrap } from "@/utils";
-import useSnakeStyles from "../styles/snakeStyles";
+import useSnakeStyles from "../../hooks/styles/useSnakeStyles";
 import Icon from "@/components/icon";
 import { Link } from "expo-router";
 

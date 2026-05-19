@@ -1,5 +1,5 @@
 import { FlatList, Text } from "react-native";
-import useStyles from "./styles/styles";
+import useStyles from "../hooks/styles/useStyles";
 
 type ResumeListProps = {
   data: string[];

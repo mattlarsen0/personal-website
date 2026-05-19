@@ -1,5 +1,5 @@
 import { View } from "react-native";
-import useStyles from "../styles/styles";
+import useStyles from "../../hooks/styles/useStyles";
 
 export default function HR() {
     const styles = useStyles();

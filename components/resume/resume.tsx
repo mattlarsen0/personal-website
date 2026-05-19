@@ -1,6 +1,6 @@
 import { Text, View } from "react-native";
 import ResumeList from "../resumeList";
-import useStyles from '../styles/styles';
+import useStyles from '../../hooks/styles/useStyles';
 import HR from "../utils/hr";
   
 export default function Resume() {
