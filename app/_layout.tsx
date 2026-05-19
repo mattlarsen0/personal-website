@@ -1,12 +1,15 @@
+import useStyles from '@/components/styles/styles';
 import { useFonts } from '@expo-google-fonts/roboto/useFonts';
+import { DrawerNavigationOptions } from '@react-navigation/drawer';
 import { Drawer } from "expo-router/drawer";
 import * as SplashScreen from 'expo-splash-screen';
 import { useEffect } from 'react';
-import { View, Text, Platform } from 'react-native';
+import { View, Text, Platform, Appearance } from 'react-native';
 
 SplashScreen.preventAutoHideAsync();
 
 export default function RootLayout() {
+  const styles = useStyles();
   let [fontsLoaded, error] = useFonts({
       'Merriweather-Light': require('@/assets/fonts/Merriweather-Light.ttf'),
       'Oswald-Regular': require('@/assets/fonts/Oswald-Regular.ttf'),
@@ -34,9 +37,39 @@ export default function RootLayout() {
       </View>
     )
   }
+  const colorScheme = Appearance.getColorScheme();
+  const drawerBackground = colorScheme === "dark" ? '#2c2c2c' : '#2c2c2c';
+  const screenOptions: DrawerNavigationOptions = {
+    drawerStyle: {
+      backgroundColor: drawerBackground,
+      width: 250,
+    },
+    drawerActiveTintColor: '#4f5aff',
+    drawerInactiveTintColor: String(styles.text.color),
+    drawerActiveBackgroundColor: '#363636',
+    drawerInactiveBackgroundColor: '#363636',
+    drawerLabelStyle: {
+      fontSize: 16,
+      fontFamily: styles.titleText.fontFamily
+    },
+    drawerItemStyle: {
+      marginVertical: 6,
+      borderRadius: 8,
+    },
+    headerShown: true,
+    headerStyle: {
+      backgroundColor: drawerBackground,
+    },
+    headerTintColor: '#fff',
+    headerTitleStyle: {
+      fontSize: 20,
+      fontWeight: '600',
+      fontFamily: styles.titleText.fontFamily
+    },
+  };
 
   return (
-    <Drawer>
+    <Drawer screenOptions={screenOptions}>
       <Drawer.Screen
         name="(home)/index"
         options={{
