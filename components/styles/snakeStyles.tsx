@@ -13,6 +13,7 @@ type SnakeStyles = {
   scoreText: TextStyle;
   gameStatusButtonText: TextStyle;
   scoreValue: TextStyle;
+  buttonContainer: ViewStyle;
 }
 
 const gradiusBlue = '#285fab';
@@ -57,23 +58,17 @@ const initStyles = (styles: ReturnType<typeof useStyles>): SnakeStyles => {
         borderWidth: 4,
         borderColor: '#838383',
         backgroundColor: '#B3B3B3',
-        width: 75,
-        height: 75,
         justifyContent: 'center',
         alignItems: 'center',
-        margin: 5,
-        padding: 5
       },
       buttonText: {
         ...styles.text,
-        padding: 20,
         color: '#141414',
       },
       buttonSpacer: {
         justifyContent: "center",
         alignItems: "center",
         flex: 1,
-        borderWidth: 2,
         margin: 10,
         padding: 10
       },
@@ -102,6 +97,9 @@ const initStyles = (styles: ReturnType<typeof useStyles>): SnakeStyles => {
         ...scoreText,
         paddingRight: 0,
         textAlign: 'right'
+      },
+      buttonContainer: {
+        margin: 5
       }
     });
 }

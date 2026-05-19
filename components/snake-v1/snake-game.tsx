@@ -517,25 +517,33 @@ export default function SnakeGame() {
       <View style={{ flexDirection: "column" }}>
         <View style={{ flexDirection: "row" }}>
           <View style={snakeStyles.buttonSpacer} />
-          <Pressable onHoverIn={upTouch} onPress={upTouch} style={snakeStyles.controlButtons}>
-            <Text style={snakeStyles.buttonText}><Icon name="arrow-circle-up"/></Text>
-          </Pressable>
+          <View style={snakeStyles.buttonContainer}>
+            <Pressable onHoverIn={upTouch} onPress={upTouch} style={snakeStyles.controlButtons}>
+              <Text style={snakeStyles.buttonText}><Icon name="arrow-circle-up"/></Text>
+            </Pressable>
+          </View>
           <View style={snakeStyles.buttonSpacer} />
         </View>
         <View style={{ flexDirection: "row" }}>
-          <Pressable onHoverIn={leftTouch} onPress={leftTouch} style={snakeStyles.controlButtons}>
-            <Text style={snakeStyles.buttonText}><Icon name="arrow-circle-left"/></Text>
-          </Pressable>
+          <View style={snakeStyles.buttonContainer}>
+            <Pressable onHoverIn={leftTouch} onPress={leftTouch} style={snakeStyles.controlButtons}>
+              <Text style={snakeStyles.buttonText}><Icon name="arrow-circle-left"/></Text>
+            </Pressable>
+          </View>
           <View style={snakeStyles.buttonSpacer} />
-          <Pressable onHoverIn={rightTouch} onPress={rightTouch} style={snakeStyles.controlButtons}>
-            <Text style={snakeStyles.buttonText}><Icon name="arrow-circle-right"/></Text>
-          </Pressable>
+          <View style={snakeStyles.buttonContainer}>
+            <Pressable onHoverIn={rightTouch} onPress={rightTouch} style={snakeStyles.controlButtons}>
+              <Text style={snakeStyles.buttonText}><Icon name="arrow-circle-right"/></Text>
+            </Pressable>
+          </View>
         </View>
         <View style={{ display: "flex", flexDirection: "row" }}>
           <View style={snakeStyles.buttonSpacer} />
-          <Pressable onHoverIn={downTouch} onPress={downTouch} style={snakeStyles.controlButtons}>
-            <Text style={snakeStyles.buttonText}><Icon name="arrow-circle-down"/></Text>
-          </Pressable>
+          <View style={snakeStyles.buttonContainer}>
+            <Pressable onHoverIn={downTouch} onPress={downTouch} style={snakeStyles.controlButtons}>
+              <Text style={snakeStyles.buttonText}><Icon name="arrow-circle-down"/></Text>
+            </Pressable>
+          </View>
           <View style={snakeStyles.buttonSpacer} />
         </View>
       </View>
