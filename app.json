@@ -8,7 +8,8 @@
     "scheme": "personalwebsite",
     "userInterfaceStyle": "automatic",
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.mattlarsen0.personalwebsite"
     },
     "android": {
       "adaptiveIcon": {
@@ -79,8 +80,8 @@
           },
           "ios": {
             "fonts": [
-              "./assets/fonts/Merriweather-VariableFont.ttf",
-              "./assets/fonts/Oswald-VariableFont.ttf",
+              "./assets/fonts/Merriweather-Light.ttf",
+              "./assets/fonts/Oswald-Regular.ttf",
               "./assets/fonts/SpaceMono-Regular.ttf"
             ]
           }
