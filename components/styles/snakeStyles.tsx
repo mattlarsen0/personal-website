@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { StyleSheet, TextStyle, ViewStyle } from "react-native";
 import useStyles from "./styles";
 
@@ -17,7 +17,7 @@ type SnakeStyles = {
 
 const gradiusBlue = '#285fab';
 
-const initStyles = (styles: ReturnType<typeof useStyles>) => {
+const initStyles = (styles: ReturnType<typeof useStyles>): SnakeStyles => {
     const scoreText =  {
       fontFamily: styles.titleText.fontFamily,
       color: gradiusBlue,
@@ -32,7 +32,6 @@ const initStyles = (styles: ReturnType<typeof useStyles>) => {
           fontSize: 10,
           display: "flex",
           justifyContent: "center",
-          verticalAlign: "middle",
           alignItems: "center",
           fontFamily: "SpaceMono-Regular",
       },
@@ -45,7 +44,6 @@ const initStyles = (styles: ReturnType<typeof useStyles>) => {
         height: 75,
         justifyContent: 'center',
         alignItems: 'center',
-        verticalAlign: 'middle',
         margin: 5,
         padding: 5,
       },
@@ -63,7 +61,6 @@ const initStyles = (styles: ReturnType<typeof useStyles>) => {
         height: 75,
         justifyContent: 'center',
         alignItems: 'center',
-        verticalAlign: 'middle',
         margin: 5,
         padding: 5
       },
@@ -110,18 +107,8 @@ const initStyles = (styles: ReturnType<typeof useStyles>) => {
 }
 
 const useSnakeStyles = () => {
-  const [, setStylesInit] = useState(false);
   const styles = useStyles();
-  const [snakeStyles, setSnakeStyles] = useState({
-    tiles: {},
-    buttonText: {},
-    buttonSpacer: {},
-  } as SnakeStyles);
-
-  useEffect(() => {
-    setSnakeStyles({...initStyles(styles)});
-    setStylesInit(true);
-  }, [styles])
+  const [snakeStyles] = useState({...initStyles(styles)})
 
   return snakeStyles;
 };

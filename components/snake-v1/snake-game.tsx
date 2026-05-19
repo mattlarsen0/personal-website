@@ -392,23 +392,21 @@ const renderTiles = (gameState: GameState, snakeStyles: ReturnType<typeof useSna
 }
 
 const getSnakeSpeed = (gameState: GameState) => {
-  return Math.min(SpeedInterval * (gameState.snakeBody.length - InitialSnakeLength + 1), MaxSpeed);
+  return Math.min(SpeedInterval * (gameState.snakeBody?.length - InitialSnakeLength + 1), MaxSpeed);
 }
 
 export default function SnakeGame() {
   const styles = useStyles();
   const snakeStyles = useSnakeStyles();
   const [gameState, setGameState] = useState({} as GameState);
-  const [isLoading, setIsLoading] = useState(true);
   const [tiles, setTiles] = useState([] as React.ReactElement[]);
   const directionRef = useRef(DefaultDirection);
 
-  useEffect(() => {
-    if (!isLoading) {
-      setGameState(initGameState());
-      setIsLoading(false);
-    }
-  }, []);
+  if (!gameState.highScore) {
+    const firstLoadState = initGameState();
+    setGameState(firstLoadState);
+    setTiles(renderTiles(firstLoadState, snakeStyles));
+  }
 
   useEffect(() => {
     const subscription = AppState.addEventListener('change', nextAppState => {
@@ -421,14 +419,6 @@ export default function SnakeGame() {
       subscription.remove();
     };
   }, [gameState]);
-
-  if (isLoading) {
-    return (
-      <View style={styles.container}>
-        <Text>LOADING</Text>
-      </View>
-    );
-  }
 
   const changeDirection = (gameState: GameState, newDirection: Direction) => {
     if (gameState.status !== GameStatus.Running) {
@@ -464,7 +454,7 @@ export default function SnakeGame() {
     gameStatusAction = () => onPause(gameState, setGameState);
   } else if (gameState.status === GameStatus.Paused) {
     gameStatusText = "RESUME GAME";
-    gameStatusAction = () => onResume(gameState, setGameState, directionRef);
+    gameStatusAction = () => onResume(gameState, setGameState, directionRef, setTiles, snakeStyles);
   } else if (gameState.status === GameStatus.Lost) {
     gameStatusText = "RESTART GAME";
     gameStatusAction = () => {
