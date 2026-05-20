@@ -79,7 +79,7 @@ export default function RootLayout() {
         }}
       />
       <Drawer.Screen
-        name="(snake3d)/index"
+        name="(snake)/index"
         options={{
           drawerLabel: 'S-N-A-K-E Game',
           title: 'S-N-A-K-E Game'

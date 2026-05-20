@@ -11,15 +11,16 @@ type Styles = {
   h2: TextStyle;
   h3: TextStyle;
   list: ViewStyle;
-  centerText: TextStyle;
+  centerContainer: ViewStyle;
   link: TextStyle;
+  containerWithBackground: ViewStyle;
 }
 
 const initStyles = (): Styles => {
   const whiteTextColor = '#e7e7e7';
   const blackTextColor = '#030303';
-  const transparentWhiteTextColor = 'rgba(231, 231, 231, 0.5)';
-  const transparentBlackTextColor = 'rgba(3, 3, 3, 0.5)';
+  const transparentWhiteTextColor = 'rgba(231, 231, 231, 0.7)';
+  const transparentBlackTextColor = 'rgba(3, 3, 3, 0.7)';
   const colorScheme = Appearance.getColorScheme();
   const textStyles: TextStyle = {
     fontFamily: "Merriweather-Light",
@@ -33,7 +34,8 @@ const initStyles = (): Styles => {
     zIndex: styleConstants.zIndex.content,
     flex: 1,
     alignItems: "center",
-    backgroundColor: colorScheme === "dark" ? transparentBlackTextColor : transparentWhiteTextColor
+    minHeight: '100%',
+    minWidth: '100%',
   };
   
   return StyleSheet.create({
@@ -43,20 +45,24 @@ const initStyles = (): Styles => {
       backgroundColor: colorScheme === "dark" ? blackTextColor : whiteTextColor
     },
     container: containerStyles,
-    centerText: {
-      ...textStyles,
-      verticalAlign: 'middle'
+    containerWithBackground: {
+      ...containerStyles,
+      backgroundColor: colorScheme === "dark" ? transparentBlackTextColor : transparentWhiteTextColor,
+    },
+    centerContainer: {
+      ...containerStyles,
+      flexDirection: 'row',
+      justifyContent: 'center',
+      alignItems: 'center',
     },
     text: {
       ...textStyles,
       textAlign: "left",
-      verticalAlign: "middle",
     },
     titleText: {
       ...textStyles,
       fontFamily: "Oswald-Regular",
       fontSize: 24,
-      verticalAlign: "middle",
     },
     h1: {
       ...textStyles,
@@ -84,6 +90,7 @@ const initStyles = (): Styles => {
       color: '#285fab',
       textDecorationLine: 'underline',
       fontFamily: "Oswald-Regular",
+      fontSize: undefined, // "inherit" text size from parent
     }
   });
 }

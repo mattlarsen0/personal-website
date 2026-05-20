@@ -7,8 +7,7 @@ export default function Resume() {
     const styles = useStyles();
     
     return (
-        <View style={{flexDirection: 'column', width: 750 }}>
-            <Text style={styles.h1}>Matthew Larsen</Text>
+        <View style={{flexDirection: 'column'}}>
             <Text style={styles.h2}>Experience</Text>
             <Text style={styles.h3}>Columbia Sportswear Company ◦ Senior Software Engineer ◦ August 2021 to June 2025</Text>
             <HR />
@@ -68,7 +67,9 @@ export default function Resume() {
             />
             <Text style={styles.h3}>Education</Text>
             <HR />
-            <Text style={styles.centerText}>Portland State University • B.S. in Computer Science - Portland, OR - 3.3 GPA</Text>
+            <View style={styles.centerContainer}>
+                <Text style={styles.text}>Portland State University • B.S. in Computer Science - Portland, OR - 3.3 GPA</Text>
+            </View>
         </View>
     );
 }
