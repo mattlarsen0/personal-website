@@ -1,6 +1,9 @@
 import { useState } from "react";
 import { Appearance, StyleSheet, TextStyle, ViewStyle } from "react-native";
+import styleConstants from "./styleConstants";
+
 type Styles = {
+  background: ViewStyle;
   container: ViewStyle;
   text: TextStyle;
   titleText: TextStyle;
@@ -15,6 +18,8 @@ type Styles = {
 const initStyles = (): Styles => {
   const whiteTextColor = '#e7e7e7';
   const blackTextColor = '#030303';
+  const transparentWhiteTextColor = 'rgba(231, 231, 231, 0.5)';
+  const transparentBlackTextColor = 'rgba(3, 3, 3, 0.5)';
   const colorScheme = Appearance.getColorScheme();
   const textStyles: TextStyle = {
     fontFamily: "Merriweather-Light",
@@ -25,12 +30,18 @@ const initStyles = (): Styles => {
   };
 
   const containerStyles: ViewStyle = {
+    zIndex: styleConstants.zIndex.content,
     flex: 1,
     alignItems: "center",
-    backgroundColor: colorScheme === "dark" ? blackTextColor : whiteTextColor
+    backgroundColor: colorScheme === "dark" ? transparentBlackTextColor : transparentWhiteTextColor
   };
   
   return StyleSheet.create({
+    background: {
+      ...containerStyles,
+      zIndex: styleConstants.zIndex.background,
+      backgroundColor: colorScheme === "dark" ? blackTextColor : whiteTextColor
+    },
     container: containerStyles,
     centerText: {
       ...textStyles,

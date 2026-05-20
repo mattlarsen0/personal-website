@@ -1,44 +1,36 @@
-import { Dimensions, DimensionValue, Image, View } from 'react-native'
-
+import { DimensionValue, useWindowDimensions, View } from 'react-native'
+import Gradient from '../../assets/images/svg/gradientMin.svg';
 type GradientBarProps = {
     colors: string[]
 };
-const dimensions = Dimensions.get('window');
 
 export default function GradientBar(props: GradientBarProps) {
+    const { width } = useWindowDimensions();    
     const bars = props.colors.map((color, index) => {
-        const leftOffset = `${10 * index}%` as DimensionValue;
+        const leftOffset = `${3 * index}%` as DimensionValue;
         return (
             <View style={{
-                zIndex: 0,
                 left: leftOffset,
                 top: 0,
                 height: '100%',
-                width: dimensions.width/4,
+                width: width/3,
                 position: 'absolute'
             }} key={`gradientBar-${color}-${index}`}>
-                <Image
-                    source={require("@/assets/images/gradient.png")}
-                    style={{
-                        tintColor: color,
-                        resizeMode: "contain",
-                        width: '100%',
-                        aspectRatio: 1,
-                        flex: 1,
-                        left: leftOffset,
-                        top: 0,
-                    }}
+                <Gradient
+                    width='100%'
+                    height='100%'
+                    fill={color}
                 />
             </View>
         );
     })
     return (
         <View style={{
+            zIndex: 0,
             position: 'absolute',
             top: 0,
             left: 0,
-            zIndex: 1,
-            height: dimensions.height,
+            height: '100%',
             width: '100%',
         }}>
             {bars}

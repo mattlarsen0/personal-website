@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { StyleSheet, TextStyle, ViewStyle } from "react-native";
 import useStyles from "./useStyles";
+import styleConstants from "./styleConstants";
 
 type SnakeStyles = {
   tiles: ViewStyle;
@@ -81,7 +82,7 @@ const initStyles = (styles: ReturnType<typeof useStyles>): SnakeStyles => {
         justifyContent: 'center',
         alignContent: 'center',
         alignItems: 'center',
-        zIndex: 1,
+        zIndex: styleConstants.zIndex.modal,
       },
       postGameText: {
         ...styles.text,
