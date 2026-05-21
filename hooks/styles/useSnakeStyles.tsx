@@ -95,6 +95,7 @@ const initStyles = (styles: ReturnType<typeof useStyles>): SnakeStyles => {
             borderWidth: 4,
             borderColor: gradiusBlue,
             fontFamily: styles.titleText.fontFamily,
+            color: '#e7e7e7'
         },
         scoreText: scoreText,
         scoreValue: {
