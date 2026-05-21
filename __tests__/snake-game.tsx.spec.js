@@ -7,7 +7,7 @@ describe('<SnakeGame />', () => {
     test('Text renders correctly on SnakeGame', async () => {
         const { getByText } = await render(<SnakeGame />);
 
-        getByText(/START GAME/i);
+        expect(getByText('START GAME')).toBeTruthy();
     });
 
     test('Can be started and not immediately crash', async () => {

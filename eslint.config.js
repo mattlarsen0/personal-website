@@ -10,8 +10,14 @@ const compat = new FlatCompat();
 export default [
     js.configs.recommended,
     ...compat.extends('eslint-config-expo'),
-
     {
+        settings: {
+            'import/resolver': {
+                typescript: {
+                    project: './tsconfig.json'
+                }
+            }
+        },
         files: ['**/*.js', '**/*.jsx', '**/*.ts', '**/*.tsx'],
         languageOptions: {
             ecmaVersion: 2021,
@@ -20,13 +26,11 @@ export default [
                 ecmaFeatures: { jsx: true },
             },
         },
-
         plugins: {
             react: reactPlugin,
             'react-native': reactNativePlugin,
             'react-hooks': reactHooksPlugin,
         },
-
         rules: {
             'no-fallthrough': 'error',
             'func-style': ['error', 'expression'],
@@ -51,10 +55,6 @@ export default [
             'react-hooks/exhaustive-deps': 'warn',
         },
     },
-
-    // ---------------------------
-    // Jest config (test files only)
-    // ---------------------------
     {
         files: ['**/*.test.js', '**/*.test.ts', '**/*.spec.js', '**/*.spec.ts', '**/__tests__/**/*'],
         plugins: {
