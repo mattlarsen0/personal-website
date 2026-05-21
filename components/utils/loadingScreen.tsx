@@ -1,13 +1,12 @@
 import { Text, View } from 'react-native';
 import { Image } from 'expo-image';
 import Animated, {
-  useSharedValue,
-  withTiming,
-  useAnimatedStyle,
-  Easing,
-  withRepeat,
+    useSharedValue,
+    withTiming,
+    useAnimatedStyle,
+    Easing,
+    withRepeat,
 } from 'react-native-reanimated';
-
 
 export default function LoadingScreen() {
     const rotation = useSharedValue(0);
