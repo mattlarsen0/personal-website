@@ -16,7 +16,7 @@ for (let i = 0; i < 3; i++) {
 
     colors.push(randomColor);
 }
-    
+
 export default function PageLayoutView(props: PageLayoutViewProps) {
     const styles = useStyles();
     return (

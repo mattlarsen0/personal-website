@@ -5,7 +5,7 @@ type GradientBarProps = {
 };
 
 export default function GradientBar(props: GradientBarProps) {
-    const { width } = useWindowDimensions();    
+    const { width } = useWindowDimensions();
     const bars = props.colors.map((color, index) => {
         const leftOffset = `${3 * index}%` as DimensionValue;
         return (

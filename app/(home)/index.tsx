@@ -1,14 +1,14 @@
-import Icon from "@/components/icon";
-import Resume from "@/components/resume/resume";
-import useStyles from "@/hooks/styles/useStyles";
-import TechList from "@/components/techList";
-import { Link } from "expo-router";
-import { ScrollView, Text, View } from "react-native";
-import PageLayoutView from "@/components/pageLayoutView";
+import Icon from '@/components/icon';
+import Resume from '@/components/resume/resume';
+import useStyles from '@/hooks/styles/useStyles';
+import TechList from '@/components/techList';
+import { Link } from 'expo-router';
+import { ScrollView, Text, View } from 'react-native';
+import PageLayoutView from '@/components/pageLayoutView';
 
 export default function Index() {
-  const styles = useStyles();
-  return (
+    const styles = useStyles();
+    return (
     <PageLayoutView style={styles.containerWithBackground}>
       <ScrollView contentContainerStyle={{ width: '95%' }}>
         <Text style={styles.h1}>Welcome to Matt Larsen's website built with React Native!</Text>
@@ -29,8 +29,8 @@ export default function Index() {
         <View style={styles.centerContainer}>
           <Text style={styles.titleText}>Read my resume below, try out </Text>
           <Link href="/(snake)" style={styles.titleLink}>S-N-A-K-E</Link>
-          <Text style={styles.titleText}>, and refresh to change colors!</Text>
-        </View>        
+          <Text style={styles.titleText}> and refresh to change colors!</Text>
+        </View>
         <View style={{alignItems: 'center', margin: 20}}>
           <Resume/>
         </View>
@@ -39,8 +39,8 @@ export default function Index() {
             This website was built with:
           </Text>
           <TechList
-            style={styles.text}
-            data={[
+              style={styles.text}
+              data={[
               <View style={styles.centerContainer}>
                 <Icon name="react" size={styles.text.fontSize} />
                 <Link style={styles.titleLink} key="0" href="https://reactnative.dev/">
@@ -77,10 +77,10 @@ export default function Index() {
                   Cloudflare Pages (Automatic Deployment and Hosting)
                 </Link>
               </View>,
-            ]}
+              ]}
           />
           </View>
       </ScrollView>
     </PageLayoutView>
-  );
+    );
 }

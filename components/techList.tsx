@@ -1,4 +1,4 @@
-import { FlatList, StyleProp, Text, TextStyle } from "react-native";
+import { FlatList, StyleProp, Text, TextStyle } from 'react-native';
 
 type TechListProps = {
   data: React.ReactNode[];
@@ -6,11 +6,11 @@ type TechListProps = {
 };
 
 export default function TechList(props: TechListProps) {
-  return (
+    return (
         <FlatList
             data={props.data}
             renderItem={({item}) => <Text style={props.style}>{item}</Text>}
             style={{margin: 10}}
         />
-  );
+    );
 }
