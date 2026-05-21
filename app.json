@@ -30,7 +30,7 @@
       [
         "expo-splash-screen",
         {
-          "image": "./assets/images/applesauce.webp",
+          "image": "./assets/images/applesauce.png",
           "imageWidth": 200,
           "resizeMode": "contain",
           "backgroundColor": "#ffffff",

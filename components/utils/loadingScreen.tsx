@@ -26,7 +26,7 @@ export default function LoadingScreen() {
         <View style={{ flex: 1, justifyContent: 'flex-start', alignItems: 'center', backgroundColor: '#808080' }}>
             <Animated.View style={animatedStyle}>
                 <Image
-                    source={require('@/assets/images/applesauce.webp')}
+                    source={require('@/assets/images/applesauce.png')}
                     style={{ flex: 1, width: '100%', aspectRatio: 1}}
                     contentFit='none'
                 />
