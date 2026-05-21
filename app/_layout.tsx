@@ -1,10 +1,11 @@
+import LoadingScreen from '@/components/utils/loadingScreen';
 import useStyles from '@/hooks/styles/useStyles';
 import { useFonts } from '@expo-google-fonts/roboto/useFonts';
 import { DrawerNavigationOptions } from '@react-navigation/drawer';
 import { Drawer } from 'expo-router/drawer';
 import * as SplashScreen from 'expo-splash-screen';
-import { useEffect } from 'react';
-import { View, Text, Platform, Appearance } from 'react-native';
+import { useEffect, useRef, useState } from 'react';
+import { Platform, Appearance } from 'react-native';
 
 SplashScreen.preventAutoHideAsync();
 
@@ -21,21 +22,22 @@ export default function RootLayout() {
         fade: true,
     });
 
+    let [catShown, setCatShown] = useState(false);
+    setTimeout(() => {
+        setCatShown(true);
+    }, 1000);
+
     useEffect(() => {
-        if (fontsLoaded) {
+        if (catShown && fontsLoaded) {
             SplashScreen.hideAsync();
         } else if (error) {
             console.warn('Error loading fonts:', error);
             SplashScreen.hideAsync();
         }
-    }, [fontsLoaded, error]);
+    }, [catShown, fontsLoaded, error]);
 
-    if (!fontsLoaded && Platform.OS === 'web') {
-        return (
-      <View>
-        <Text>LOADING</Text>
-      </View>
-        )
+    if ((!catShown || !fontsLoaded) && Platform.OS === 'web') {
+        return (<LoadingScreen />);
     }
     const colorScheme = Appearance.getColorScheme();
     const darkMode = colorScheme === 'dark';
