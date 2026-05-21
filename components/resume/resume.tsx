@@ -39,9 +39,6 @@ export default function Resume() {
             <HR />
             <ResumeList
                 data={[
-                    'Built and maintained React and C# .NET MVC web pages for a flight operations application, focusing on user experience and functionality.',
-                    'Developed and optimized SQL scripts for database management including stored procedures and indexes.',
-                    'Enhanced build tools and infrastructure automation using C# and PowerShell to improve deployment efficiency.',
                     'Developed full stack C# .NET MVC pages for an e-commerce website, applying agile methodologies to deliver features.',
                     'Updated and maintained custom Umbraco CMS using AngularJS and C# .NET to improve content management.',
                 ]}
