@@ -14,6 +14,7 @@ type Styles = {
   centerContainer: ViewStyle;
   link: TextStyle;
   containerWithBackground: ViewStyle;
+  titleLink: TextStyle;
 }
 
 const initStyles = (): Styles => {
@@ -37,6 +38,20 @@ const initStyles = (): Styles => {
     minHeight: '100%',
     minWidth: '100%',
   };
+
+  const linkStyles: TextStyle = {
+    ...textStyles,
+    color: '#285fab',
+    textDecorationLine: 'underline',
+    fontFamily: "Oswald-Regular",
+    fontSize: undefined, // "inherit" text size from parent
+  }
+
+  const titleTextStyles: TextStyle = {
+    ...textStyles,
+    fontFamily: "Oswald-Regular",
+    fontSize: 24,
+  }
   
   return StyleSheet.create({
     background: {
@@ -59,11 +74,7 @@ const initStyles = (): Styles => {
       ...textStyles,
       textAlign: "left",
     },
-    titleText: {
-      ...textStyles,
-      fontFamily: "Oswald-Regular",
-      fontSize: 24,
-    },
+    titleText: titleTextStyles,
     h1: {
       ...textStyles,
       fontSize: 40,
@@ -85,12 +96,10 @@ const initStyles = (): Styles => {
     list: {
       margin: 10,
     },
-    link: {
-      ...textStyles,
-      color: '#285fab',
-      textDecorationLine: 'underline',
-      fontFamily: "Oswald-Regular",
-      fontSize: undefined, // "inherit" text size from parent
+    link: linkStyles,
+    titleLink: {  
+      ...linkStyles,
+      fontSize: titleTextStyles.fontSize
     }
   });
 }

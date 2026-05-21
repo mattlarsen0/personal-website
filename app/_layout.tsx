@@ -46,7 +46,7 @@ export default function RootLayout() {
       width: 250,
     },
     drawerActiveTintColor: '#4f5aff',
-    drawerInactiveTintColor: String(styles.container.backgroundColor),
+    drawerInactiveTintColor: '#e7e7e7',
     drawerActiveBackgroundColor: '#363636',
     drawerInactiveBackgroundColor: '#363636',
     drawerLabelStyle: {
@@ -61,7 +61,7 @@ export default function RootLayout() {
     headerStyle: {
       backgroundColor: drawerBackground,
     },
-    headerTintColor: '#fff',
+    headerTintColor: '#ffffff',
     headerTitleStyle: {
       fontSize: 20,
       fontWeight: '600',

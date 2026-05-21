@@ -6,7 +6,7 @@ export default function Snake3d() {
   const styles = useStyles();
   return (
     <PageLayoutView
-      style={styles.container}
+      style={styles.containerWithBackground}
     >
       <SnakeGame />
     </PageLayoutView>

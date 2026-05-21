@@ -8,28 +8,27 @@ import PageLayoutView from "@/components/pageLayoutView";
 
 export default function Index() {
   const styles = useStyles();
-  const titleLink = {...styles.link, fontSize: styles.titleText.fontSize};
   return (
     <PageLayoutView style={styles.containerWithBackground}>
       <ScrollView contentContainerStyle={{ width: '95%' }}>
         <Text style={styles.h1}>Welcome to Matt Larsen's website built with React Native!</Text>
         <View style={styles.centerContainer}>
           <Text style={styles.titleText}>Checkout my code here:&nbsp;</Text>
-          <Link style={titleLink} href='https://github.com/mattlarsen0/personal-website/'>https://github.com/mattlarsen0/personal-website/</Link>
+          <Link style={styles.titleLink} href='https://github.com/mattlarsen0/personal-website/'>https://github.com/mattlarsen0/personal-website/</Link>
         </View>
         <View style={styles.centerContainer}>
-          <Text style={styles.titleText}>Download it for android here:&nbsp;</Text>
-          <Link style={titleLink} href='https://www.github.com'>
+          <Text style={styles.titleText}>Download it for Android here:&nbsp;</Text>
+          <Link style={styles.titleLink} href='https://www.github.com'>
             <Icon name="download" />
           </Link>
         </View>
         <View style={styles.centerContainer}>
           <Text style={styles.titleText}>Hire Me (Contact):&nbsp;</Text>
-          <Link style={titleLink} href="mailto:matt.larsen0@gmail.com">matt.larsen0@gmail.com</Link>
+          <Link style={styles.titleLink} href="mailto:matt.larsen0@gmail.com">matt.larsen0@gmail.com</Link>
         </View>
         <View style={styles.centerContainer}>
           <Text style={styles.titleText}>Read my resume below, try out </Text>
-          <Link href="/(snake)" style={titleLink}>S-N-A-K-E</Link>
+          <Link href="/(snake)" style={styles.titleLink}>S-N-A-K-E</Link>
           <Text style={styles.titleText}>, and refresh to change colors!</Text>
         </View>        
         <View style={{alignItems: 'center', margin: 20}}>
@@ -44,37 +43,37 @@ export default function Index() {
             data={[
               <View style={styles.centerContainer}>
                 <Icon name="react" size={styles.text.fontSize} />
-                <Link style={titleLink} key="0" href="https://reactnative.dev/">
+                <Link style={styles.titleLink} key="0" href="https://reactnative.dev/">
                   React Native
                 </Link>
               </View>,
               <View style={styles.centerContainer}>
                 <Icon name="mobile" size={styles.text.fontSize} />
-                <Link style={titleLink} key="1" href="https://expo.dev/">
+                <Link style={styles.titleLink} key="1" href="https://expo.dev/">
                   Expo
                 </Link>
               </View>,
               <View style={styles.centerContainer}>
                 <Icon name="check-double" size={styles.text.fontSize} />
-                <Link style={titleLink} key="2" href="https://www.typescriptlang.org/">
+                <Link style={styles.titleLink} key="2" href="https://www.typescriptlang.org/">
                   TypeScript
                 </Link>
               </View>,
               <View style={styles.centerContainer}>
                 <Icon name="microsoft" size={styles.text.fontSize} />
-                <Link style={titleLink} key="3" href="https://code.visualstudio.com/">
+                <Link style={styles.titleLink} key="3" href="https://code.visualstudio.com/">
                   VS Code
                 </Link>
               </View>,
               <View style={styles.centerContainer}>
                 <Icon name="github-alt" size={styles.text.fontSize} />
-                <Link style={titleLink} key="4" href="https://github.com/features/copilot">
+                <Link style={styles.titleLink} key="4" href="https://github.com/features/copilot">
                   Github Copilot (Autocomplete only)
                 </Link>
               </View>,
               <View style={styles.centerContainer}>
                 <Icon name="cloud" size={styles.text.fontSize} />
-                <Link style={titleLink} key="5" href="https://pages.cloudflare.com/">
+                <Link style={styles.titleLink} key="5" href="https://pages.cloudflare.com/">
                   Cloudflare Pages (Automatic Deployment and Hosting)
                 </Link>
               </View>,

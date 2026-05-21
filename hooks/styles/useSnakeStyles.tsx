@@ -61,6 +61,9 @@ const initStyles = (styles: ReturnType<typeof useStyles>): SnakeStyles => {
         backgroundColor: '#B3B3B3',
         justifyContent: 'center',
         alignItems: 'center',
+        width: 75,
+        height: 75,
+        margin: 5,
       },
       buttonText: {
         ...styles.text,

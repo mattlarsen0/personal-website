@@ -481,11 +481,11 @@ export default function SnakeGame() {
   }
 
   return (
-    <ScrollView contentContainerStyle={{ ...styles.container, flexDirection: 'column' }}>
+    <View style={{ ...styles.container, flexDirection: 'column' }}>
       <View style={{ alignItems: 'center' }}>
         <Text style={styles.h1}>S-N-A-K-E</Text>
         <Text style={styles.h3}>Collect the WAFFLES to grow longer! Touch or hover to change direction! Can YOU beat Matt&apos;s HIGH SCORE?</Text>
-        <Link style={styles.link} href='https://github.com/mattlarsen0/personal-website/blob/main/app/(snake3d)/index.tsx'>Read my code for this game!</Link>
+        <Link style={styles.titleLink} href='https://github.com/mattlarsen0/personal-website/blob/main/app/(snake3d)/index.tsx'>Read my code for this game!</Link>
       </View>
       <View style={{ flexDirection: "row", width: '100%', justifyContent: 'center' }}>
         <Pressable onPressOut={gameStatusAction}>
@@ -510,7 +510,7 @@ export default function SnakeGame() {
       </View>
       <View>
         {gameStatusScreen}
-        <Text style={styles.centerText}>
+        <Text style={{...styles.text, textAlign: 'center'}}>
           <FlatList data={tiles} renderItem={({ item }) => item} horizontal={true} />
         </Text>
       </View>
@@ -547,6 +547,6 @@ export default function SnakeGame() {
           <View style={snakeStyles.buttonSpacer} />
         </View>
       </View>
-    </ScrollView>
+    </View>
   );
 }
