@@ -18,7 +18,8 @@
     "test": "jest --watchAll"
   },
   "jest": {
-    "preset": "jest-expo"
+    "preset": "jest-expo",
+    "setupFilesAfterEnv": ["<rootDir>/__tests__/jest.setup.js"]
   },
   "dependencies": {
     "@expo-google-fonts/roboto": "^0.4.3",

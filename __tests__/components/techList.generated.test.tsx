@@ -2,11 +2,9 @@ import { FlatList, StyleProp, Text, TextStyle, View } from 'react-native';
 import TechList from '@/components/techList';
 import { render } from '@testing-library/react-native';
 
-jest.mock('react-native');
-
 const testProps = {
-    data: [<View />],
-    style: {/* StyleProp<TextStyle> */} as StyleProp<TextStyle>,
+    data: ['test'],
+    style: {},
 }
 
 describe('<TechList>', () => {

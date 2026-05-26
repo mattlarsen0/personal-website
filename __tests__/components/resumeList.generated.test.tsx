@@ -1,13 +1,10 @@
-import { FlatList, Text, View } from 'react-native';
+import { FlatList, StyleProp, Text, TextStyle, View } from 'react-native';
 import useStyles from '@/hooks/styles/useStyles';
 import ResumeList from '@/components/resumeList';
 import { render } from '@testing-library/react-native';
 
-jest.mock('react-native');
-jest.mock('@/hooks/styles/useStyles');
-
 const testProps = {
-    data: ['test']
+    data: ['test'],
 }
 
 describe('<ResumeList>', () => {
