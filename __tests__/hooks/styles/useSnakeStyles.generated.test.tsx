@@ -5,9 +5,34 @@ import styleConstants from '@/hooks/styles/styleConstants';
 import useSnakeStyles from '@/hooks/styles/useSnakeStyles';
 import { render } from '@testing-library/react-native';
 
-jest.mock('react-native');
-jest.mock('./useStyles');
-jest.mock('./styleConstants');
+const mockStyleSheet = {
+    text: {
+        fontSize: 16,
+    },
+    titleText: {
+        fontFamily: 'Arial',
+    },
+};
+
+const mockSnakeStyleSheet = {
+    text: {
+        fontSize: 16,
+    }
+};
+
+jest.mock('react-native', () => ({
+    Appearance: {
+        getColorScheme: jest.fn(),
+    },
+    StyleSheet: {
+        create: jest.fn((styles) => mockSnakeStyleSheet),
+    }
+}));
+jest.mock('@/hooks/styles/useStyles', () => () => mockStyleSheet);
+jest.mock('@/hooks/styles/styleConstants', () => jest.requireActual('@/hooks/styles/styleConstants'));
+jest.mock('react', () => ({
+    useState: jest.fn((styles) => [styles, jest.fn()]),
+}));
 
 describe('useSnakeStyles', () => {
     it('should expose a function', () => {
@@ -15,7 +40,7 @@ describe('useSnakeStyles', () => {
     });
 
     it('useSnakeStyles should return expected output', () => {
-    // const retValue = useSnakeStyles();
-        expect(false).toBeTruthy();
+        const retValue = useSnakeStyles();
+        expect(retValue).toEqual(mockSnakeStyleSheet);
     });
 });
