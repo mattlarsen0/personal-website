@@ -1,4 +1,3 @@
-import renderer from 'react-test-renderer';
 import Icon from '@/components/icon';
 import Resume from '@/components/resume/resume';
 import useStyles from '@/hooks/styles/useStyles';
@@ -6,7 +5,8 @@ import TechList from '@/components/techList';
 import { Link } from 'expo-router';
 import { ScrollView, Text, View } from 'react-native';
 import PageLayoutView from '@/components/pageLayoutView';
-import Index from './index';
+import Index from '@/app/(home)/index';
+import { render } from '@testing-library/react-native';
 
 jest.mock('@/components/icon');
 jest.mock('@/components/resume/resume');
@@ -16,10 +16,9 @@ jest.mock('expo-router');
 jest.mock('react-native');
 jest.mock('@/components/pageLayoutView');
 
-const renderTree = tree => renderer.create(tree);
 describe('<Index>', () => {
     it('should render component', () => {
-        expect(renderTree(<Index
+        expect(render(<Index
         />).toJSON()).toMatchSnapshot();
     });
 

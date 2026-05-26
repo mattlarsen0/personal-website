@@ -1,7 +1,8 @@
 import { useState } from 'react';
 import { Appearance, StyleSheet, TextStyle, ViewStyle } from 'react-native';
-import styleConstants from './styleConstants';
-import useStyles from './useStyles';
+import styleConstants from '@/hooks/styles/styleConstants';
+import useStyles from '@/hooks/styles/useStyles';
+import { render } from '@testing-library/react-native';
 
 jest.mock('react-native');
 jest.mock('./styleConstants');

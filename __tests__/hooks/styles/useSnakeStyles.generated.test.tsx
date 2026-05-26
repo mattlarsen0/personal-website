@@ -1,8 +1,9 @@
 import { useState } from 'react';
 import { StyleSheet, TextStyle, ViewStyle } from 'react-native';
-import useStyles from './useStyles';
-import styleConstants from './styleConstants';
-import useSnakeStyles from './useSnakeStyles';
+import useStyles from '@/hooks/styles/useStyles';
+import styleConstants from '@/hooks/styles/styleConstants';
+import useSnakeStyles from '@/hooks/styles/useSnakeStyles';
+import { render } from '@testing-library/react-native';
 
 jest.mock('react-native');
 jest.mock('./useStyles');
