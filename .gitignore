@@ -4,6 +4,7 @@
 .expo/
 .vscode/
 .wrangler/
+.idea/
 
 # dependencies
 node_modules/
