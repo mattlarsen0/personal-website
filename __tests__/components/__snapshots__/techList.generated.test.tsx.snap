@@ -1,5 +1,36 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<TechList> should render component 1`] = `null`;
+exports[`<TechList> should render component 1`] = `
+<div
+  className="flatList"
+  style={
+    {
+      "margin": 10,
+    }
+  }
+>
+  <div
+    className="text"
+  >
+    test
+  </div>
+</div>
+`;
 
-exports[`<TechList> should render component with props 1`] = `null`;
+exports[`<TechList> should render component with props 1`] = `
+<div
+  className="flatList"
+  style={
+    {
+      "margin": 10,
+    }
+  }
+>
+  <div
+    className="text"
+    style={{}}
+  >
+    test
+  </div>
+</div>
+`;

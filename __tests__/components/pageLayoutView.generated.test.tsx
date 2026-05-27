@@ -10,7 +10,9 @@ jest.mock('@/hooks/styles/useStyles');
 
 const testProps = {
     children: <View />,
-    style: {/* ViewStyle */} as ViewStyle,
+    style: {
+        margin: 10,
+    },
 }
 
 describe('<PageLayoutView>', () => {

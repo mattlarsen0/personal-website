@@ -1,0 +1,43 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<LoadingScreen> should render component 1`] = `
+<div
+  className="view"
+  style={
+    {
+      "alignItems": "center",
+      "backgroundColor": "#808080",
+      "flex": 1,
+      "justifyContent": "flex-start",
+    }
+  }
+>
+  <div
+    className="animated-view"
+  />
+  <div
+    className="view"
+    style={
+      {
+        "alignItems": "center",
+        "flex": 1,
+        "justifyContent": "center",
+        "width": "100%",
+      }
+    }
+  >
+    <div
+      className="text"
+      style={
+        {
+          "color": "#e7e7e7",
+          "fontFamily": "Arial",
+          "fontSize": 24,
+        }
+      }
+    >
+      Loading...
+    </div>
+  </div>
+</div>
+`;

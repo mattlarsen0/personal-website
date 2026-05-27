@@ -1,3 +1,29 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<Icon> should render component with props 1`] = `null`;
+exports[`<Icon> should render component 1`] = `
+<div
+  className="fontAwesome5"
+  style={
+    {
+      "color": "#000000",
+      "fontSize": 24,
+    }
+  }
+>
+  test-icon
+</div>
+`;
+
+exports[`<Icon> should render component with props 1`] = `
+<div
+  className="fontAwesome5"
+  style={
+    {
+      "color": "#000000",
+      "fontSize": 24,
+    }
+  }
+>
+  test-icon
+</div>
+`;

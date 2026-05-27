@@ -1,0 +1,57 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<PageLayoutView> should render component 1`] = `
+<div
+  className="view"
+  style={
+    {
+      "backgroundColor": "transparent",
+    }
+  }
+>
+  <div
+    className="scrollView"
+  >
+    <div
+      className="view"
+      style={
+        {
+          "margin": 10,
+        }
+      }
+    >
+      <div
+        className="view"
+      />
+    </div>
+  </div>
+</div>
+`;
+
+exports[`<PageLayoutView> should render component with props 1`] = `
+<div
+  className="view"
+  style={
+    {
+      "backgroundColor": "transparent",
+    }
+  }
+>
+  <div
+    className="scrollView"
+  >
+    <div
+      className="view"
+      style={
+        {
+          "margin": 10,
+        }
+      }
+    >
+      <div
+        className="view"
+      />
+    </div>
+  </div>
+</div>
+`;

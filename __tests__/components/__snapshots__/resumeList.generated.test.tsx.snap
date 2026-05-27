@@ -1,111 +1,37 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<ResumeList> should render component 1`] = `
-<RCTScrollView
-  data={
-    [
-      {
-        "key": "test",
-      },
-    ]
-  }
-  getItem={[Function]}
-  getItemCount={[Function]}
-  keyExtractor={[Function]}
-  onContentSizeChange={[Function]}
-  onLayout={[Function]}
-  onMomentumScrollBegin={[Function]}
-  onMomentumScrollEnd={[Function]}
-  onScroll={[Function]}
-  onScrollBeginDrag={[Function]}
-  onScrollEndDrag={[Function]}
-  removeClippedSubviews={false}
-  renderItem={[Function]}
-  scrollEventThrottle={0.0001}
-  stickyHeaderIndices={[]}
+<div
+  className="flatList"
   style={
     {
-      "margin": 10,
+      "backgroundColor": "#FFFFFF",
     }
   }
-  viewabilityConfigCallbackPairs={[]}
 >
-  <View>
-    <View
-      onFocusCapture={[Function]}
-      onLayout={[Function]}
-      style={null}
-    >
-      <Text
-        style={
-          {
-            "color": "#030303",
-            "fontFamily": "Merriweather-Light",
-            "fontSize": 16,
-            "textAlign": "left",
-            "verticalAlign": "middle",
-          }
-        }
-      >
-        • 
-        test
-      </Text>
-    </View>
-  </View>
-</RCTScrollView>
+  <div
+    className="text"
+  >
+    • 
+    test
+  </div>
+</div>
 `;
 
 exports[`<ResumeList> should render component with props 1`] = `
-<RCTScrollView
-  data={
-    [
-      {
-        "key": "test",
-      },
-    ]
-  }
-  getItem={[Function]}
-  getItemCount={[Function]}
-  keyExtractor={[Function]}
-  onContentSizeChange={[Function]}
-  onLayout={[Function]}
-  onMomentumScrollBegin={[Function]}
-  onMomentumScrollEnd={[Function]}
-  onScroll={[Function]}
-  onScrollBeginDrag={[Function]}
-  onScrollEndDrag={[Function]}
-  removeClippedSubviews={false}
-  renderItem={[Function]}
-  scrollEventThrottle={0.0001}
-  stickyHeaderIndices={[]}
+<div
+  className="flatList"
   style={
     {
-      "margin": 10,
+      "backgroundColor": "#FFFFFF",
     }
   }
-  viewabilityConfigCallbackPairs={[]}
 >
-  <View>
-    <View
-      onFocusCapture={[Function]}
-      onLayout={[Function]}
-      style={null}
-    >
-      <Text
-        style={
-          {
-            "color": "#030303",
-            "fontFamily": "Merriweather-Light",
-            "fontSize": 16,
-            "textAlign": "left",
-            "verticalAlign": "middle",
-          }
-        }
-      >
-        • 
-        test
-      </Text>
-    </View>
-  </View>
-</RCTScrollView>
+  <div
+    className="text"
+  >
+    • 
+    test
+  </div>
+</div>
 `;
