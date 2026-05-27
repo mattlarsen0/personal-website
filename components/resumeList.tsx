@@ -9,12 +9,13 @@ export default function ResumeList(props: ResumeListProps) {
     const styles = useStyles();
     return (
         <FlatList
-            data={props.data.map(item => {
+            data={props.data.map((item, index) => {
                 return {
-                    key: item
+                    key: index,
+                    value: item
                 }
             })}
-            renderItem={({item}) => <Text style={styles.text}>• {item.key}</Text>}
+            renderItem={({item}) => <Text style={styles.text}>• {item.value}</Text>}
             style={styles.list}
         />
     );

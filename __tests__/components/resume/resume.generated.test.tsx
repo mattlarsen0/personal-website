@@ -5,6 +5,8 @@ import HR from '@/components/utils/hr';
 import Resume from '@/components/resume/resume';
 import { render } from '@testing-library/react-native';
 
+jest.unmock('@/components/resume/resume');
+
 describe('<Resume>', () => {
     it('should render component', () => {
         expect(render(<Resume

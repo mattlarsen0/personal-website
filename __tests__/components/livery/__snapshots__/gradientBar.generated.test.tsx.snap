@@ -2,18 +2,147 @@
 
 exports[`<GradientBar> should render component with one color 1`] = `
 <div
-  className="gradient-bar"
-/>
+  className="view"
+  style={
+    {
+      "height": "100%",
+      "left": 0,
+      "position": "absolute",
+      "top": 0,
+      "width": "100%",
+      "zIndex": 0,
+    }
+  }
+>
+  <div
+    className="view"
+    style={
+      {
+        "height": "100%",
+        "left": "0%",
+        "position": "absolute",
+        "top": 0,
+        "width": 266.6666666666667,
+      }
+    }
+  >
+    <div
+      className="svg"
+    />
+  </div>
+</div>
 `;
 
 exports[`<GradientBar> should render component with three colors 1`] = `
 <div
-  className="gradient-bar"
-/>
+  className="view"
+  style={
+    {
+      "height": "100%",
+      "left": 0,
+      "position": "absolute",
+      "top": 0,
+      "width": "100%",
+      "zIndex": 0,
+    }
+  }
+>
+  <div
+    className="view"
+    style={
+      {
+        "height": "100%",
+        "left": "0%",
+        "position": "absolute",
+        "top": 0,
+        "width": 266.6666666666667,
+      }
+    }
+  >
+    <div
+      className="svg"
+    />
+  </div>
+  <div
+    className="view"
+    style={
+      {
+        "height": "100%",
+        "left": "3%",
+        "position": "absolute",
+        "top": 0,
+        "width": 266.6666666666667,
+      }
+    }
+  >
+    <div
+      className="svg"
+    />
+  </div>
+  <div
+    className="view"
+    style={
+      {
+        "height": "100%",
+        "left": "6%",
+        "position": "absolute",
+        "top": 0,
+        "width": 266.6666666666667,
+      }
+    }
+  >
+    <div
+      className="svg"
+    />
+  </div>
+</div>
 `;
 
 exports[`<GradientBar> should render component with two colors 1`] = `
 <div
-  className="gradient-bar"
-/>
+  className="view"
+  style={
+    {
+      "height": "100%",
+      "left": 0,
+      "position": "absolute",
+      "top": 0,
+      "width": "100%",
+      "zIndex": 0,
+    }
+  }
+>
+  <div
+    className="view"
+    style={
+      {
+        "height": "100%",
+        "left": "0%",
+        "position": "absolute",
+        "top": 0,
+        "width": 266.6666666666667,
+      }
+    }
+  >
+    <div
+      className="svg"
+    />
+  </div>
+  <div
+    className="view"
+    style={
+      {
+        "height": "100%",
+        "left": "3%",
+        "position": "absolute",
+        "top": 0,
+        "width": 266.6666666666667,
+      }
+    }
+  >
+    <div
+      className="svg"
+    />
+  </div>
+</div>
 `;

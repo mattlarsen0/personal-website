@@ -2,9 +2,17 @@ import { FlatList, StyleProp, Text, TextStyle, View } from 'react-native';
 import TechList from '@/components/techList';
 import { render } from '@testing-library/react-native';
 
+jest.unmock('@/components/techList');
+
 const testProps = {
-    data: ['test'],
-    style: {},
+    data: [
+        <div key='1'>Test 1</div>,
+        <div key='2'>Test 2</div>,
+        <div key='3'>Test 3</div>,
+    ],
+    style: {
+        fontSize: 20,
+    },
 }
 
 describe('<TechList>', () => {

@@ -3,6 +3,8 @@ import useStyles from '@/hooks/styles/useStyles';
 import Icon from '@/components/icon';
 import { render } from '@testing-library/react-native';
 
+jest.unmock('@/components/icon');
+
 const testProps = {
     name: 'test-icon',
     size: 24,

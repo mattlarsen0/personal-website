@@ -9,6 +9,8 @@ import { Link } from 'expo-router';
 import SnakeGame from '@/components/snake-v1/snake-game';
 import { render } from '@testing-library/react-native';
 
+jest.unmock('@/components/snake-v1/snake-game');
+
 jest.mock('@/hooks/styles/useSnakeStyles', () => ({
     __esModule: true,
     default: jest.fn(() => ({

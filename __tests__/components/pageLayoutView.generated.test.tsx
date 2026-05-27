@@ -4,6 +4,8 @@ import useStyles from '@/hooks/styles/useStyles';
 import PageLayoutView from '@/components/pageLayoutView';
 import { render } from '@testing-library/react-native';
 
+jest.unmock('@/components/pageLayoutView');
+
 const testProps = {
     children: <View />,
     style: {

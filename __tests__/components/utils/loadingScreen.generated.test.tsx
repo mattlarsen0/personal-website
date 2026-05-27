@@ -1,6 +1,8 @@
 import LoadingScreen from '@/components/utils/loadingScreen';
 import { render } from '@testing-library/react-native';
 
+jest.unmock('@/components/loadingScreen');
+
 jest.mock('expo-image', () => {
     return {
         Image: jest.fn().mockImplementation(() => {

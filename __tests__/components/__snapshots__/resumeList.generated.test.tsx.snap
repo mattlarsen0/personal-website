@@ -2,12 +2,90 @@
 
 exports[`<ResumeList> should render component 1`] = `
 <div
-  className="resumeList"
-/>
+  className="flatList"
+  style={
+    {
+      "backgroundColor": "#FFFFFF",
+    }
+  }
+>
+  <div
+    className="text"
+    style={
+      {
+        "color": "#000000",
+      }
+    }
+  >
+    • 
+    Test 1
+  </div>
+  <div
+    className="text"
+    style={
+      {
+        "color": "#000000",
+      }
+    }
+  >
+    • 
+    Test 2
+  </div>
+  <div
+    className="text"
+    style={
+      {
+        "color": "#000000",
+      }
+    }
+  >
+    • 
+    Test 3
+  </div>
+</div>
 `;
 
 exports[`<ResumeList> should render component with props 1`] = `
 <div
-  className="resumeList"
-/>
+  className="flatList"
+  style={
+    {
+      "backgroundColor": "#FFFFFF",
+    }
+  }
+>
+  <div
+    className="text"
+    style={
+      {
+        "color": "#000000",
+      }
+    }
+  >
+    • 
+    Test 1
+  </div>
+  <div
+    className="text"
+    style={
+      {
+        "color": "#000000",
+      }
+    }
+  >
+    • 
+    Test 2
+  </div>
+  <div
+    className="text"
+    style={
+      {
+        "color": "#000000",
+      }
+    }
+  >
+    • 
+    Test 3
+  </div>
+</div>
 `;

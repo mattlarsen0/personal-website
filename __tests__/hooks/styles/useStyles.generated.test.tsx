@@ -2,9 +2,11 @@ import { useState } from 'react';
 import { Appearance, StyleSheet, TextStyle, ViewStyle } from 'react-native';
 import useStyles from '@/hooks/styles/useStyles';
 
-const mockStyleSheet = {
+jest.unmock('@/hooks/styles/useStyles');
+
+const expectedStyleSheet = {
     text: {
-        fontSize: 16,
+        color: '#000000',
     }
 };
 
@@ -17,11 +19,9 @@ jest.mock('react-native', () => ({
         getColorScheme: jest.fn(),
     },
     StyleSheet: {
-        create: jest.fn((styles) => mockStyleSheet),
+        create: jest.fn((styles) => expectedStyleSheet),
     }
 }));
-
-jest.mock('@/hooks/styles/styleConstants', () => jest.requireActual('@/hooks/styles/styleConstants'));
 
 describe('useStyles', () => {
     it('should expose a function', () => {
@@ -30,6 +30,6 @@ describe('useStyles', () => {
 
     it('useStyles should return expected output', () => {
         const retValue = useStyles();
-        expect(retValue).toEqual(mockStyleSheet);
+        expect(retValue).toEqual(expectedStyleSheet);
     });
 });

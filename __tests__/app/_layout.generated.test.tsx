@@ -9,6 +9,8 @@ import { Platform, Appearance } from 'react-native';
 import RootLayout from '@/app/_layout';
 import { act, render } from '@testing-library/react-native';
 
+jest.unmock('@/app/_layout');
+
 jest.mock('@/components/utils/loadingScreen', () => ({
     __esModule: true,
     default: jest.fn(() => (<div className='loading-screen'></div>)),

@@ -12,7 +12,23 @@ exports[`<TechList> should render component 1`] = `
   <div
     className="text"
   >
-    test
+    <div>
+      Test 1
+    </div>
+  </div>
+  <div
+    className="text"
+  >
+    <div>
+      Test 2
+    </div>
+  </div>
+  <div
+    className="text"
+  >
+    <div>
+      Test 3
+    </div>
   </div>
 </div>
 `;
@@ -28,9 +44,39 @@ exports[`<TechList> should render component with props 1`] = `
 >
   <div
     className="text"
-    style={{}}
+    style={
+      {
+        "fontSize": 20,
+      }
+    }
   >
-    test
+    <div>
+      Test 1
+    </div>
+  </div>
+  <div
+    className="text"
+    style={
+      {
+        "fontSize": 20,
+      }
+    }
+  >
+    <div>
+      Test 2
+    </div>
+  </div>
+  <div
+    className="text"
+    style={
+      {
+        "fontSize": 20,
+      }
+    }
+  >
+    <div>
+      Test 3
+    </div>
   </div>
 </div>
 `;

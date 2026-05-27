@@ -2,6 +2,8 @@ import { DimensionValue, useWindowDimensions, View } from 'react-native'
 import GradientBar from '@/components/livery/gradientBar';
 import { render } from '@testing-library/react-native';
 
+jest.unmock('@/components/livery/gradientBar');
+
 jest.mock('@/assets/images/svg/gradientMin.svg', () => ({
     __esModule: true,
     default: jest.fn(() => (<div className='svg'></div>)),

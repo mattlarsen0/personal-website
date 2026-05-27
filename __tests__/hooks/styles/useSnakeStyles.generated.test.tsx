@@ -5,6 +5,8 @@ import styleConstants from '@/hooks/styles/styleConstants';
 import useSnakeStyles from '@/hooks/styles/useSnakeStyles';
 import { render } from '@testing-library/react-native';
 
+jest.unmock('@/hooks/styles/useSnakeStyles');
+
 const mockStyleSheet = {
     text: {
         fontSize: 16,

@@ -4,6 +4,8 @@ import PageLayoutView from '@/components/pageLayoutView';
 import Snake3d from '@/app/(snake)/index';
 import { render } from '@testing-library/react-native';
 
+jest.unmock('@/app/(snake)/index');
+
 jest.mock('@/components/snake-v1/snake-game');
 
 describe('<Snake3d>', () => {

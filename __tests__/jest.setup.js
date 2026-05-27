@@ -1,4 +1,6 @@
 // put shared mocks here, some expo incompatibility is preventing __mocks__ from working
+jest.mock('@/hooks/styles/styleConstants', () => jest.requireActual('@/hooks/styles/styleConstants'));
+
 jest.mock('@/hooks/styles/useStyles', () => ({
     __esModule: true,
     default: () => ({

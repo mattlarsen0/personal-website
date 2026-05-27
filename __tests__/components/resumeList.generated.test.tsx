@@ -3,8 +3,14 @@ import useStyles from '@/hooks/styles/useStyles';
 import ResumeList from '@/components/resumeList';
 import { render } from '@testing-library/react-native';
 
+jest.unmock('@/components/resumeList');
+
 const testProps = {
-    data: ['test'],
+    data: [
+        'Test 1',
+        'Test 2',
+        'Test 3',
+    ]
 }
 
 describe('<ResumeList>', () => {

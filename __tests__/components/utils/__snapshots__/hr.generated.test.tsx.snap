@@ -2,6 +2,14 @@
 
 exports[`<HR> should render component 1`] = `
 <div
-  className="hr"
+  className="view"
+  style={
+    {
+      "borderBottomColor": "#000000",
+      "borderBottomWidth": 1,
+      "marginBottom": 10,
+      "marginTop": 2,
+    }
+  }
 />
 `;
