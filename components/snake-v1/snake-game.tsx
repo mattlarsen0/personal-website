@@ -1,10 +1,11 @@
 import useStyles from '@/hooks/styles/useStyles';
-import { Text, View, Pressable, AppState, FlatList } from 'react-native';
+import { Text, View, Pressable, AppState } from 'react-native';
 import { useEffect, useRef, useState } from 'react';
 import utils from '@/utils';
 import useSnakeStyles from '../../hooks/styles/useSnakeStyles';
 import Icon from '@/components/icon';
 import { Link } from 'expo-router';
+import { FlashList, useMappingHelper } from '@shopify/flash-list';
 
 enum Direction {
   Up,
@@ -59,6 +60,12 @@ type GameState = {
   highScore: number,
   currentDirection: Direction
 }
+
+const getMutableGameState = (gameState: GameState) => ({
+    ...gameState,
+    snakeBody: [...(gameState.snakeBody ?? [])],
+    playArea: gameState.playArea?.map(row => [...row]),
+});
 
 const addSnakeToPlayArea = (gameState: GameState, direction: Direction) => {
     for (let i = 0; i < InitialSnakeLength; i++) {
@@ -185,7 +192,7 @@ const getTickSpeed = (gameState: GameState) => {
     return Math.max(GameTickInterval - ((gameState.snakeBody.length - InitialSnakeLength) * TickTimeModifier), MinimumTickInterval);
 }
 
-const startTicking = (gameState: GameState, setGameState: Function, directionRef: React.RefObject<Direction>, setTiles: Function, snakeStyles: ReturnType<typeof useSnakeStyles>) => {
+const startTicking = (gameState: GameState, setGameState: Function, directionRef: React.RefObject<Direction>, setTiles: Function, snakeStyles: ReturnType<typeof useSnakeStyles>, getMappingKey: Function) => {
     if (gameState.activeTimeout) {
         return;
     }
@@ -200,7 +207,7 @@ const startTicking = (gameState: GameState, setGameState: Function, directionRef
             gameState.activeTimeout = setTimeout(tick, tickSpeed);
         }
         setGameState({ ...gameState });
-        setTiles(renderTiles(gameState, snakeStyles));
+        setTiles(renderTiles(gameState, snakeStyles, getMappingKey));
     }
     gameState.activeTimeout = setTimeout(tick, GameTickInterval);
 }
@@ -213,8 +220,8 @@ const onPause = (gameState: GameState, setState: Function) => {
     setState({ ...gameState });
 }
 
-const onResume = (gameState: GameState, setState: Function, directionRef: React.RefObject<Direction>, setTiles: Function, snakeStyles: ReturnType<typeof useSnakeStyles>) => {
-    startTicking(gameState, setState, directionRef, setTiles, snakeStyles);
+const onResume = (gameState: GameState, setState: Function, directionRef: React.RefObject<Direction>, setTiles: Function, snakeStyles: ReturnType<typeof useSnakeStyles>, getMappingKey: Function) => {
+    startTicking(gameState, setState, directionRef, setTiles, snakeStyles, getMappingKey);
 }
 
 const onTick = (gameState: GameState, direction: Direction) => {
@@ -298,13 +305,13 @@ const endGame = (gameState: GameState, status: GameStatus) => {
     clearTimeout(gameState.activeTimeout);
     gameState.status = status;
     if (gameState.score > gameState.highScore) {
-    // Inconceivable!
+        // Inconceivable!
         gameState.highScore = gameState.score
     }
 }
 
-const renderTiles = (gameState: GameState, snakeStyles: ReturnType<typeof useSnakeStyles>) => {
-    if (!gameState || !gameState.snakeBody) {
+const renderTiles = (gameState: GameState, snakeStyles: ReturnType<typeof useSnakeStyles>, getMappingKey: Function) => {
+    if (!gameState || !gameState.snakeBody || !gameState.snakeBody.length) {
         return [];
     }
 
@@ -332,16 +339,16 @@ const renderTiles = (gameState: GameState, snakeStyles: ReturnType<typeof useSna
     const diffY = tail[1] - preTail[1];
 
     if (diffX > 0) {
-    // left
+        // left
         tailRotation = '90deg';
     } else if (diffX < 0) {
-    // right
+        // right
         tailRotation = '-90deg';
     } else if (diffY > 0) {
-    // up
+        // up
         tailRotation = '180deg';
     } else if (diffY < 0) {
-    // down
+        // down
         tailRotation = '0deg';
     }
 
@@ -372,18 +379,17 @@ const renderTiles = (gameState: GameState, snakeStyles: ReturnType<typeof useSna
                     throw new Error(`Unexpected tile type ${tile} at coordinates (${columnIndex}, ${rowIndex})`);
             }
 
-            return {
-                key: key,
-                value: <View style={snakeStyles.tiles}>{tileContents}</View>
-            };
+            return (
+                <View key={getMappingKey(key, rowIndex)} style={snakeStyles.tiles}>{tileContents}</View>
+            );
         });
         return (
-      <View key={`column-view-${columnIndex}`} style={{ display: 'flex', flexDirection: 'column' }}>
-        <FlatList
-            data={columnTiles}
-            renderItem={({ item }) => item.value}
-        />
-      </View>
+            <View key={getMappingKey(`column-view-${columnIndex}`, columnIndex)} style={{ display: 'flex', flexDirection: 'column' }}>
+                <FlashList
+                    data={columnTiles}
+                    renderItem={({ item }) => item}
+                />
+            </View>
         )
     });
 
@@ -400,11 +406,13 @@ export default function SnakeGame() {
     const [gameState, setGameState] = useState({} as GameState);
     const [tiles, setTiles] = useState([] as React.ReactElement[]);
     const directionRef = useRef(DefaultDirection);
+    const { getMappingKey } = useMappingHelper();
 
     if (!gameState.highScore) {
         const firstLoadState = initGameState();
+        const mutableGameState = getMutableGameState(firstLoadState);
         setGameState(firstLoadState);
-        setTiles(renderTiles(firstLoadState, snakeStyles));
+        setTiles(renderTiles(mutableGameState, snakeStyles, getMappingKey));
     }
 
     useEffect(() => {
@@ -443,39 +451,40 @@ export default function SnakeGame() {
     const rightTouch = () => changeDirection(gameState, Direction.Right);
     const leftTouch = () => changeDirection(gameState, Direction.Left);
 
+    const mutableGameState = getMutableGameState(gameState);
     let gameStatusText;
     let gameStatusAction;
     if (gameState.status === GameStatus.Initiated) {
         gameStatusText = 'START GAME';
-        gameStatusAction = () => startTicking(gameState, setGameState, directionRef, setTiles, snakeStyles)
+        gameStatusAction = () => startTicking(mutableGameState, setGameState, directionRef, setTiles, snakeStyles, getMappingKey)
     } else if (gameState.status === GameStatus.Running) {
         gameStatusText = 'PAUSE GAME';
-        gameStatusAction = () => onPause(gameState, setGameState);
+        gameStatusAction = () => onPause(mutableGameState, setGameState);
     } else if (gameState.status === GameStatus.Paused) {
         gameStatusText = 'RESUME GAME';
-        gameStatusAction = () => onResume(gameState, setGameState, directionRef, setTiles, snakeStyles);
+        gameStatusAction = () => onResume(mutableGameState, setGameState, directionRef, setTiles, snakeStyles, getMappingKey);
     } else if (gameState.status === GameStatus.Lost) {
         gameStatusText = 'RESTART GAME';
         gameStatusAction = () => {
             const newGameState = initGameState();
             setGameState(newGameState);
             directionRef.current = DefaultDirection;
-            startTicking(newGameState, setGameState, directionRef, setTiles, snakeStyles);
+            startTicking(newGameState, setGameState, directionRef, setTiles, snakeStyles, getMappingKey);
         };
     }
 
     let gameStatusScreen;
     if (gameState.status === GameStatus.Lost) {
         gameStatusScreen = (
-      <View style={snakeStyles.postGameStatus}>
-        <Text style={snakeStyles.postGameText}>GAME OVER</Text>
-      </View>
+            <View style={snakeStyles.postGameStatus}>
+                <Text style={snakeStyles.postGameText}>GAME OVER</Text>
+            </View>
         )
     } else if (gameState.status === GameStatus.Win) {
         gameStatusScreen = (
-      <View style={snakeStyles.postGameStatus}>
-        <Text style={snakeStyles.postGameText}>WIN!</Text>
-      </View>
+            <View style={snakeStyles.postGameStatus}>
+                <Text style={snakeStyles.postGameText}>WIN!</Text>
+            </View>
         )
     }
 
@@ -510,7 +519,7 @@ export default function SnakeGame() {
       <View>
         {gameStatusScreen}
         <Text style={{...styles.text, textAlign: 'center'}}>
-          <FlatList data={tiles} renderItem={({ item }) => item} horizontal={true} />
+          <FlashList data={tiles} renderItem={({ item }) => item} horizontal={true} />
         </Text>
       </View>
       <View style={{ flexDirection: 'column' }}>

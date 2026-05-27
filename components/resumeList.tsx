@@ -1,5 +1,6 @@
-import { FlatList, Text } from 'react-native';
+import { Text } from 'react-native';
 import useStyles from '@/hooks/styles/useStyles';
+import { FlashList } from '@shopify/flash-list';
 
 type ResumeListProps = {
   data: string[];
@@ -8,7 +9,7 @@ type ResumeListProps = {
 export default function ResumeList(props: ResumeListProps) {
     const styles = useStyles();
     return (
-        <FlatList
+        <FlashList
             data={props.data.map((item, index) => {
                 return {
                     key: index,

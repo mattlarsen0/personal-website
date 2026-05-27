@@ -7,7 +7,7 @@ export default function Resume() {
     const styles = useStyles();
 
     return (
-        <View style={{flexDirection: 'column'}}>
+        <View style={{flexDirection: 'column', width: '100%'}}>
             <Text style={styles.h2}>Experience</Text>
             <Text style={{...styles.h3, marginTop: 20}}>Columbia Sportswear Company</Text>
             <Text style={styles.h4}>Senior Software Engineer</Text>

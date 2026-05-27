@@ -9,11 +9,16 @@ import PageLayoutView from '@/components/pageLayoutView';
 export default function Index() {
     const styles = useStyles();
     return (
-    <PageLayoutView style={styles.containerWithBackground}>
+    <PageLayoutView>
       <ScrollView contentContainerStyle={{ width: '95%' }}>
-        <Text style={styles.h1}>Welcome to Matt Larsen's website built with React Native!</Text>
+        <Text style={styles.h1}>Welcome to Matt Larsen's website!</Text>
         <View style={styles.centerContainer}>
-          <Text style={styles.titleText}>Checkout my code here:&nbsp;</Text>
+          <Text style={styles.h2}>Hire Me (Contact):&nbsp;</Text>
+          <Link style={styles.titleLink} href="mailto:matt.larsen0@gmail.com">matt.larsen0@gmail.com</Link>
+        </View>
+        <Text style={styles.h2}></Text>
+        <View style={styles.centerContainer}>
+          <Text style={styles.titleText}>Built with React Native, checkout my code here:&nbsp;</Text>
           <Link style={styles.titleLink} href='https://github.com/mattlarsen0/personal-website/'>https://github.com/mattlarsen0/personal-website/</Link>
         </View>
         <View style={styles.centerContainer}>
@@ -23,10 +28,6 @@ export default function Index() {
           </Link>
         </View>
         <View style={styles.centerContainer}>
-          <Text style={styles.titleText}>Hire Me (Contact):&nbsp;</Text>
-          <Link style={styles.titleLink} href="mailto:matt.larsen0@gmail.com">matt.larsen0@gmail.com</Link>
-        </View>
-        <View style={styles.centerContainer}>
           <Text style={styles.titleText}>Read my resume below, try out </Text>
           <Link href="/(snake)" style={styles.titleLink}>S-N-A-K-E</Link>
           <Text style={styles.titleText}> and refresh to change colors!</Text>
@@ -34,10 +35,10 @@ export default function Index() {
         <View style={{alignItems: 'center', margin: 20}}>
           <Resume/>
         </View>
-        <View style={{alignItems: 'center', justifyContent: 'center'}}>
-          <Text style={styles.h3}>
-            This website was built with:
-          </Text>
+        <Text style={styles.h3}>
+          This website was built with:
+        </Text>
+        <View style={styles.centerContainer}>
           <TechList
               style={styles.text}
               data={[

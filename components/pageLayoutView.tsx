@@ -4,7 +4,7 @@ import useStyles from '@/hooks/styles/useStyles';
 
 type PageLayoutViewProps = {
     children: React.ReactElement,
-    style: ViewStyle
+    style?: ViewStyle
 }
 
 const allowedColors = ['#ff1100','#ffd000','#00970d', '#6e7dff', '#940080', '#32e7ff'];
@@ -23,7 +23,7 @@ export default function PageLayoutView(props: PageLayoutViewProps) {
         <View style={styles.background}>
             <GradientBar colors={colors} />
             <ScrollView>
-                <View style={props.style}>
+                <View style={props.style ?? styles.containerWithBackground}>
                     {props.children}
                 </View>
             </ScrollView>
