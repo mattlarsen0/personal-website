@@ -52,9 +52,8 @@ jest.mock('expo-splash-screen', () => ({
 }));
 
 describe('<RootLayout>', () => {
-    it('should render component', () => {
-        act(() => {
-            expect(render(<RootLayout />).toJSON()).toMatchSnapshot();
-        });
+    it('should render component', async () => {
+        const tree = await render(<RootLayout />).toJSON();
+        expect(tree).toMatchSnapshot();
     });
 });

@@ -1,8 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<LoadingScreen> should render component 1`] = `
-<div
-  className="view"
+<View
   style={
     {
       "alignItems": "center",
@@ -15,8 +14,7 @@ exports[`<LoadingScreen> should render component 1`] = `
   <div
     className="animated-view"
   />
-  <div
-    className="view"
+  <View
     style={
       {
         "alignItems": "center",
@@ -26,8 +24,7 @@ exports[`<LoadingScreen> should render component 1`] = `
       }
     }
   >
-    <div
-      className="text"
+    <Text
       style={
         {
           "color": "#e7e7e7",
@@ -37,7 +34,7 @@ exports[`<LoadingScreen> should render component 1`] = `
       }
     >
       Loading...
-    </div>
-  </div>
-</div>
+    </Text>
+  </View>
+</View>
 `;

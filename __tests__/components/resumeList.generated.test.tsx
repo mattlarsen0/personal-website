@@ -14,14 +14,16 @@ const testProps = {
 }
 
 describe('<ResumeList>', () => {
-    it('should render component', () => {
-        expect(render(<ResumeList
+    it('should render component', async () => {
+        const result = await render(<ResumeList
             data={testProps.data}
-        />).toJSON()).toMatchSnapshot();
+        />).toJSON();
+        expect(result).toMatchSnapshot();
     });
-    it('should render component with props', () => {
-        expect(render(<ResumeList
+    it('should render component with props', async () => {
+        const result = await render(<ResumeList
             data={testProps.data}
-        />).toJSON()).toMatchSnapshot();
+        />).toJSON();
+        expect(result).toMatchSnapshot();
     });
 });

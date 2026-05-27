@@ -19,7 +19,12 @@
   },
   "jest": {
     "preset": "jest-expo",
-    "setupFilesAfterEnv": ["<rootDir>/__tests__/jest.setup.js"]
+    "setupFilesAfterEnv": [
+      "<rootDir>/__tests__/jest.setup.js"
+    ],
+    "testPathIgnorePatterns": [
+      "/__tests__/jest.setup.js"
+    ]
   },
   "dependencies": {
     "@expo-google-fonts/roboto": "^0.4.3",

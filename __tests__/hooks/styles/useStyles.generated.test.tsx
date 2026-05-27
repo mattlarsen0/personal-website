@@ -24,12 +24,12 @@ jest.mock('react-native', () => ({
 }));
 
 describe('useStyles', () => {
-    it('should expose a function', () => {
+    it('should expose a function', async () => {
         expect(useStyles).toBeDefined();
     });
 
-    it('useStyles should return expected output', () => {
-        const retValue = useStyles();
+    it('useStyles should return expected output', async () => {
+        const retValue = await useStyles();
         expect(retValue).toEqual(expectedStyleSheet);
     });
 });

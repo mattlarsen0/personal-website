@@ -6,9 +6,10 @@ import { render } from '@testing-library/react-native';
 jest.unmock('@/components/utils/hr');
 
 describe('<HR>', () => {
-    it('should render component', () => {
-        expect(render(<HR
-        />).toJSON()).toMatchSnapshot();
+    it('should render component', async () => {
+        const result = await render(<HR
+        />).toJSON();
+        expect(result).toMatchSnapshot();
     });
 
 });

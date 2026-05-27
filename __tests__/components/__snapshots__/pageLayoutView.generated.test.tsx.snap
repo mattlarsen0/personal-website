@@ -1,8 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<PageLayoutView> should render component 1`] = `
-<div
-  className="view"
+<View
   style={
     {
       "backgroundColor": "transparent",
@@ -12,28 +11,24 @@ exports[`<PageLayoutView> should render component 1`] = `
   <div
     className="gradient-bar"
   />
-  <div
-    className="scrollView"
-  >
-    <div
-      className="view"
-      style={
-        {
-          "margin": 10,
+  <RCTScrollView>
+    <View>
+      <View
+        style={
+          {
+            "margin": 10,
+          }
         }
-      }
-    >
-      <div
-        className="view"
-      />
-    </div>
-  </div>
-</div>
+      >
+        <View />
+      </View>
+    </View>
+  </RCTScrollView>
+</View>
 `;
 
 exports[`<PageLayoutView> should render component with props 1`] = `
-<div
-  className="view"
+<View
   style={
     {
       "backgroundColor": "transparent",
@@ -43,21 +38,18 @@ exports[`<PageLayoutView> should render component with props 1`] = `
   <div
     className="gradient-bar"
   />
-  <div
-    className="scrollView"
-  >
-    <div
-      className="view"
-      style={
-        {
-          "margin": 10,
+  <RCTScrollView>
+    <View>
+      <View
+        style={
+          {
+            "margin": 10,
+          }
         }
-      }
-    >
-      <div
-        className="view"
-      />
-    </div>
-  </div>
-</div>
+      >
+        <View />
+      </View>
+    </View>
+  </RCTScrollView>
+</View>
 `;

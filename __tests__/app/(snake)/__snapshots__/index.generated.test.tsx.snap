@@ -1,8 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<Snake3d> should render component 1`] = `
-<div
-  className="view"
+<View
   style={
     {
       "backgroundColor": "transparent",
@@ -12,12 +11,10 @@ exports[`<Snake3d> should render component 1`] = `
   <div
     className="gradient-bar"
   />
-  <div
-    className="scrollView"
-  >
-    <div
-      className="view"
-    />
-  </div>
-</div>
+  <RCTScrollView>
+    <View>
+      <View />
+    </View>
+  </RCTScrollView>
+</View>
 `;

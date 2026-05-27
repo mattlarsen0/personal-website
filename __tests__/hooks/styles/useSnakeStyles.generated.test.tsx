@@ -37,12 +37,12 @@ jest.mock('react', () => ({
 }));
 
 describe('useSnakeStyles', () => {
-    it('should expose a function', () => {
+    it('should expose a function', async () => {
         expect(useSnakeStyles).toBeDefined();
     });
 
-    it('useSnakeStyles should return expected output', () => {
-        const retValue = useSnakeStyles();
+    it('useSnakeStyles should return expected output', async () => {
+        const retValue = await useSnakeStyles();
         expect(retValue).toEqual(mockSnakeStyleSheet);
     });
 });

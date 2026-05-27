@@ -14,16 +14,18 @@ const testProps = {
 }
 
 describe('<PageLayoutView>', () => {
-    it('should render component', () => {
-        expect(render(<PageLayoutView
+    it('should render component', async () => {
+        const result = await render(<PageLayoutView
             children={testProps.children}
             style={testProps.style}
-        />).toJSON()).toMatchSnapshot();
+        />).toJSON();
+        expect(result).toMatchSnapshot();
     });
-    it('should render component with props', () => {
-        expect(render(<PageLayoutView
+    it('should render component with props', async () => {
+        const result = await render(<PageLayoutView
             children={testProps.children}
             style={testProps.style}
-        />).toJSON()).toMatchSnapshot();
+        />).toJSON();
+        expect(result).toMatchSnapshot();
     });
 });

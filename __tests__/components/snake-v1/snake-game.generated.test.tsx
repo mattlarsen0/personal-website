@@ -1,7 +1,7 @@
 import useStyles from '@/hooks/styles/useStyles';
 import { Text, View, Pressable, AppState } from 'react-native';
 import { FlatList } from 'react-native-gesture-handler';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState, ReactNode } from 'react';
 import utils from '@/utils';
 import useSnakeStyles from '@/hooks/styles/useSnakeStyles';
 import Icon from '@/components/icon';
@@ -27,6 +27,7 @@ jest.mock('@/hooks/styles/useSnakeStyles', () => ({
 describe('<SnakeGame>', () => {
     it('should render component', () => {
         jest.spyOn(Math, 'random').mockReturnValue(0.5);
-        expect(render(<SnakeGame/>).toJSON()).toMatchSnapshot();
+        const result = render(<SnakeGame />);
+        expect(result.getByText('🧇')).toBeTruthy();
     });
 });

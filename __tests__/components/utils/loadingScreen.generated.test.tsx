@@ -1,7 +1,7 @@
 import LoadingScreen from '@/components/utils/loadingScreen';
 import { render } from '@testing-library/react-native';
 
-jest.unmock('@/components/loadingScreen');
+jest.unmock('@/components/utils/loadingScreen');
 
 jest.mock('expo-image', () => {
     return {
@@ -63,9 +63,10 @@ jest.mock('react-native-reanimated', () => {
 });
 
 describe('<LoadingScreen>', () => {
-    it('should render component', () => {
-        expect(render(<LoadingScreen
-        />).toJSON()).toMatchSnapshot();
+    it('should render component', async () => {
+        const result = await render(<LoadingScreen
+        />).toJSON();
+        expect(result).toMatchSnapshot();
     });
 
 });

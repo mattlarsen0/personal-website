@@ -16,15 +16,17 @@ const testProps = {
 }
 
 describe('<TechList>', () => {
-    it('should render component', () => {
-        expect(render(<TechList
+    it('should render component', async () => {
+        const result = await render(<TechList
             data={testProps.data}
-        />).toJSON()).toMatchSnapshot();
+        />).toJSON();
+        expect(result).toMatchSnapshot();
     });
-    it('should render component with props', () => {
-        expect(render(<TechList
+    it('should render component with props', async () => {
+        const result = await render(<TechList
             data={testProps.data}
             style={testProps.style}
-        />).toJSON()).toMatchSnapshot();
+        />).toJSON();
+        expect(result).toMatchSnapshot();
     });
 });

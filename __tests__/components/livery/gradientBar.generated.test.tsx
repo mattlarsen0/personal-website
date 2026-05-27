@@ -10,20 +10,22 @@ jest.mock('@/assets/images/svg/gradientMin.svg', () => ({
 }));
 
 describe('<GradientBar>', () => {
-    it('should render component with one color', () => {
-        const result = render(<GradientBar
+    it('should render component with one color', async () => {
+        const result = await render(<GradientBar
             colors={['red']}
         />).toJSON();
         expect(result).toMatchSnapshot();
     });
-    it('should render component with two colors', () => {
-        expect(render(<GradientBar
+    it('should render component with two colors', async () => {
+        const result = await render(<GradientBar
             colors={['red', 'white']}
-        />).toJSON()).toMatchSnapshot();
+        />).toJSON();
+        expect(result).toMatchSnapshot();
     });
-    it('should render component with three colors', () => {
-        expect(render(<GradientBar
+    it('should render component with three colors', async () => {
+        const result = await render(<GradientBar
             colors={['red','white', 'blue']}
-        />).toJSON()).toMatchSnapshot();
+        />).toJSON();
+        expect(result).toMatchSnapshot();
     });
 });

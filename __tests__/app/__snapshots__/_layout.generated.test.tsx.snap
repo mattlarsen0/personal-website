@@ -2,6 +2,13 @@
 
 exports[`<RootLayout> should render component 1`] = `
 <div
-  className="loading-screen"
-/>
+  className="drawer"
+>
+  <div
+    className="drawer-screen"
+  />
+  <div
+    className="drawer-screen"
+  />
+</div>
 `;

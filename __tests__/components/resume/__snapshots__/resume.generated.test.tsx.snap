@@ -1,21 +1,17 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<Resume> should render component 1`] = `
-<div
-  className="view"
+<View
   style={
     {
       "flexDirection": "column",
     }
   }
 >
-  <div
-    className="text"
-  >
+  <Text>
     Experience
-  </div>
-  <div
-    className="text"
+  </Text>
+  <Text
     style={
       {
         "marginTop": 20,
@@ -23,25 +19,20 @@ exports[`<Resume> should render component 1`] = `
     }
   >
     Columbia Sportswear Company
-  </div>
-  <div
-    className="text"
-  >
+  </Text>
+  <Text>
     Senior Software Engineer
-  </div>
-  <div
-    className="text"
-  >
+  </Text>
+  <Text>
     August 2021 to June 2025
-  </div>
+  </Text>
   <div
     className="hr"
   />
   <div
     className="resumeList"
   />
-  <div
-    className="text"
+  <Text
     style={
       {
         "marginTop": 20,
@@ -49,25 +40,20 @@ exports[`<Resume> should render component 1`] = `
     }
   >
     Avinode
-  </div>
-  <div
-    className="text"
-  >
+  </Text>
+  <Text>
     Software Engineer
-  </div>
-  <div
-    className="text"
-  >
+  </Text>
+  <Text>
     August 2018 to March 2021
-  </div>
+  </Text>
   <div
     className="hr"
   />
   <div
     className="resumeList"
   />
-  <div
-    className="text"
+  <Text
     style={
       {
         "marginTop": 20,
@@ -75,25 +61,20 @@ exports[`<Resume> should render component 1`] = `
     }
   >
     Graphic Products
-  </div>
-  <div
-    className="text"
-  >
+  </Text>
+  <Text>
     Web Developer
-  </div>
-  <div
-    className="text"
-  >
+  </Text>
+  <Text>
     October 2017 to August 2018
-  </div>
+  </Text>
   <div
     className="hr"
   />
   <div
     className="resumeList"
   />
-  <div
-    className="text"
+  <Text
     style={
       {
         "marginTop": 20,
@@ -101,60 +82,45 @@ exports[`<Resume> should render component 1`] = `
     }
   >
     Convoyant
-  </div>
-  <div
-    className="text"
-  >
+  </Text>
+  <Text>
     Software Engineer
-  </div>
-  <div
-    className="text"
-  >
+  </Text>
+  <Text>
     May 2014 to June 2017
-  </div>
+  </Text>
   <div
     className="hr"
   />
   <div
     className="resumeList"
   />
-  <div
-    className="text"
-  >
+  <Text>
     Projects at Columbia Sportswear
-  </div>
+  </Text>
   <div
     className="hr"
   />
-  <div
-    className="text"
-  >
+  <Text>
     Salesforce Order Management (SFOM) - August 2024 to June 2025
-  </div>
+  </Text>
   <div
     className="resumeList"
   />
-  <div
-    className="text"
-  >
+  <Text>
     AWS Lambda Node Upgrades - January 2024 to June 2024
-  </div>
+  </Text>
   <div
     className="resumeList"
   />
-  <div
-    className="text"
-  >
+  <Text>
     Education
-  </div>
+  </Text>
   <div
     className="hr"
   />
-  <div
-    className="view"
-  >
-    <div
-      className="text"
+  <View>
+    <Text
       style={
         {
           "color": "#000000",
@@ -162,7 +128,7 @@ exports[`<Resume> should render component 1`] = `
       }
     >
       Portland State University • B.S. in Computer Science - Portland, OR - 3.3 GPA
-    </div>
-  </div>
-</div>
+    </Text>
+  </View>
+</View>
 `;

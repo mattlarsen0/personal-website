@@ -1,91 +1,185 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<ResumeList> should render component 1`] = `
-<div
-  className="flatList"
+<RCTScrollView
+  data={
+    [
+      {
+        "key": 0,
+        "value": "Test 1",
+      },
+      {
+        "key": 1,
+        "value": "Test 2",
+      },
+      {
+        "key": 2,
+        "value": "Test 3",
+      },
+    ]
+  }
+  getItem={[Function]}
+  getItemCount={[Function]}
+  keyExtractor={[Function]}
+  onContentSizeChange={[Function]}
+  onLayout={[Function]}
+  onMomentumScrollBegin={[Function]}
+  onMomentumScrollEnd={[Function]}
+  onScroll={[Function]}
+  onScrollBeginDrag={[Function]}
+  onScrollEndDrag={[Function]}
+  removeClippedSubviews={false}
+  renderItem={[Function]}
+  scrollEventThrottle={0.0001}
+  stickyHeaderIndices={[]}
   style={
     {
       "backgroundColor": "#FFFFFF",
     }
   }
+  viewabilityConfigCallbackPairs={[]}
 >
-  <div
-    className="text"
-    style={
-      {
-        "color": "#000000",
-      }
-    }
-  >
-    • 
-    Test 1
-  </div>
-  <div
-    className="text"
-    style={
-      {
-        "color": "#000000",
-      }
-    }
-  >
-    • 
-    Test 2
-  </div>
-  <div
-    className="text"
-    style={
-      {
-        "color": "#000000",
-      }
-    }
-  >
-    • 
-    Test 3
-  </div>
-</div>
+  <View>
+    <View
+      onFocusCapture={[Function]}
+      onLayout={[Function]}
+      style={null}
+    >
+      <Text
+        style={
+          {
+            "color": "#000000",
+          }
+        }
+      >
+        • 
+        Test 1
+      </Text>
+    </View>
+    <View
+      onFocusCapture={[Function]}
+      onLayout={[Function]}
+      style={null}
+    >
+      <Text
+        style={
+          {
+            "color": "#000000",
+          }
+        }
+      >
+        • 
+        Test 2
+      </Text>
+    </View>
+    <View
+      onFocusCapture={[Function]}
+      onLayout={[Function]}
+      style={null}
+    >
+      <Text
+        style={
+          {
+            "color": "#000000",
+          }
+        }
+      >
+        • 
+        Test 3
+      </Text>
+    </View>
+  </View>
+</RCTScrollView>
 `;
 
 exports[`<ResumeList> should render component with props 1`] = `
-<div
-  className="flatList"
+<RCTScrollView
+  data={
+    [
+      {
+        "key": 0,
+        "value": "Test 1",
+      },
+      {
+        "key": 1,
+        "value": "Test 2",
+      },
+      {
+        "key": 2,
+        "value": "Test 3",
+      },
+    ]
+  }
+  getItem={[Function]}
+  getItemCount={[Function]}
+  keyExtractor={[Function]}
+  onContentSizeChange={[Function]}
+  onLayout={[Function]}
+  onMomentumScrollBegin={[Function]}
+  onMomentumScrollEnd={[Function]}
+  onScroll={[Function]}
+  onScrollBeginDrag={[Function]}
+  onScrollEndDrag={[Function]}
+  removeClippedSubviews={false}
+  renderItem={[Function]}
+  scrollEventThrottle={0.0001}
+  stickyHeaderIndices={[]}
   style={
     {
       "backgroundColor": "#FFFFFF",
     }
   }
+  viewabilityConfigCallbackPairs={[]}
 >
-  <div
-    className="text"
-    style={
-      {
-        "color": "#000000",
-      }
-    }
-  >
-    • 
-    Test 1
-  </div>
-  <div
-    className="text"
-    style={
-      {
-        "color": "#000000",
-      }
-    }
-  >
-    • 
-    Test 2
-  </div>
-  <div
-    className="text"
-    style={
-      {
-        "color": "#000000",
-      }
-    }
-  >
-    • 
-    Test 3
-  </div>
-</div>
+  <View>
+    <View
+      onFocusCapture={[Function]}
+      onLayout={[Function]}
+      style={null}
+    >
+      <Text
+        style={
+          {
+            "color": "#000000",
+          }
+        }
+      >
+        • 
+        Test 1
+      </Text>
+    </View>
+    <View
+      onFocusCapture={[Function]}
+      onLayout={[Function]}
+      style={null}
+    >
+      <Text
+        style={
+          {
+            "color": "#000000",
+          }
+        }
+      >
+        • 
+        Test 2
+      </Text>
+    </View>
+    <View
+      onFocusCapture={[Function]}
+      onLayout={[Function]}
+      style={null}
+    >
+      <Text
+        style={
+          {
+            "color": "#000000",
+          }
+        }
+      >
+        • 
+        Test 3
+      </Text>
+    </View>
+  </View>
+</RCTScrollView>
 `;

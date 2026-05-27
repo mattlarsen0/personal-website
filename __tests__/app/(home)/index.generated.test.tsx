@@ -14,9 +14,7 @@ jest.mock('expo-router');
 jest.mock('@/components/pageLayoutView');
 
 describe('<Index>', () => {
-    it('should render component', () => {
-        expect(render(<Index
-        />).toJSON()).toMatchSnapshot();
+    it('should render component', async () => {
+        expect(await render(<Index />).toJSON()).toMatchSnapshot();
     });
-
 });

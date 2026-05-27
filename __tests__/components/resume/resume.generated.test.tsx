@@ -8,8 +8,9 @@ import { render } from '@testing-library/react-native';
 jest.unmock('@/components/resume/resume');
 
 describe('<Resume>', () => {
-    it('should render component', () => {
-        expect(render(<Resume
-        />).toJSON()).toMatchSnapshot();
+    it('should render component', async () => {
+        const result = await render(<Resume
+        />).toJSON();
+        expect(result).toMatchSnapshot();
     });
 });

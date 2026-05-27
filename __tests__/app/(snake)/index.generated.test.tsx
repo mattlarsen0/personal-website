@@ -9,9 +9,7 @@ jest.unmock('@/app/(snake)/index');
 jest.mock('@/components/snake-v1/snake-game');
 
 describe('<Snake3d>', () => {
-    it('should render component', () => {
-        expect(render(<Snake3d
-        />).toJSON()).toMatchSnapshot();
+    it('should render component', async () => {
+        expect(await render(<Snake3d/>).toJSON()).toMatchSnapshot();
     });
-
 });

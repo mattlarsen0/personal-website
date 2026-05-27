@@ -1,8 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<GradientBar> should render component with one color 1`] = `
-<div
-  className="view"
+<View
   style={
     {
       "height": "100%",
@@ -14,28 +13,26 @@ exports[`<GradientBar> should render component with one color 1`] = `
     }
   }
 >
-  <div
-    className="view"
+  <View
     style={
       {
         "height": "100%",
         "left": "0%",
         "position": "absolute",
         "top": 0,
-        "width": 266.6666666666667,
+        "width": 250,
       }
     }
   >
     <div
       className="svg"
     />
-  </div>
-</div>
+  </View>
+</View>
 `;
 
 exports[`<GradientBar> should render component with three colors 1`] = `
-<div
-  className="view"
+<View
   style={
     {
       "height": "100%",
@@ -47,60 +44,56 @@ exports[`<GradientBar> should render component with three colors 1`] = `
     }
   }
 >
-  <div
-    className="view"
+  <View
     style={
       {
         "height": "100%",
         "left": "0%",
         "position": "absolute",
         "top": 0,
-        "width": 266.6666666666667,
+        "width": 250,
       }
     }
   >
     <div
       className="svg"
     />
-  </div>
-  <div
-    className="view"
+  </View>
+  <View
     style={
       {
         "height": "100%",
         "left": "3%",
         "position": "absolute",
         "top": 0,
-        "width": 266.6666666666667,
+        "width": 250,
       }
     }
   >
     <div
       className="svg"
     />
-  </div>
-  <div
-    className="view"
+  </View>
+  <View
     style={
       {
         "height": "100%",
         "left": "6%",
         "position": "absolute",
         "top": 0,
-        "width": 266.6666666666667,
+        "width": 250,
       }
     }
   >
     <div
       className="svg"
     />
-  </div>
-</div>
+  </View>
+</View>
 `;
 
 exports[`<GradientBar> should render component with two colors 1`] = `
-<div
-  className="view"
+<View
   style={
     {
       "height": "100%",
@@ -112,37 +105,35 @@ exports[`<GradientBar> should render component with two colors 1`] = `
     }
   }
 >
-  <div
-    className="view"
+  <View
     style={
       {
         "height": "100%",
         "left": "0%",
         "position": "absolute",
         "top": 0,
-        "width": 266.6666666666667,
+        "width": 250,
       }
     }
   >
     <div
       className="svg"
     />
-  </div>
-  <div
-    className="view"
+  </View>
+  <View
     style={
       {
         "height": "100%",
         "left": "3%",
         "position": "absolute",
         "top": 0,
-        "width": 266.6666666666667,
+        "width": 250,
       }
     }
   >
     <div
       className="svg"
     />
-  </div>
-</div>
+  </View>
+</View>
 `;
