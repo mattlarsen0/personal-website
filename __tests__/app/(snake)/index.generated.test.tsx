@@ -5,8 +5,6 @@ import Snake3d from '@/app/(snake)/index';
 import { render } from '@testing-library/react-native';
 
 jest.mock('@/components/snake-v1/snake-game');
-jest.mock('@/hooks/styles/useStyles');
-jest.mock('@/components/pageLayoutView');
 
 describe('<Snake3d>', () => {
     it('should render component', () => {

@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<GradientBar> should render component with one color 1`] = `
+<div
+  className="gradient-bar"
+/>
+`;
+
+exports[`<GradientBar> should render component with three colors 1`] = `
+<div
+  className="gradient-bar"
+/>
+`;
+
+exports[`<GradientBar> should render component with two colors 1`] = `
+<div
+  className="gradient-bar"
+/>
+`;

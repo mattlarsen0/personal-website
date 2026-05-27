@@ -7,20 +7,52 @@ import * as SplashScreen from 'expo-splash-screen';
 import { useEffect, useRef, useState } from 'react';
 import { Platform, Appearance } from 'react-native';
 import RootLayout from '@/app/_layout';
-import { render } from '@testing-library/react-native';
+import { act, render } from '@testing-library/react-native';
 
-jest.mock('@/components/utils/loadingScreen');
-jest.mock('@/hooks/styles/useStyles');
-jest.mock('@expo-google-fonts/roboto/useFonts');
-jest.mock('@react-navigation/drawer');
-jest.mock('expo-router/drawer');
-jest.mock('expo-splash-screen');
-jest.mock('react-native');
+jest.mock('@/components/utils/loadingScreen', () => ({
+    __esModule: true,
+    default: jest.fn(() => (<div className='loading-screen'></div>)),
+}));
+jest.mock('@expo-google-fonts/roboto/useFonts', () => ({
+    __esModule: true,
+    useFonts: jest.fn(() => [true, null]),
+}));
+jest.mock('@/hooks/styles/useStyles', () => ({
+    __esModule: true,
+    default: jest.fn(() => ({
+        titleText: {
+            fontFamily: 'Oswald-Regular',
+        },
+    })),
+}));
+jest.mock('expo-splash-screen', () => ({
+    __esModule: true,
+    preventAutoHideAsync: jest.fn(),
+    hideAsync: jest.fn(),
+    setOptions: jest.fn(),
+}));
+jest.mock('expo-router/drawer', () => {
+    const DrawerScreen = ({ children }: any) => (
+        <div className="drawer-screen">{children}</div>
+    );
+    DrawerScreen.displayName = 'DrawerScreen';
+    const Drawer = ({ children }: any) => <div className='drawer'>{children}</div>;
+    Drawer.Screen = DrawerScreen;
+    return {
+        Drawer
+    };
+});
+jest.mock('expo-splash-screen', () => ({
+    __esModule: true,
+    preventAutoHideAsync: jest.fn(),
+    hideAsync: jest.fn(),
+    setOptions: jest.fn(),
+}));
 
 describe('<RootLayout>', () => {
     it('should render component', () => {
-        expect(render(<RootLayout
-        />).toJSON()).toMatchSnapshot();
+        act(() => {
+            expect(render(<RootLayout />).toJSON()).toMatchSnapshot();
+        });
     });
-
 });

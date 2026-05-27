@@ -1,5 +1,5 @@
 import { DimensionValue, useWindowDimensions, View } from 'react-native'
-import Gradient from '../../assets/images/svg/gradientMin.svg';
+import Gradient from '@/assets/images/svg/gradientMin.svg';
 type GradientBarProps = {
     colors: string[]
 };

@@ -16,6 +16,8 @@
     "**/*.ts",
     "**/*.tsx",
     ".expo/types/**/*.ts",
-    "expo-env.d.ts"
-, "__tests__/jest.setup.js"  ]
+    "expo-env.d.ts",
+    "__tests__/jest.setup.js",
+    "custom.d.ts"
+  ]
 }

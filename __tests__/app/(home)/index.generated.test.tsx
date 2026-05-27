@@ -8,12 +8,9 @@ import PageLayoutView from '@/components/pageLayoutView';
 import Index from '@/app/(home)/index';
 import { render } from '@testing-library/react-native';
 
-jest.mock('@/components/icon');
 jest.mock('@/components/resume/resume');
-jest.mock('@/hooks/styles/useStyles');
 jest.mock('@/components/techList');
 jest.mock('expo-router');
-jest.mock('react-native');
 jest.mock('@/components/pageLayoutView');
 
 describe('<Index>', () => {

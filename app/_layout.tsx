@@ -72,21 +72,21 @@ export default function RootLayout() {
     };
 
     return (
-    <Drawer screenOptions={screenOptions}>
-      <Drawer.Screen
-          name="(home)/index"
-          options={{
-              drawerLabel: 'Home',
-              title: 'Home',
-          }}
-      />
-      <Drawer.Screen
-          name="(snake)/index"
-          options={{
-              drawerLabel: 'S-N-A-K-E Game',
-              title: 'S-N-A-K-E Game'
-          }}
-      />
-    </Drawer>
+        <Drawer screenOptions={screenOptions}>
+        <Drawer.Screen
+            name="(home)/index"
+            options={{
+                drawerLabel: 'Home',
+                title: 'Home',
+            }}
+        />
+        <Drawer.Screen
+            name="(snake)/index"
+            options={{
+                drawerLabel: 'S-N-A-K-E Game',
+                title: 'S-N-A-K-E Game'
+            }}
+        />
+        </Drawer>
     );
 }

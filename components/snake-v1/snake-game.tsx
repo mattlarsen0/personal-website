@@ -1,6 +1,5 @@
 import useStyles from '@/hooks/styles/useStyles';
-import { Text, View, Pressable, AppState } from 'react-native';
-import { FlatList } from 'react-native-gesture-handler';
+import { Text, View, Pressable, AppState, FlatList } from 'react-native';
 import { useEffect, useRef, useState } from 'react';
 import utils from '@/utils';
 import useSnakeStyles from '../../hooks/styles/useSnakeStyles';

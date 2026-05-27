@@ -1,0 +1,168 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Resume> should render component 1`] = `
+<div
+  className="view"
+  style={
+    {
+      "flexDirection": "column",
+    }
+  }
+>
+  <div
+    className="text"
+  >
+    Experience
+  </div>
+  <div
+    className="text"
+    style={
+      {
+        "marginTop": 20,
+      }
+    }
+  >
+    Columbia Sportswear Company
+  </div>
+  <div
+    className="text"
+  >
+    Senior Software Engineer
+  </div>
+  <div
+    className="text"
+  >
+    August 2021 to June 2025
+  </div>
+  <div
+    className="hr"
+  />
+  <div
+    className="resumeList"
+  />
+  <div
+    className="text"
+    style={
+      {
+        "marginTop": 20,
+      }
+    }
+  >
+    Avinode
+  </div>
+  <div
+    className="text"
+  >
+    Software Engineer
+  </div>
+  <div
+    className="text"
+  >
+    August 2018 to March 2021
+  </div>
+  <div
+    className="hr"
+  />
+  <div
+    className="resumeList"
+  />
+  <div
+    className="text"
+    style={
+      {
+        "marginTop": 20,
+      }
+    }
+  >
+    Graphic Products
+  </div>
+  <div
+    className="text"
+  >
+    Web Developer
+  </div>
+  <div
+    className="text"
+  >
+    October 2017 to August 2018
+  </div>
+  <div
+    className="hr"
+  />
+  <div
+    className="resumeList"
+  />
+  <div
+    className="text"
+    style={
+      {
+        "marginTop": 20,
+      }
+    }
+  >
+    Convoyant
+  </div>
+  <div
+    className="text"
+  >
+    Software Engineer
+  </div>
+  <div
+    className="text"
+  >
+    May 2014 to June 2017
+  </div>
+  <div
+    className="hr"
+  />
+  <div
+    className="resumeList"
+  />
+  <div
+    className="text"
+  >
+    Projects at Columbia Sportswear
+  </div>
+  <div
+    className="hr"
+  />
+  <div
+    className="text"
+  >
+    Salesforce Order Management (SFOM) - August 2024 to June 2025
+  </div>
+  <div
+    className="resumeList"
+  />
+  <div
+    className="text"
+  >
+    AWS Lambda Node Upgrades - January 2024 to June 2024
+  </div>
+  <div
+    className="resumeList"
+  />
+  <div
+    className="text"
+  >
+    Education
+  </div>
+  <div
+    className="hr"
+  />
+  <div
+    className="view"
+  >
+    <div
+      className="text"
+      style={
+        {
+          "color": "#000000",
+        }
+      }
+    >
+      Portland State University • B.S. in Computer Science - Portland, OR - 3.3 GPA
+    </div>
+  </div>
+</div>
+`;

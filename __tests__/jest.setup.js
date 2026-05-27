@@ -1,3 +1,4 @@
+// put shared mocks here, some expo incompatibility is preventing __mocks__ from working
 jest.mock('@/hooks/styles/useStyles', () => ({
     __esModule: true,
     default: () => ({
@@ -30,6 +31,21 @@ jest.mock('react-native', () => ({
     ScrollView: ({ children, style }) => (
         <div className="scrollView" style={style}>{children}</div>
     ),
+    Pressable: ({ children, onPress, style }) => (
+        <div className="pressable" style={style} onClick={onPress}>
+            {children}
+        </div>
+    ),
+    AppState: {
+        currentState: 'active',
+        addEventListener: jest.fn().mockImplementation((event, callback) => {
+            return {
+                remove: jest.fn(),
+            };
+        }),
+        removeEventListener: jest.fn(),
+    },
+    useWindowDimensions: jest.fn().mockReturnValue({ width: 800, height: 600 }),
 }));
 
 jest.mock('@expo/vector-icons/FontAwesome5', () => ({
@@ -39,4 +55,36 @@ jest.mock('@expo/vector-icons/FontAwesome5', () => ({
             {name}
         </div>
     ),
+}));
+
+jest.mock('expo-router', () => ({
+    Link: ({ href, children }) => (
+        <a href={href} className="link">
+            {children}
+        </a>
+    ),
+}));
+
+jest.mock('@/utils', () => ({
+    __esModule: true,
+    default: {
+        wrap: jest.fn().mockImplementation((value, min, max) => {
+            return value;
+        })
+    }
+}));
+
+jest.mock('@/components/utils/hr', () => ({
+    __esModule: true,
+    default: jest.fn(() => <div className='hr' />),
+}));
+
+jest.mock('@/components/ResumeList', () => ({
+    __esModule: true,
+    default: jest.fn(({ children, style }) => <div className='resumeList'>{children}</div>),
+}));
+
+jest.mock('@/components/livery/gradientBar', () => ({
+    __esModule: true,
+    default: jest.fn(() => (<div className='gradient-bar'></div>)),
 }));

@@ -2,36 +2,12 @@
 
 exports[`<ResumeList> should render component 1`] = `
 <div
-  className="flatList"
-  style={
-    {
-      "backgroundColor": "#FFFFFF",
-    }
-  }
->
-  <div
-    className="text"
-  >
-    • 
-    test
-  </div>
-</div>
+  className="resumeList"
+/>
 `;
 
 exports[`<ResumeList> should render component with props 1`] = `
 <div
-  className="flatList"
-  style={
-    {
-      "backgroundColor": "#FFFFFF",
-    }
-  }
->
-  <div
-    className="text"
-  >
-    • 
-    test
-  </div>
-</div>
+  className="resumeList"
+/>
 `;

@@ -3,9 +3,6 @@ import useStyles from '@/hooks/styles/useStyles';
 import Icon from '@/components/icon';
 import { render } from '@testing-library/react-native';
 
-jest.mock('@expo/vector-icons/FontAwesome5');
-jest.mock('@/hooks/styles/useStyles');
-
 const testProps = {
     name: 'test-icon',
     size: 24,

@@ -4,10 +4,6 @@ import useStyles from '@/hooks/styles/useStyles';
 import PageLayoutView from '@/components/pageLayoutView';
 import { render } from '@testing-library/react-native';
 
-jest.mock('react-native');
-jest.mock('@/components/livery/gradientBar');
-jest.mock('@/hooks/styles/useStyles');
-
 const testProps = {
     children: <View />,
     style: {

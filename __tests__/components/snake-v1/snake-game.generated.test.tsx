@@ -9,18 +9,22 @@ import { Link } from 'expo-router';
 import SnakeGame from '@/components/snake-v1/snake-game';
 import { render } from '@testing-library/react-native';
 
-jest.mock('@/hooks/styles/useStyles');
-jest.mock('react-native');
-jest.mock('react-native-gesture-handler');
-jest.mock('@/utils');
-jest.mock('../../hooks/styles/useSnakeStyles');
-jest.mock('@/components/icon');
-jest.mock('expo-router');
+jest.mock('@/hooks/styles/useSnakeStyles', () => ({
+    __esModule: true,
+    default: jest.fn(() => ({
+        container: {},
+        gameContainer: {},
+        gameOverContainer: {},
+        gameOverText: {},
+        scoreText: {},
+        buttonContainer: {},
+        buttonText: {},
+    })),
+}));
 
 describe('<SnakeGame>', () => {
     it('should render component', () => {
-        expect(render(<SnakeGame
-        />).toJSON()).toMatchSnapshot();
+        jest.spyOn(Math, 'random').mockReturnValue(0.5);
+        expect(render(<SnakeGame/>).toJSON()).toMatchSnapshot();
     });
-
 });

@@ -1,0 +1,7 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<HR> should render component 1`] = `
+<div
+  className="hr"
+/>
+`;

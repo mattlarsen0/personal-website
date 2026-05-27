@@ -1,16 +1,18 @@
 import { DimensionValue, useWindowDimensions, View } from 'react-native'
-const Gradient = require('@/assets/images/svg/gradientMin.svg');
 import GradientBar from '@/components/livery/gradientBar';
 import { render } from '@testing-library/react-native';
 
-jest.mock('react-native');
-jest.mock('@/assets/images/svg/gradientMin.svg');
+jest.mock('@/assets/images/svg/gradientMin.svg', () => ({
+    __esModule: true,
+    default: jest.fn(() => (<div className='svg'></div>)),
+}));
 
 describe('<GradientBar>', () => {
     it('should render component with one color', () => {
-        expect(render(<GradientBar
+        const result = render(<GradientBar
             colors={['red']}
-        />).toJSON()).toMatchSnapshot();
+        />).toJSON();
+        expect(result).toMatchSnapshot();
     });
     it('should render component with two colors', () => {
         expect(render(<GradientBar
