@@ -6,7 +6,6 @@ import useSnakeStyles from '../../hooks/styles/useSnakeStyles';
 import Icon from '@/components/icon';
 import { Link } from 'expo-router';
 import { FlashList, useMappingHelper } from '@shopify/flash-list';
-
 enum Direction {
   Up,
   Down,
@@ -403,17 +402,10 @@ const getSnakeSpeed = (gameState: GameState) => {
 export default function SnakeGame() {
     const styles = useStyles();
     const snakeStyles = useSnakeStyles();
-    const [gameState, setGameState] = useState({} as GameState);
-    const [tiles, setTiles] = useState([] as React.ReactElement[]);
-    const directionRef = useRef(DefaultDirection);
     const { getMappingKey } = useMappingHelper();
-
-    if (!gameState.highScore) {
-        const firstLoadState = initGameState();
-        const mutableGameState = getMutableGameState(firstLoadState);
-        setGameState(firstLoadState);
-        setTiles(renderTiles(mutableGameState, snakeStyles, getMappingKey));
-    }
+    const [gameState, setGameState] = useState(() => initGameState());
+    const [tiles, setTiles] = useState(() => renderTiles(gameState, snakeStyles, getMappingKey));
+    const directionRef = useRef(DefaultDirection);
 
     useEffect(() => {
         const subscription = AppState.addEventListener('change', nextAppState => {
