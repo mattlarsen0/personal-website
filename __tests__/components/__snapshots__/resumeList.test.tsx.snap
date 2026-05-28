@@ -1,185 +1,291 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<ResumeList> should render component 1`] = `
-<RCTScrollView
-  data={
-    [
-      {
-        "key": 0,
-        "value": "Test 1",
-      },
-      {
-        "key": 1,
-        "value": "Test 2",
-      },
-      {
-        "key": 2,
-        "value": "Test 3",
-      },
-    ]
-  }
-  getItem={[Function]}
-  getItemCount={[Function]}
-  keyExtractor={[Function]}
-  onContentSizeChange={[Function]}
+<View
+  collapsable={false}
   onLayout={[Function]}
-  onMomentumScrollBegin={[Function]}
-  onMomentumScrollEnd={[Function]}
-  onScroll={[Function]}
-  onScrollBeginDrag={[Function]}
-  onScrollEndDrag={[Function]}
-  removeClippedSubviews={false}
-  renderItem={[Function]}
-  scrollEventThrottle={0.0001}
-  stickyHeaderIndices={[]}
   style={
     {
       "backgroundColor": "#FFFFFF",
+      "flex": 1,
+      "overflow": "hidden",
     }
   }
-  viewabilityConfigCallbackPairs={[]}
 >
-  <View>
-    <View
-      onFocusCapture={[Function]}
-      onLayout={[Function]}
-      style={null}
-    >
-      <Text
+  <RCTScrollView
+    collapsable={false}
+    maintainVisibleContentPosition={
+      {
+        "minIndexForVisible": 0,
+      }
+    }
+    onScroll={[Function]}
+    scrollEventThrottle={0.0001}
+  >
+    <View>
+      <View
         style={
           {
-            "color": "#000000",
+            "height": 0,
+            "left": 0,
+            "position": "absolute",
+            "top": 1000000,
+          }
+        }
+      />
+      <View
+        style={
+          {
+            "height": 0,
+            "width": undefined,
+          }
+        }
+      />
+      <View
+        style={
+          {
+            "height": 0,
+            "marginLeft": undefined,
+            "marginTop": 0,
+            "opacity": 1,
+            "width": undefined,
           }
         }
       >
-        • 
-        Test 1
-      </Text>
-    </View>
-    <View
-      onFocusCapture={[Function]}
-      onLayout={[Function]}
-      style={null}
-    >
-      <Text
-        style={
-          {
-            "color": "#000000",
+        <View
+          index={0}
+          onLayout={[Function]}
+          style={
+            {
+              "flexDirection": "column",
+              "height": undefined,
+              "left": 0,
+              "maxHeight": undefined,
+              "maxWidth": undefined,
+              "minHeight": undefined,
+              "minWidth": undefined,
+              "position": "absolute",
+              "top": 0,
+              "width": 0,
+            }
           }
-        }
-      >
-        • 
-        Test 2
-      </Text>
-    </View>
-    <View
-      onFocusCapture={[Function]}
-      onLayout={[Function]}
-      style={null}
-    >
-      <Text
-        style={
-          {
-            "color": "#000000",
+        >
+          <Text
+            style={
+              {
+                "color": "#000000",
+              }
+            }
+          >
+            • 
+            Test 1
+          </Text>
+        </View>
+        <View
+          index={1}
+          onLayout={[Function]}
+          style={
+            {
+              "flexDirection": "column",
+              "height": undefined,
+              "left": 0,
+              "maxHeight": undefined,
+              "maxWidth": undefined,
+              "minHeight": undefined,
+              "minWidth": undefined,
+              "position": "absolute",
+              "top": 0,
+              "width": 0,
+            }
           }
-        }
-      >
-        • 
-        Test 3
-      </Text>
+        >
+          <Text
+            style={
+              {
+                "color": "#000000",
+              }
+            }
+          >
+            • 
+            Test 2
+          </Text>
+        </View>
+        <View
+          index={2}
+          onLayout={[Function]}
+          style={
+            {
+              "flexDirection": "column",
+              "height": undefined,
+              "left": 0,
+              "maxHeight": undefined,
+              "maxWidth": undefined,
+              "minHeight": undefined,
+              "minWidth": undefined,
+              "position": "absolute",
+              "top": 0,
+              "width": 0,
+            }
+          }
+        >
+          <Text
+            style={
+              {
+                "color": "#000000",
+              }
+            }
+          >
+            • 
+            Test 3
+          </Text>
+        </View>
+      </View>
     </View>
-  </View>
-</RCTScrollView>
+  </RCTScrollView>
+</View>
 `;
 
 exports[`<ResumeList> should render component with props 1`] = `
-<RCTScrollView
-  data={
-    [
-      {
-        "key": 0,
-        "value": "Test 1",
-      },
-      {
-        "key": 1,
-        "value": "Test 2",
-      },
-      {
-        "key": 2,
-        "value": "Test 3",
-      },
-    ]
-  }
-  getItem={[Function]}
-  getItemCount={[Function]}
-  keyExtractor={[Function]}
-  onContentSizeChange={[Function]}
+<View
+  collapsable={false}
   onLayout={[Function]}
-  onMomentumScrollBegin={[Function]}
-  onMomentumScrollEnd={[Function]}
-  onScroll={[Function]}
-  onScrollBeginDrag={[Function]}
-  onScrollEndDrag={[Function]}
-  removeClippedSubviews={false}
-  renderItem={[Function]}
-  scrollEventThrottle={0.0001}
-  stickyHeaderIndices={[]}
   style={
     {
       "backgroundColor": "#FFFFFF",
+      "flex": 1,
+      "overflow": "hidden",
     }
   }
-  viewabilityConfigCallbackPairs={[]}
 >
-  <View>
-    <View
-      onFocusCapture={[Function]}
-      onLayout={[Function]}
-      style={null}
-    >
-      <Text
+  <RCTScrollView
+    collapsable={false}
+    maintainVisibleContentPosition={
+      {
+        "minIndexForVisible": 0,
+      }
+    }
+    onScroll={[Function]}
+    scrollEventThrottle={0.0001}
+  >
+    <View>
+      <View
         style={
           {
-            "color": "#000000",
+            "height": 0,
+            "left": 0,
+            "position": "absolute",
+            "top": 1000000,
+          }
+        }
+      />
+      <View
+        style={
+          {
+            "height": 0,
+            "width": undefined,
+          }
+        }
+      />
+      <View
+        style={
+          {
+            "height": 0,
+            "marginLeft": undefined,
+            "marginTop": 0,
+            "opacity": 1,
+            "width": undefined,
           }
         }
       >
-        • 
-        Test 1
-      </Text>
-    </View>
-    <View
-      onFocusCapture={[Function]}
-      onLayout={[Function]}
-      style={null}
-    >
-      <Text
-        style={
-          {
-            "color": "#000000",
+        <View
+          index={0}
+          onLayout={[Function]}
+          style={
+            {
+              "flexDirection": "column",
+              "height": undefined,
+              "left": 0,
+              "maxHeight": undefined,
+              "maxWidth": undefined,
+              "minHeight": undefined,
+              "minWidth": undefined,
+              "position": "absolute",
+              "top": 0,
+              "width": 0,
+            }
           }
-        }
-      >
-        • 
-        Test 2
-      </Text>
-    </View>
-    <View
-      onFocusCapture={[Function]}
-      onLayout={[Function]}
-      style={null}
-    >
-      <Text
-        style={
-          {
-            "color": "#000000",
+        >
+          <Text
+            style={
+              {
+                "color": "#000000",
+              }
+            }
+          >
+            • 
+            Test 1
+          </Text>
+        </View>
+        <View
+          index={1}
+          onLayout={[Function]}
+          style={
+            {
+              "flexDirection": "column",
+              "height": undefined,
+              "left": 0,
+              "maxHeight": undefined,
+              "maxWidth": undefined,
+              "minHeight": undefined,
+              "minWidth": undefined,
+              "position": "absolute",
+              "top": 0,
+              "width": 0,
+            }
           }
-        }
-      >
-        • 
-        Test 3
-      </Text>
+        >
+          <Text
+            style={
+              {
+                "color": "#000000",
+              }
+            }
+          >
+            • 
+            Test 2
+          </Text>
+        </View>
+        <View
+          index={2}
+          onLayout={[Function]}
+          style={
+            {
+              "flexDirection": "column",
+              "height": undefined,
+              "left": 0,
+              "maxHeight": undefined,
+              "maxWidth": undefined,
+              "minHeight": undefined,
+              "minWidth": undefined,
+              "position": "absolute",
+              "top": 0,
+              "width": 0,
+            }
+          }
+        >
+          <Text
+            style={
+              {
+                "color": "#000000",
+              }
+            }
+          >
+            • 
+            Test 3
+          </Text>
+        </View>
+      </View>
     </View>
-  </View>
-</RCTScrollView>
+  </RCTScrollView>
+</View>
 `;

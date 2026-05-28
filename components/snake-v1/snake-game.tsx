@@ -384,10 +384,7 @@ const renderTiles = (gameState: GameState, snakeStyles: ReturnType<typeof useSna
         });
         return (
             <View key={getMappingKey(`column-view-${columnIndex}`, columnIndex)} style={{ display: 'flex', flexDirection: 'column' }}>
-                <FlashList
-                    data={columnTiles}
-                    renderItem={({ item }) => item}
-                />
+                {columnTiles}
             </View>
         )
     });
@@ -404,7 +401,8 @@ export default function SnakeGame() {
     const snakeStyles = useSnakeStyles();
     const { getMappingKey } = useMappingHelper();
     const [gameState, setGameState] = useState(() => initGameState());
-    const [tiles, setTiles] = useState(() => renderTiles(gameState, snakeStyles, getMappingKey));
+    const mutableGameState = getMutableGameState(gameState);
+    const [tiles, setTiles] = useState(() => renderTiles(mutableGameState, snakeStyles, getMappingKey));
     const directionRef = useRef(DefaultDirection);
 
     useEffect(() => {
@@ -443,7 +441,6 @@ export default function SnakeGame() {
     const rightTouch = () => changeDirection(gameState, Direction.Right);
     const leftTouch = () => changeDirection(gameState, Direction.Left);
 
-    const mutableGameState = getMutableGameState(gameState);
     let gameStatusText;
     let gameStatusAction;
     if (gameState.status === GameStatus.Initiated) {

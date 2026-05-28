@@ -1,209 +1,279 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<TechList> should render component 1`] = `
-<RCTScrollView
-  data={
-    [
-      {
-        "$$typeof": Symbol(react.transitional.element),
-        "_owner": null,
-        "_store": {},
-        "key": "1",
-        "props": {
-          "children": "Test 1",
-        },
-        "type": "div",
-      },
-      {
-        "$$typeof": Symbol(react.transitional.element),
-        "_owner": null,
-        "_store": {},
-        "key": "2",
-        "props": {
-          "children": "Test 2",
-        },
-        "type": "div",
-      },
-      {
-        "$$typeof": Symbol(react.transitional.element),
-        "_owner": null,
-        "_store": {},
-        "key": "3",
-        "props": {
-          "children": "Test 3",
-        },
-        "type": "div",
-      },
-    ]
-  }
-  getItem={[Function]}
-  getItemCount={[Function]}
-  keyExtractor={[Function]}
-  onContentSizeChange={[Function]}
+<View
+  collapsable={false}
   onLayout={[Function]}
-  onMomentumScrollBegin={[Function]}
-  onMomentumScrollEnd={[Function]}
-  onScroll={[Function]}
-  onScrollBeginDrag={[Function]}
-  onScrollEndDrag={[Function]}
-  removeClippedSubviews={false}
-  renderItem={[Function]}
-  scrollEventThrottle={0.0001}
-  stickyHeaderIndices={[]}
   style={
     {
+      "flex": 1,
       "margin": 10,
+      "overflow": "hidden",
     }
   }
-  viewabilityConfigCallbackPairs={[]}
 >
-  <View>
-    <View
-      onFocusCapture={[Function]}
-      onLayout={[Function]}
-      style={null}
-    >
-      <Text>
-        <div>
-          Test 1
-        </div>
-      </Text>
+  <RCTScrollView
+    collapsable={false}
+    maintainVisibleContentPosition={
+      {
+        "minIndexForVisible": 0,
+      }
+    }
+    onScroll={[Function]}
+    scrollEventThrottle={0.0001}
+  >
+    <View>
+      <View
+        style={
+          {
+            "height": 0,
+            "left": 0,
+            "position": "absolute",
+            "top": 1000000,
+          }
+        }
+      />
+      <View
+        style={
+          {
+            "height": 0,
+            "width": undefined,
+          }
+        }
+      />
+      <View
+        style={
+          {
+            "height": 0,
+            "marginLeft": undefined,
+            "marginTop": 0,
+            "opacity": 1,
+            "width": undefined,
+          }
+        }
+      >
+        <View
+          index={0}
+          onLayout={[Function]}
+          style={
+            {
+              "flexDirection": "column",
+              "height": undefined,
+              "left": 0,
+              "maxHeight": undefined,
+              "maxWidth": undefined,
+              "minHeight": undefined,
+              "minWidth": undefined,
+              "position": "absolute",
+              "top": 0,
+              "width": 0,
+            }
+          }
+        >
+          <Text>
+            <div>
+              Test 1
+            </div>
+          </Text>
+        </View>
+        <View
+          index={1}
+          onLayout={[Function]}
+          style={
+            {
+              "flexDirection": "column",
+              "height": undefined,
+              "left": 0,
+              "maxHeight": undefined,
+              "maxWidth": undefined,
+              "minHeight": undefined,
+              "minWidth": undefined,
+              "position": "absolute",
+              "top": 0,
+              "width": 0,
+            }
+          }
+        >
+          <Text>
+            <div>
+              Test 2
+            </div>
+          </Text>
+        </View>
+        <View
+          index={2}
+          onLayout={[Function]}
+          style={
+            {
+              "flexDirection": "column",
+              "height": undefined,
+              "left": 0,
+              "maxHeight": undefined,
+              "maxWidth": undefined,
+              "minHeight": undefined,
+              "minWidth": undefined,
+              "position": "absolute",
+              "top": 0,
+              "width": 0,
+            }
+          }
+        >
+          <Text>
+            <div>
+              Test 3
+            </div>
+          </Text>
+        </View>
+      </View>
     </View>
-    <View
-      onFocusCapture={[Function]}
-      onLayout={[Function]}
-      style={null}
-    >
-      <Text>
-        <div>
-          Test 2
-        </div>
-      </Text>
-    </View>
-    <View
-      onFocusCapture={[Function]}
-      onLayout={[Function]}
-      style={null}
-    >
-      <Text>
-        <div>
-          Test 3
-        </div>
-      </Text>
-    </View>
-  </View>
-</RCTScrollView>
+  </RCTScrollView>
+</View>
 `;
 
 exports[`<TechList> should render component with props 1`] = `
-<RCTScrollView
-  data={
-    [
-      {
-        "$$typeof": Symbol(react.transitional.element),
-        "_owner": null,
-        "_store": {},
-        "key": "1",
-        "props": {
-          "children": "Test 1",
-        },
-        "type": "div",
-      },
-      {
-        "$$typeof": Symbol(react.transitional.element),
-        "_owner": null,
-        "_store": {},
-        "key": "2",
-        "props": {
-          "children": "Test 2",
-        },
-        "type": "div",
-      },
-      {
-        "$$typeof": Symbol(react.transitional.element),
-        "_owner": null,
-        "_store": {},
-        "key": "3",
-        "props": {
-          "children": "Test 3",
-        },
-        "type": "div",
-      },
-    ]
-  }
-  getItem={[Function]}
-  getItemCount={[Function]}
-  keyExtractor={[Function]}
-  onContentSizeChange={[Function]}
+<View
+  collapsable={false}
   onLayout={[Function]}
-  onMomentumScrollBegin={[Function]}
-  onMomentumScrollEnd={[Function]}
-  onScroll={[Function]}
-  onScrollBeginDrag={[Function]}
-  onScrollEndDrag={[Function]}
-  removeClippedSubviews={false}
-  renderItem={[Function]}
-  scrollEventThrottle={0.0001}
-  stickyHeaderIndices={[]}
   style={
     {
+      "flex": 1,
       "margin": 10,
+      "overflow": "hidden",
     }
   }
-  viewabilityConfigCallbackPairs={[]}
 >
-  <View>
-    <View
-      onFocusCapture={[Function]}
-      onLayout={[Function]}
-      style={null}
-    >
-      <Text
+  <RCTScrollView
+    collapsable={false}
+    maintainVisibleContentPosition={
+      {
+        "minIndexForVisible": 0,
+      }
+    }
+    onScroll={[Function]}
+    scrollEventThrottle={0.0001}
+  >
+    <View>
+      <View
         style={
           {
-            "fontSize": 20,
+            "height": 0,
+            "left": 0,
+            "position": "absolute",
+            "top": 1000000,
+          }
+        }
+      />
+      <View
+        style={
+          {
+            "height": 0,
+            "width": undefined,
+          }
+        }
+      />
+      <View
+        style={
+          {
+            "height": 0,
+            "marginLeft": undefined,
+            "marginTop": 0,
+            "opacity": 1,
+            "width": undefined,
           }
         }
       >
-        <div>
-          Test 1
-        </div>
-      </Text>
-    </View>
-    <View
-      onFocusCapture={[Function]}
-      onLayout={[Function]}
-      style={null}
-    >
-      <Text
-        style={
-          {
-            "fontSize": 20,
+        <View
+          index={0}
+          onLayout={[Function]}
+          style={
+            {
+              "flexDirection": "column",
+              "height": undefined,
+              "left": 0,
+              "maxHeight": undefined,
+              "maxWidth": undefined,
+              "minHeight": undefined,
+              "minWidth": undefined,
+              "position": "absolute",
+              "top": 0,
+              "width": 0,
+            }
           }
-        }
-      >
-        <div>
-          Test 2
-        </div>
-      </Text>
-    </View>
-    <View
-      onFocusCapture={[Function]}
-      onLayout={[Function]}
-      style={null}
-    >
-      <Text
-        style={
-          {
-            "fontSize": 20,
+        >
+          <Text
+            style={
+              {
+                "fontSize": 20,
+              }
+            }
+          >
+            <div>
+              Test 1
+            </div>
+          </Text>
+        </View>
+        <View
+          index={1}
+          onLayout={[Function]}
+          style={
+            {
+              "flexDirection": "column",
+              "height": undefined,
+              "left": 0,
+              "maxHeight": undefined,
+              "maxWidth": undefined,
+              "minHeight": undefined,
+              "minWidth": undefined,
+              "position": "absolute",
+              "top": 0,
+              "width": 0,
+            }
           }
-        }
-      >
-        <div>
-          Test 3
-        </div>
-      </Text>
+        >
+          <Text
+            style={
+              {
+                "fontSize": 20,
+              }
+            }
+          >
+            <div>
+              Test 2
+            </div>
+          </Text>
+        </View>
+        <View
+          index={2}
+          onLayout={[Function]}
+          style={
+            {
+              "flexDirection": "column",
+              "height": undefined,
+              "left": 0,
+              "maxHeight": undefined,
+              "maxWidth": undefined,
+              "minHeight": undefined,
+              "minWidth": undefined,
+              "position": "absolute",
+              "top": 0,
+              "width": 0,
+            }
+          }
+        >
+          <Text
+            style={
+              {
+                "fontSize": 20,
+              }
+            }
+          >
+            <div>
+              Test 3
+            </div>
+          </Text>
+        </View>
+      </View>
     </View>
-  </View>
-</RCTScrollView>
+  </RCTScrollView>
+</View>
 `;

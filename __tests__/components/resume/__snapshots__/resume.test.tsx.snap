@@ -5,6 +5,7 @@ exports[`<Resume> should render component 1`] = `
   style={
     {
       "flexDirection": "column",
+      "width": "100%",
     }
   }
 >
