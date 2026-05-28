@@ -101,6 +101,7 @@ const initStyles = (): Styles => {
         },
         list: {
             margin: 10,
+            flex: 1
         },
         link: linkStyles,
         titleLink: {

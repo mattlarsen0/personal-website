@@ -43,7 +43,7 @@ export default function Index() {
 
     return (
     <PageLayoutView>
-      <ScrollView contentContainerStyle={{ width: '95%' }}>
+      <ScrollView>
         <Text style={styles.h1}>Welcome to Matt Larsen's Website!</Text>
         <View style={styles.centerContainer}>
           <Text style={styles.h2}>Hire Me (Contact):&nbsp;</Text>
