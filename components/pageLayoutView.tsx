@@ -3,7 +3,7 @@ import GradientBar from './livery/gradientBar';
 import useStyles from '@/hooks/styles/useStyles';
 
 type PageLayoutViewProps = {
-    children: React.ReactElement,
+    children: React.ReactElement | React.ReactElement[],
     style?: ViewStyle
 }
 
@@ -19,11 +19,19 @@ for (let i = 0; i < 3; i++) {
 
 export default function PageLayoutView(props: PageLayoutViewProps) {
     const styles = useStyles();
+
+    const viewStyle = {
+        ...styles.containerWithBackground,
+        ...(props.style ?? []),
+        width: '100%',
+        padding: 5,
+    } as ViewStyle;
+
     return (
         <View style={styles.background}>
             <GradientBar colors={colors} />
-            <ScrollView>
-                <View style={props.style ?? styles.containerWithBackground}>
+            <ScrollView style={{width: '100%'}}>
+                <View style={viewStyle}>
                     {props.children}
                 </View>
             </ScrollView>

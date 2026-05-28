@@ -1,17 +1,35 @@
+import useStyles from '@/hooks/styles/useStyles';
 import { FlashList } from '@shopify/flash-list';
-import { StyleProp, Text, TextStyle } from 'react-native';
+import { StyleProp, Text, TextStyle, View } from 'react-native';
+import Icon from '@/components/icon';
+import { Link, LinkProps } from 'expo-router';
 
-type TechListProps = {
-  data: React.ReactNode[];
+export type TechListItem = {
+    href: LinkProps['href'],
+    linkText: string
+    icon: string
+}
+export type TechListProps = {
+  data: TechListItem[];
   style?: StyleProp<TextStyle>;
 };
 
 export default function TechList(props: TechListProps) {
+    const styles = useStyles();
     return (
-        <FlashList
-            data={props.data}
-            renderItem={({item}) => <Text style={props.style}>{item}</Text>}
-            style={{margin: 10}}
-        />
+        <View>
+            <FlashList
+                data={props.data}
+                renderItem={({item}) => (
+                    <Text style={props.style}>
+                        <Icon name={item.icon} size={styles.text.fontSize} />
+                        <Link style={styles.titleLink} key="5" href={item.href}>
+                            {item.linkText}
+                        </Link>
+                    </Text>
+                )}
+                style={styles.list}
+            />
+        </View>
     );
 }

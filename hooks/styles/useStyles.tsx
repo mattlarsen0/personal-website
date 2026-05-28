@@ -36,8 +36,6 @@ const initStyles = (): Styles => {
         zIndex: styleConstants.zIndex.content,
         flex: 1,
         alignItems: 'center',
-        minHeight: '100%',
-        minWidth: '100%',
     };
 
     const linkStyles: TextStyle = {
