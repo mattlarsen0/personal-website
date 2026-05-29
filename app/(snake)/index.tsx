@@ -4,7 +4,7 @@ import PageLayoutView from '@/components/pageLayoutView';
 export default function Snake3d() {
     return (
       <PageLayoutView>
-        <SnakeGame />
+          <SnakeGame />
       </PageLayoutView>
     );
 }

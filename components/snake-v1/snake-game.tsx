@@ -383,8 +383,10 @@ const renderTiles = (gameState: GameState, snakeStyles: ReturnType<typeof useSna
             );
         });
         return (
-            <View key={getMappingKey(`column-view-${columnIndex}`, columnIndex)} style={{ display: 'flex', flexDirection: 'column' }}>
-                {columnTiles}
+            <View key={getMappingKey(`column-view-${columnIndex}`, columnIndex)}>
+                <Text style={snakeStyles.playAreaText}>
+                    {columnTiles}
+                </Text>
             </View>
         )
     });
@@ -478,28 +480,28 @@ export default function SnakeGame() {
     }
 
     return (
-    <View style={{ ...styles.container, flexDirection: 'column' }}>
+    <View style={styles.container}>
       <View style={{ alignItems: 'center' }}>
         <Text style={styles.h1}>S-N-A-K-E</Text>
         <Text style={styles.h3}>Collect the WAFFLES to grow longer! Touch or hover to change direction! Can YOU beat Matt&apos;s HIGH SCORE?</Text>
         <Link style={styles.titleLink} href='https://github.com/mattlarsen0/personal-website/blob/main/app/(snake3d)/index.tsx'>Read my code for this game!</Link>
       </View>
-      <View style={{ flexDirection: 'row', width: '100%', justifyContent: 'center' }}>
+      <View style={snakeStyles.row}>
         <Pressable onPressOut={gameStatusAction}>
           <View style={snakeStyles.gameStatusButtons}>
             <Text style={snakeStyles.gameStatusButtonText}>{gameStatusText}</Text>
           </View>
         </Pressable>
-        <View style={{ justifyContent: 'center' }}>
-          <View style={{flexDirection: 'row' }}>
+        <View style={snakeStyles.gameScoreContainer}>
+          <View style={snakeStyles.row}>
             <Text style={snakeStyles.scoreText}>SCORE</Text>
             <Text style={snakeStyles.scoreValue}>{`${gameState.score}`.padStart(8, '0')}</Text>
           </View>
-          <View style={{flexDirection: 'row' }}>
+          <View style={snakeStyles.row}>
             <Text style={snakeStyles.scoreText}>HI</Text>
             <Text style={snakeStyles.scoreValue}>{`${gameState.highScore}`.padStart(8, '0')}</Text>
           </View>
-          <View style={{flexDirection: 'row' }}>
+          <View style={snakeStyles.row}>
             <Text style={snakeStyles.scoreText}>SPEED</Text>
             <Text style={snakeStyles.scoreValue}>{getSnakeSpeed(gameState)} MPH</Text>
           </View>
@@ -507,12 +509,10 @@ export default function SnakeGame() {
       </View>
       <View>
         {gameStatusScreen}
-        <Text style={{...styles.text, textAlign: 'center'}}>
-          <FlashList data={tiles} renderItem={({ item }) => item} horizontal={true} />
-        </Text>
+        {tiles}
       </View>
-      <View style={{ flexDirection: 'column' }}>
-        <View style={{ flexDirection: 'row' }}>
+      <View>
+        <View style={snakeStyles.row}>
           <View style={snakeStyles.buttonSpacer} />
           <View style={snakeStyles.buttonContainer}>
             <Pressable onHoverIn={upTouch} onPress={upTouch} style={snakeStyles.controlButtons}>
@@ -521,7 +521,7 @@ export default function SnakeGame() {
           </View>
           <View style={snakeStyles.buttonSpacer} />
         </View>
-        <View style={{ flexDirection: 'row' }}>
+        <View style={snakeStyles.row}>
           <View style={snakeStyles.buttonContainer}>
             <Pressable onHoverIn={leftTouch} onPress={leftTouch} style={snakeStyles.controlButtons}>
               <Text style={snakeStyles.buttonText}><Icon name="arrow-circle-left"/></Text>
@@ -534,7 +534,7 @@ export default function SnakeGame() {
             </Pressable>
           </View>
         </View>
-        <View style={{ display: 'flex', flexDirection: 'row' }}>
+        <View style={snakeStyles.row}>
           <View style={snakeStyles.buttonSpacer} />
           <View style={snakeStyles.buttonContainer}>
             <Pressable onHoverIn={downTouch} onPress={downTouch} style={snakeStyles.controlButtons}>
