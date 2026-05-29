@@ -7,16 +7,10 @@
     "icon": "./assets/images/icon.png",
     "scheme": "personalwebsite",
     "userInterfaceStyle": "automatic",
-    "ios": {
-      "supportsTablet": true,
-      "bundleIdentifier": "com.mattlarsen0.personalwebsite"
-    },
     "android": {
       "adaptiveIcon": {
-        "backgroundColor": "#E6F4FE",
-        "foregroundImage": "./assets/images/android-icon-foreground.png",
-        "backgroundImage": "./assets/images/android-icon-background.png",
-        "monochromeImage": "./assets/images/android-icon-monochrome.png"
+        "foregroundImage": "./assets/images/icon.png",
+        "backgroundColor": "#e7e7e7"
       },
       "predictiveBackGestureEnabled": false,
       "package": "com.mattlarsen0.personalwebsite"
@@ -25,17 +19,20 @@
       "output": "static",
       "favicon": "./assets/images/favicon.png"
     },
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.mattlarsen0.personalwebsite"
+    },
     "plugins": [
       "expo-router",
       [
         "expo-splash-screen",
         {
-          "image": "./assets/images/applesauce.png",
-          "imageWidth": 200,
+          "image": "./assets/images/splash-icon.png",
           "resizeMode": "contain",
-          "backgroundColor": "#ffffff",
+          "backgroundColor": "#e7e7e7",
           "dark": {
-            "backgroundColor": "#000000"
+            "backgroundColor": "#e7e7e7"
           }
         }
       ],
