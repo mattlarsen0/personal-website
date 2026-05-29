@@ -1,291 +1,295 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<ResumeList> should render component 1`] = `
-<View
-  collapsable={false}
-  onLayout={[Function]}
-  style={
-    {
-      "backgroundColor": "#FFFFFF",
-      "flex": 1,
-      "overflow": "hidden",
-    }
-  }
->
-  <RCTScrollView
+<View>
+  <View
     collapsable={false}
-    maintainVisibleContentPosition={
+    onLayout={[Function]}
+    style={
       {
-        "minIndexForVisible": 0,
+        "backgroundColor": "#FFFFFF",
+        "flex": 1,
+        "overflow": "hidden",
       }
     }
-    onScroll={[Function]}
-    scrollEventThrottle={0.0001}
   >
-    <View>
-      <View
-        style={
-          {
-            "height": 0,
-            "left": 0,
-            "position": "absolute",
-            "top": 1000000,
-          }
+    <RCTScrollView
+      collapsable={false}
+      maintainVisibleContentPosition={
+        {
+          "minIndexForVisible": 0,
         }
-      />
-      <View
-        style={
-          {
-            "height": 0,
-            "width": undefined,
-          }
-        }
-      />
-      <View
-        style={
-          {
-            "height": 0,
-            "marginLeft": undefined,
-            "marginTop": 0,
-            "opacity": 1,
-            "width": undefined,
-          }
-        }
-      >
+      }
+      onScroll={[Function]}
+      scrollEventThrottle={0.0001}
+    >
+      <View>
         <View
-          index={0}
-          onLayout={[Function]}
           style={
             {
-              "flexDirection": "column",
-              "height": undefined,
+              "height": 0,
               "left": 0,
-              "maxHeight": undefined,
-              "maxWidth": undefined,
-              "minHeight": undefined,
-              "minWidth": undefined,
               "position": "absolute",
-              "top": 0,
-              "width": 0,
+              "top": 1000000,
+            }
+          }
+        />
+        <View
+          style={
+            {
+              "height": 0,
+              "width": undefined,
+            }
+          }
+        />
+        <View
+          style={
+            {
+              "height": 0,
+              "marginLeft": undefined,
+              "marginTop": 0,
+              "opacity": 1,
+              "width": undefined,
             }
           }
         >
-          <Text
+          <View
+            index={0}
+            onLayout={[Function]}
             style={
               {
-                "color": "#000000",
+                "flexDirection": "column",
+                "height": undefined,
+                "left": 0,
+                "maxHeight": undefined,
+                "maxWidth": undefined,
+                "minHeight": undefined,
+                "minWidth": undefined,
+                "position": "absolute",
+                "top": 0,
+                "width": 0,
               }
             }
           >
-            • 
-            Test 1
-          </Text>
-        </View>
-        <View
-          index={1}
-          onLayout={[Function]}
-          style={
-            {
-              "flexDirection": "column",
-              "height": undefined,
-              "left": 0,
-              "maxHeight": undefined,
-              "maxWidth": undefined,
-              "minHeight": undefined,
-              "minWidth": undefined,
-              "position": "absolute",
-              "top": 0,
-              "width": 0,
-            }
-          }
-        >
-          <Text
+            <Text
+              style={
+                {
+                  "color": "#000000",
+                }
+              }
+            >
+              • 
+              Test 1
+            </Text>
+          </View>
+          <View
+            index={1}
+            onLayout={[Function]}
             style={
               {
-                "color": "#000000",
+                "flexDirection": "column",
+                "height": undefined,
+                "left": 0,
+                "maxHeight": undefined,
+                "maxWidth": undefined,
+                "minHeight": undefined,
+                "minWidth": undefined,
+                "position": "absolute",
+                "top": 0,
+                "width": 0,
               }
             }
           >
-            • 
-            Test 2
-          </Text>
-        </View>
-        <View
-          index={2}
-          onLayout={[Function]}
-          style={
-            {
-              "flexDirection": "column",
-              "height": undefined,
-              "left": 0,
-              "maxHeight": undefined,
-              "maxWidth": undefined,
-              "minHeight": undefined,
-              "minWidth": undefined,
-              "position": "absolute",
-              "top": 0,
-              "width": 0,
-            }
-          }
-        >
-          <Text
+            <Text
+              style={
+                {
+                  "color": "#000000",
+                }
+              }
+            >
+              • 
+              Test 2
+            </Text>
+          </View>
+          <View
+            index={2}
+            onLayout={[Function]}
             style={
               {
-                "color": "#000000",
+                "flexDirection": "column",
+                "height": undefined,
+                "left": 0,
+                "maxHeight": undefined,
+                "maxWidth": undefined,
+                "minHeight": undefined,
+                "minWidth": undefined,
+                "position": "absolute",
+                "top": 0,
+                "width": 0,
               }
             }
           >
-            • 
-            Test 3
-          </Text>
+            <Text
+              style={
+                {
+                  "color": "#000000",
+                }
+              }
+            >
+              • 
+              Test 3
+            </Text>
+          </View>
         </View>
       </View>
-    </View>
-  </RCTScrollView>
+    </RCTScrollView>
+  </View>
 </View>
 `;
 
 exports[`<ResumeList> should render component with props 1`] = `
-<View
-  collapsable={false}
-  onLayout={[Function]}
-  style={
-    {
-      "backgroundColor": "#FFFFFF",
-      "flex": 1,
-      "overflow": "hidden",
-    }
-  }
->
-  <RCTScrollView
+<View>
+  <View
     collapsable={false}
-    maintainVisibleContentPosition={
+    onLayout={[Function]}
+    style={
       {
-        "minIndexForVisible": 0,
+        "backgroundColor": "#FFFFFF",
+        "flex": 1,
+        "overflow": "hidden",
       }
     }
-    onScroll={[Function]}
-    scrollEventThrottle={0.0001}
   >
-    <View>
-      <View
-        style={
-          {
-            "height": 0,
-            "left": 0,
-            "position": "absolute",
-            "top": 1000000,
-          }
+    <RCTScrollView
+      collapsable={false}
+      maintainVisibleContentPosition={
+        {
+          "minIndexForVisible": 0,
         }
-      />
-      <View
-        style={
-          {
-            "height": 0,
-            "width": undefined,
-          }
-        }
-      />
-      <View
-        style={
-          {
-            "height": 0,
-            "marginLeft": undefined,
-            "marginTop": 0,
-            "opacity": 1,
-            "width": undefined,
-          }
-        }
-      >
+      }
+      onScroll={[Function]}
+      scrollEventThrottle={0.0001}
+    >
+      <View>
         <View
-          index={0}
-          onLayout={[Function]}
           style={
             {
-              "flexDirection": "column",
-              "height": undefined,
+              "height": 0,
               "left": 0,
-              "maxHeight": undefined,
-              "maxWidth": undefined,
-              "minHeight": undefined,
-              "minWidth": undefined,
               "position": "absolute",
-              "top": 0,
-              "width": 0,
+              "top": 1000000,
+            }
+          }
+        />
+        <View
+          style={
+            {
+              "height": 0,
+              "width": undefined,
+            }
+          }
+        />
+        <View
+          style={
+            {
+              "height": 0,
+              "marginLeft": undefined,
+              "marginTop": 0,
+              "opacity": 1,
+              "width": undefined,
             }
           }
         >
-          <Text
+          <View
+            index={0}
+            onLayout={[Function]}
             style={
               {
-                "color": "#000000",
+                "flexDirection": "column",
+                "height": undefined,
+                "left": 0,
+                "maxHeight": undefined,
+                "maxWidth": undefined,
+                "minHeight": undefined,
+                "minWidth": undefined,
+                "position": "absolute",
+                "top": 0,
+                "width": 0,
               }
             }
           >
-            • 
-            Test 1
-          </Text>
-        </View>
-        <View
-          index={1}
-          onLayout={[Function]}
-          style={
-            {
-              "flexDirection": "column",
-              "height": undefined,
-              "left": 0,
-              "maxHeight": undefined,
-              "maxWidth": undefined,
-              "minHeight": undefined,
-              "minWidth": undefined,
-              "position": "absolute",
-              "top": 0,
-              "width": 0,
-            }
-          }
-        >
-          <Text
+            <Text
+              style={
+                {
+                  "color": "#000000",
+                }
+              }
+            >
+              • 
+              Test 1
+            </Text>
+          </View>
+          <View
+            index={1}
+            onLayout={[Function]}
             style={
               {
-                "color": "#000000",
+                "flexDirection": "column",
+                "height": undefined,
+                "left": 0,
+                "maxHeight": undefined,
+                "maxWidth": undefined,
+                "minHeight": undefined,
+                "minWidth": undefined,
+                "position": "absolute",
+                "top": 0,
+                "width": 0,
               }
             }
           >
-            • 
-            Test 2
-          </Text>
-        </View>
-        <View
-          index={2}
-          onLayout={[Function]}
-          style={
-            {
-              "flexDirection": "column",
-              "height": undefined,
-              "left": 0,
-              "maxHeight": undefined,
-              "maxWidth": undefined,
-              "minHeight": undefined,
-              "minWidth": undefined,
-              "position": "absolute",
-              "top": 0,
-              "width": 0,
-            }
-          }
-        >
-          <Text
+            <Text
+              style={
+                {
+                  "color": "#000000",
+                }
+              }
+            >
+              • 
+              Test 2
+            </Text>
+          </View>
+          <View
+            index={2}
+            onLayout={[Function]}
             style={
               {
-                "color": "#000000",
+                "flexDirection": "column",
+                "height": undefined,
+                "left": 0,
+                "maxHeight": undefined,
+                "maxWidth": undefined,
+                "minHeight": undefined,
+                "minWidth": undefined,
+                "position": "absolute",
+                "top": 0,
+                "width": 0,
               }
             }
           >
-            • 
-            Test 3
-          </Text>
+            <Text
+              style={
+                {
+                  "color": "#000000",
+                }
+              }
+            >
+              • 
+              Test 3
+            </Text>
+          </View>
         </View>
       </View>
-    </View>
-  </RCTScrollView>
+    </RCTScrollView>
+  </View>
 </View>
 `;

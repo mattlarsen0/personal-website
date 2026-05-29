@@ -6,8 +6,8 @@ exports[`<TechList> should render component 1`] = `
   onLayout={[Function]}
   style={
     {
+      "backgroundColor": "#FFFFFF",
       "flex": 1,
-      "margin": 10,
       "overflow": "hidden",
     }
   }
@@ -70,11 +70,20 @@ exports[`<TechList> should render component 1`] = `
             }
           }
         >
-          <Text>
-            <div>
-              Test 1
-            </div>
-          </Text>
+          <View>
+            <div
+              className="fontAwesome5"
+              style={
+                {
+                  "color": "#000000",
+                  "fontSize": 24,
+                }
+              }
+            />
+            <a
+              className="link"
+            />
+          </View>
         </View>
         <View
           index={1}
@@ -94,11 +103,20 @@ exports[`<TechList> should render component 1`] = `
             }
           }
         >
-          <Text>
-            <div>
-              Test 2
-            </div>
-          </Text>
+          <View>
+            <div
+              className="fontAwesome5"
+              style={
+                {
+                  "color": "#000000",
+                  "fontSize": 24,
+                }
+              }
+            />
+            <a
+              className="link"
+            />
+          </View>
         </View>
         <View
           index={2}
@@ -118,11 +136,20 @@ exports[`<TechList> should render component 1`] = `
             }
           }
         >
-          <Text>
-            <div>
-              Test 3
-            </div>
-          </Text>
+          <View>
+            <div
+              className="fontAwesome5"
+              style={
+                {
+                  "color": "#000000",
+                  "fontSize": 24,
+                }
+              }
+            />
+            <a
+              className="link"
+            />
+          </View>
         </View>
       </View>
     </View>
@@ -136,8 +163,8 @@ exports[`<TechList> should render component with props 1`] = `
   onLayout={[Function]}
   style={
     {
+      "backgroundColor": "#FFFFFF",
       "flex": 1,
-      "margin": 10,
       "overflow": "hidden",
     }
   }
@@ -200,17 +227,20 @@ exports[`<TechList> should render component with props 1`] = `
             }
           }
         >
-          <Text
-            style={
-              {
-                "fontSize": 20,
+          <View>
+            <div
+              className="fontAwesome5"
+              style={
+                {
+                  "color": "#000000",
+                  "fontSize": 24,
+                }
               }
-            }
-          >
-            <div>
-              Test 1
-            </div>
-          </Text>
+            />
+            <a
+              className="link"
+            />
+          </View>
         </View>
         <View
           index={1}
@@ -230,17 +260,20 @@ exports[`<TechList> should render component with props 1`] = `
             }
           }
         >
-          <Text
-            style={
-              {
-                "fontSize": 20,
+          <View>
+            <div
+              className="fontAwesome5"
+              style={
+                {
+                  "color": "#000000",
+                  "fontSize": 24,
+                }
               }
-            }
-          >
-            <div>
-              Test 2
-            </div>
-          </Text>
+            />
+            <a
+              className="link"
+            />
+          </View>
         </View>
         <View
           index={2}
@@ -260,17 +293,20 @@ exports[`<TechList> should render component with props 1`] = `
             }
           }
         >
-          <Text
-            style={
-              {
-                "fontSize": 20,
+          <View>
+            <div
+              className="fontAwesome5"
+              style={
+                {
+                  "color": "#000000",
+                  "fontSize": 24,
+                }
               }
-            }
-          >
-            <div>
-              Test 3
-            </div>
-          </Text>
+            />
+            <a
+              className="link"
+            />
+          </View>
         </View>
       </View>
     </View>
