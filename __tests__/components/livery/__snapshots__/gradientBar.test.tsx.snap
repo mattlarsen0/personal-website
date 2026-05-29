@@ -18,6 +18,7 @@ exports[`<GradientBar> should render component with one color 1`] = `
       {
         "height": "100%",
         "left": "0%",
+        "minWidth": 250,
         "position": "absolute",
         "top": 0,
         "width": 250,
@@ -49,6 +50,7 @@ exports[`<GradientBar> should render component with three colors 1`] = `
       {
         "height": "100%",
         "left": "0%",
+        "minWidth": 250,
         "position": "absolute",
         "top": 0,
         "width": 250,
@@ -64,6 +66,7 @@ exports[`<GradientBar> should render component with three colors 1`] = `
       {
         "height": "100%",
         "left": "3%",
+        "minWidth": 250,
         "position": "absolute",
         "top": 0,
         "width": 250,
@@ -79,6 +82,7 @@ exports[`<GradientBar> should render component with three colors 1`] = `
       {
         "height": "100%",
         "left": "6%",
+        "minWidth": 250,
         "position": "absolute",
         "top": 0,
         "width": 250,
@@ -110,6 +114,7 @@ exports[`<GradientBar> should render component with two colors 1`] = `
       {
         "height": "100%",
         "left": "0%",
+        "minWidth": 250,
         "position": "absolute",
         "top": 0,
         "width": 250,
@@ -125,6 +130,7 @@ exports[`<GradientBar> should render component with two colors 1`] = `
       {
         "height": "100%",
         "left": "3%",
+        "minWidth": 250,
         "position": "absolute",
         "top": 0,
         "width": 250,

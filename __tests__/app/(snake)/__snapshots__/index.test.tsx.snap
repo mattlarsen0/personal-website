@@ -26,7 +26,16 @@ exports[`<Snake3d> should render component 1`] = `
         }
       }
     >
-      <View />
+      <View>
+        <View
+          style={
+            {
+              "paddingBottom": 30,
+            }
+          }
+        />
+         
+      </View>
     </RCTScrollView>
   </View>
 </View>

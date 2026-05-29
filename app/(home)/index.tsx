@@ -42,11 +42,12 @@ export default function Index() {
     ];
 
     const refreshText = Platform.OS === 'web' ? 'refresh' : 're-open the app'
+    const appName = Platform.OS === 'web' ? 'Website' : 'App'
 
     return (
     <PageLayoutView>
       <ScrollView>
-        <Text style={styles.h1}>Welcome to Matt Larsen's Website!</Text>
+        <Text style={styles.h1}>Welcome to Matt Larsen's {appName}!</Text>
         <View style={styles.centerContainer}>
           <Text style={styles.h2}>Hire Me (Contact):&nbsp;</Text>
           <Link style={styles.titleLink} href="mailto:matt.larsen0@gmail.com">matt.larsen0@gmail.com</Link>

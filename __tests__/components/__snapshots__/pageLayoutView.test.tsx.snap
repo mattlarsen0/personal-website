@@ -29,6 +29,14 @@ exports[`<PageLayoutView> should render component 1`] = `
     >
       <View>
         <View />
+        <View
+          style={
+            {
+              "paddingBottom": 30,
+            }
+          }
+        />
+         
       </View>
     </RCTScrollView>
   </View>
@@ -64,6 +72,14 @@ exports[`<PageLayoutView> should render component with props 1`] = `
     >
       <View>
         <View />
+        <View
+          style={
+            {
+              "paddingBottom": 30,
+            }
+          }
+        />
+         
       </View>
     </RCTScrollView>
   </View>

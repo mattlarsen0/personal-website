@@ -30,11 +30,12 @@ export default function PageLayoutView(props: PageLayoutViewProps) {
     return (
         <View style={styles.background}>
             <GradientBar colors={colors} />
-                <View style={viewStyle}>
-                    <ScrollView style={{width: '100%'}}>
-                        {props.children}
-                    </ScrollView>
-                </View>
+            <View style={viewStyle}>
+                <ScrollView style={{width: '100%'}}>
+                    {props.children}
+                    <View style={{paddingBottom: 30}} /> {/* Bottom padding to place content under screen buttons */}
+                </ScrollView>
+            </View>
         </View>
     );
 }
