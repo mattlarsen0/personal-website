@@ -5,7 +5,6 @@ import utils from '@/utils';
 import useSnakeStyles from '../../hooks/styles/useSnakeStyles';
 import Icon from '@/components/icon';
 import { Link } from 'expo-router';
-import { FlashList, useMappingHelper } from '@shopify/flash-list';
 enum Direction {
   Up,
   Down,
@@ -31,7 +30,6 @@ enum GameStatus {
 }
 
 const PlayAreaSize = 20;
-const GoalContents = <Text>🧇</Text>;
 const StartPosition = [10, 10];
 const SnakeXMax = PlayAreaSize - 2; // minus 2, for walls and 0-indexing
 const SnakeXMin = 1;
@@ -191,7 +189,7 @@ const getTickSpeed = (gameState: GameState) => {
     return Math.max(GameTickInterval - ((gameState.snakeBody.length - InitialSnakeLength) * TickTimeModifier), MinimumTickInterval);
 }
 
-const startTicking = (gameState: GameState, setGameState: Function, directionRef: React.RefObject<Direction>, setTiles: Function, snakeStyles: ReturnType<typeof useSnakeStyles>, getMappingKey: Function) => {
+const startTicking = (gameState: GameState, setGameState: Function, directionRef: React.RefObject<Direction>, setTiles: Function, snakeStyles: ReturnType<typeof useSnakeStyles>) => {
     if (gameState.activeTimeout) {
         return;
     }
@@ -206,7 +204,7 @@ const startTicking = (gameState: GameState, setGameState: Function, directionRef
             gameState.activeTimeout = setTimeout(tick, tickSpeed);
         }
         setGameState({ ...gameState });
-        setTiles(renderTiles(gameState, snakeStyles, getMappingKey));
+        setTiles(renderTiles(gameState, snakeStyles));
     }
     gameState.activeTimeout = setTimeout(tick, GameTickInterval);
 }
@@ -219,8 +217,8 @@ const onPause = (gameState: GameState, setState: Function) => {
     setState({ ...gameState });
 }
 
-const onResume = (gameState: GameState, setState: Function, directionRef: React.RefObject<Direction>, setTiles: Function, snakeStyles: ReturnType<typeof useSnakeStyles>, getMappingKey: Function) => {
-    startTicking(gameState, setState, directionRef, setTiles, snakeStyles, getMappingKey);
+const onResume = (gameState: GameState, setState: Function, directionRef: React.RefObject<Direction>, setTiles: Function, snakeStyles: ReturnType<typeof useSnakeStyles>) => {
+    startTicking(gameState, setState, directionRef, setTiles, snakeStyles);
 }
 
 const onTick = (gameState: GameState, direction: Direction) => {
@@ -309,7 +307,7 @@ const endGame = (gameState: GameState, status: GameStatus) => {
     }
 }
 
-const renderTiles = (gameState: GameState, snakeStyles: ReturnType<typeof useSnakeStyles>, getMappingKey: Function) => {
+const renderTiles = (gameState: GameState, snakeStyles: ReturnType<typeof useSnakeStyles>) => {
     if (!gameState || !gameState.snakeBody || !gameState.snakeBody.length) {
         return [];
     }
@@ -353,40 +351,37 @@ const renderTiles = (gameState: GameState, snakeStyles: ReturnType<typeof useSna
 
     const tiles = gameState?.playArea?.map((column, columnIndex) => {
         const columnTiles = column.map((tile, rowIndex) => {
-            const key = `tile-${columnIndex}-${rowIndex}`;
             let tileContents;
             switch (tile) {
                 case TileType.Wall:
-                    tileContents = <Text>🌲</Text>;
+                    tileContents = <Text style={snakeStyles.playAreaText}>🌾</Text>
                     break;
                 case TileType.Snake:
-                    tileContents = <Text>🟩</Text>;
+                    tileContents = <Text style={snakeStyles.playAreaText}>🟩</Text>
                     break;
                 case TileType.SnakeHead:
-                    tileContents = <Text style={{transform: [{ rotate: headRotation }]}}>🔰</Text>;
+                    tileContents = <Text style={{...snakeStyles.playAreaText, transform: [{ rotate: headRotation }]}}>🔰</Text>
                     break;
                 case TileType.SnakeTail:
-                    tileContents = <Text style={{transform: [{ rotate: tailRotation }]}}>♠️</Text>;
+                    tileContents = <Text style={{...snakeStyles.playAreaText, transform: [{ rotate: tailRotation }]}}>♠️</Text>
                     break;
                 case TileType.Goal:
-                    tileContents = GoalContents;
+                    tileContents = <Text style={snakeStyles.playAreaText}>🧇</Text>
                     break;
                 case TileType.Empty:
-                    tileContents = <Text>.</Text>;
+                    tileContents = <Text style={snakeStyles.playAreaText}>.</Text>
                     break;
                 default:
                     throw new Error(`Unexpected tile type ${tile} at coordinates (${columnIndex}, ${rowIndex})`);
             }
 
             return (
-                <View key={getMappingKey(key, rowIndex)} style={snakeStyles.tiles}>{tileContents}</View>
+                <View key={`tile-${columnIndex}-${rowIndex}`} style={snakeStyles.tiles}>{tileContents}</View>
             );
         });
         return (
-            <View key={getMappingKey(`column-view-${columnIndex}`, columnIndex)}>
-                <Text style={snakeStyles.playAreaText}>
-                    {columnTiles}
-                </Text>
+            <View key={`column-view-${columnIndex}`} style={{flexDirection: 'column'}}>
+                {columnTiles}
             </View>
         )
     });
@@ -401,10 +396,9 @@ const getSnakeSpeed = (gameState: GameState) => {
 export default function SnakeGame() {
     const styles = useStyles();
     const snakeStyles = useSnakeStyles();
-    const { getMappingKey } = useMappingHelper();
     const [gameState, setGameState] = useState(() => initGameState());
     const mutableGameState = getMutableGameState(gameState);
-    const [tiles, setTiles] = useState(() => renderTiles(mutableGameState, snakeStyles, getMappingKey));
+    const [tiles, setTiles] = useState(() => renderTiles(mutableGameState, snakeStyles));
     const directionRef = useRef(DefaultDirection);
 
     useEffect(() => {
@@ -447,20 +441,20 @@ export default function SnakeGame() {
     let gameStatusAction;
     if (gameState.status === GameStatus.Initiated) {
         gameStatusText = 'START GAME';
-        gameStatusAction = () => startTicking(mutableGameState, setGameState, directionRef, setTiles, snakeStyles, getMappingKey)
+        gameStatusAction = () => startTicking(mutableGameState, setGameState, directionRef, setTiles, snakeStyles)
     } else if (gameState.status === GameStatus.Running) {
         gameStatusText = 'PAUSE GAME';
         gameStatusAction = () => onPause(mutableGameState, setGameState);
     } else if (gameState.status === GameStatus.Paused) {
         gameStatusText = 'RESUME GAME';
-        gameStatusAction = () => onResume(mutableGameState, setGameState, directionRef, setTiles, snakeStyles, getMappingKey);
+        gameStatusAction = () => onResume(mutableGameState, setGameState, directionRef, setTiles, snakeStyles);
     } else if (gameState.status === GameStatus.Lost) {
         gameStatusText = 'RESTART GAME';
         gameStatusAction = () => {
             const newGameState = initGameState();
             setGameState(newGameState);
             directionRef.current = DefaultDirection;
-            startTicking(newGameState, setGameState, directionRef, setTiles, snakeStyles, getMappingKey);
+            startTicking(newGameState, setGameState, directionRef, setTiles, snakeStyles);
         };
     }
 
@@ -509,7 +503,9 @@ export default function SnakeGame() {
       </View>
       <View>
         {gameStatusScreen}
-        {tiles}
+        <View style={snakeStyles.row}>
+            {tiles}
+        </View>
       </View>
       <View>
         <View style={snakeStyles.row}>

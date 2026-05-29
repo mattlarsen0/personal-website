@@ -35,7 +35,6 @@ const initStyles = (styles: ReturnType<typeof useStyles>): SnakeStyles => {
         tiles: {
             height: 15,
             width: 15,
-            fontSize: 10,
             justifyContent: 'center',
             alignItems: 'center',
             fontFamily: 'SpaceMono-Regular',
@@ -119,6 +118,7 @@ const initStyles = (styles: ReturnType<typeof useStyles>): SnakeStyles => {
             ...styles.text,
             textAlign: 'center',
             justifyContent: 'center',
+            fontSize: 10
         },
         gameScoreContainer: {
             justifyContent: 'center',
