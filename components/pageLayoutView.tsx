@@ -1,4 +1,4 @@
-import { ScrollView, View, ViewStyle } from 'react-native'
+import { ScrollView, View, Text, ViewStyle } from 'react-native'
 import GradientBar from './livery/gradientBar';
 import useStyles from '@/hooks/styles/useStyles';
 
@@ -30,11 +30,11 @@ export default function PageLayoutView(props: PageLayoutViewProps) {
     return (
         <View style={styles.background}>
             <GradientBar colors={colors} />
-            <ScrollView style={{width: '100%'}}>
                 <View style={viewStyle}>
-                    {props.children}
+                    <ScrollView style={{width: '100%'}}>
+                        {props.children}
+                    </ScrollView>
                 </View>
-            </ScrollView>
         </View>
     );
 }
