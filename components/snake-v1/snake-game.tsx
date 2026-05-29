@@ -483,7 +483,7 @@ export default function SnakeGame() {
             <Text style={styles.h3}>Collect the WAFFLES to grow longer! Touch or hover to change direction!</Text>
             <Text style={styles.h3}>Can YOU beat Matt&apos;s HIGH SCORE?</Text>
         </View>
-        <Link style={styles.titleLink} href='https://github.com/mattlarsen0/personal-website/blob/main/app/(snake3d)/index.tsx'>Read my code for this game!</Link>
+        <Link style={styles.titleLink} href='https://github.com/mattlarsen0/personal-website/blob/main/components/snake-v1/snake-game.tsx'>Read my code for this game!</Link>
       </View>
       <View style={snakeStyles.row}>
         <Pressable onPressOut={gameStatusAction}>

@@ -58,7 +58,7 @@ export default function Index() {
         </View>
         <View style={styles.centerContainer}>
           <Text style={styles.titleText}>Download it for Android here:&nbsp;</Text>
-          <Link style={styles.titleLink} href='https://www.github.com'>
+          <Link style={styles.titleLink} href='https://github.com/mattlarsen0/personal-website/raw/refs/heads/main/latestAndroidBuild.zip'>
             <Icon name="download" />
           </Link>
         </View>

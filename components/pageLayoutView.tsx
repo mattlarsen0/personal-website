@@ -33,7 +33,7 @@ export default function PageLayoutView(props: PageLayoutViewProps) {
             <View style={viewStyle}>
                 <ScrollView style={{width: '100%'}}>
                     {props.children}
-                    <View style={{paddingBottom: 30}} /> {/* Bottom padding to place content under screen buttons */}
+                    <View style={{paddingBottom: 30}} />
                 </ScrollView>
             </View>
         </View>
