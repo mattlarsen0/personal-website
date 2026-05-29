@@ -122,7 +122,7 @@ const initStyles = (styles: ReturnType<typeof useStyles>): SnakeStyles => {
         },
         gameScoreContainer: {
             justifyContent: 'center',
-            flex: 1
+            width: '38%'
         }
     });
 }
