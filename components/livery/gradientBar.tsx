@@ -14,7 +14,8 @@ export default function GradientBar(props: GradientBarProps) {
                 top: 0,
                 height: '100%',
                 width: width/3,
-                position: 'absolute'
+                position: 'absolute',
+                minWidth: 250
             }} key={`gradientBar-${color}-${index}`}>
                 <Gradient
                     width='100%'

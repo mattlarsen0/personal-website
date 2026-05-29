@@ -4,7 +4,7 @@ import { useFonts } from '@expo-google-fonts/roboto/useFonts';
 import { DrawerNavigationOptions } from '@react-navigation/drawer';
 import { Drawer } from 'expo-router/drawer';
 import * as SplashScreen from 'expo-splash-screen';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Platform, Appearance } from 'react-native';
 
 SplashScreen.preventAutoHideAsync();

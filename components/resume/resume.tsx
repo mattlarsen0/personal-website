@@ -7,7 +7,7 @@ export default function Resume() {
     const styles = useStyles();
 
     return (
-        <View style={{flexDirection: 'column', width: '100%'}}>
+        <View style={{flexDirection: 'column', width: '100%', maxWidth: 1000}}>
             <Text style={styles.h2}>Experience</Text>
             <Text style={{...styles.h3, marginTop: 20}}>Columbia Sportswear Company</Text>
             <Text style={styles.h4}>Senior Software Engineer</Text>
@@ -15,7 +15,7 @@ export default function Resume() {
             <HR />
             <ResumeList
                 data={[
-                    'Developed full stack features using JavaScript frameworks and backend services in an agile environment, enhancing e-commerce platforms for multiple brands.',
+                    'Developed full stack features using C#, JavaScript, AWS and Azure frameworks and backend services in an agile environment, enhancing e-commerce platforms for multiple brands',
                     'Mentored junior developers through pair programming and knowledge transfer sessions, fostering team growth and code quality.',
                     'Conducted code reviews and wrote tests to ensure maintainable and robust software releases.',
                     'Managed database operations and contributed to system scalability and performance.',

@@ -2,7 +2,7 @@ import Icon from '@/components/icon';
 import Resume from '@/components/resume/resume';
 import useStyles from '@/hooks/styles/useStyles';
 import { Link, LinkProps } from 'expo-router';
-import { ScrollView, Text, View } from 'react-native';
+import { Platform, ScrollView, Text, View } from 'react-native';
 import PageLayoutView from '@/components/pageLayoutView';
 import TechList, { TechListItem } from '@/components/techList';
 
@@ -41,6 +41,8 @@ export default function Index() {
         },
     ];
 
+    const refreshText = Platform.OS === 'web' ? 'refresh' : 're-open the app'
+
     return (
     <PageLayoutView>
       <ScrollView>
@@ -62,7 +64,7 @@ export default function Index() {
         <View style={styles.centerContainer}>
           <Text style={styles.titleText}>Read my resume below, try out </Text>
           <Link href="/(snake)" style={styles.titleLink}>S-N-A-K-E</Link>
-          <Text style={styles.titleText}> and refresh to change colors!</Text>
+          <Text style={styles.titleText}> and {refreshText} to change colors!</Text>
         </View>
         <View style={{ alignItems: 'center', margin: 20 }}>
           <Resume />
