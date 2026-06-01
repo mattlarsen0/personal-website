@@ -1,6 +1,5 @@
 import { Text, View } from 'react-native';
 import useStyles from '@/hooks/styles/useStyles';
-import { FlashList } from '@shopify/flash-list';
 
 type ResumeListProps = {
   data: string[];
@@ -8,18 +7,15 @@ type ResumeListProps = {
 
 export default function ResumeList(props: ResumeListProps) {
     const styles = useStyles();
+    const items = props.data.map((item, index) =>
+        <View key={`resumeListItem-${index}`}>
+            <Text style={styles.text}>• {item}</Text>
+        </View>
+    );
+
     return (
-        <View>
-            <FlashList
-                data={props.data.map((item, index) => {
-                    return {
-                        key: index,
-                        value: item
-                    }
-                })}
-                renderItem={({item}) => <Text style={styles.text}>• {item.value}</Text>}
-                style={styles.list}
-            />
+        <View style={styles.list}>
+            {items}
         </View>
     );
 }

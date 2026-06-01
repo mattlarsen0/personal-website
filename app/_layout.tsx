@@ -4,7 +4,7 @@ import { useFonts } from '@expo-google-fonts/roboto/useFonts';
 import { DrawerNavigationOptions } from '@react-navigation/drawer';
 import { Drawer } from 'expo-router/drawer';
 import * as SplashScreen from 'expo-splash-screen';
-import { useEffect, useState } from 'react';
+import { StrictMode, useEffect, useState } from 'react';
 import { Platform, Appearance } from 'react-native';
 
 SplashScreen.preventAutoHideAsync();
@@ -72,21 +72,23 @@ export default function RootLayout() {
     };
 
     return (
-        <Drawer screenOptions={screenOptions}>
-        <Drawer.Screen
-            name="(home)/index"
-            options={{
-                drawerLabel: 'Home',
-                title: 'Home',
-            }}
-        />
-        <Drawer.Screen
-            name="(snake)/index"
-            options={{
-                drawerLabel: 'S-N-A-K-E Game',
-                title: 'S-N-A-K-E Game'
-            }}
-        />
-        </Drawer>
+        <StrictMode>
+            <Drawer screenOptions={screenOptions}>
+            <Drawer.Screen
+                name="(home)/index"
+                options={{
+                    drawerLabel: 'Home',
+                    title: 'Home',
+                }}
+            />
+            <Drawer.Screen
+                name="(snake)/index"
+                options={{
+                    drawerLabel: 'S-N-A-K-E Game',
+                    title: 'S-N-A-K-E Game'
+                }}
+            />
+            </Drawer>
+        </StrictMode>
     );
 }

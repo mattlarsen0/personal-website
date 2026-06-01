@@ -1,6 +1,5 @@
 import useStyles from '@/hooks/styles/useStyles';
-import { FlashList } from '@shopify/flash-list';
-import { StyleProp, Text, TextStyle, View } from 'react-native';
+import { View } from 'react-native';
 import Icon from '@/components/icon';
 import { Link, LinkProps } from 'expo-router';
 
@@ -15,18 +14,18 @@ export type TechListProps = {
 
 export default function TechList(props: TechListProps) {
     const styles = useStyles();
+    const items = props.data.map((item, index) => (
+        <View key={`techListItem-${index}`} style={styles.centerContainer}>
+            <Icon name={item.icon} size={styles.text.fontSize} />
+            <Link style={styles.titleLink} href={item.href}>
+                {item.linkText}
+            </Link>
+        </View>
+    ));
+
     return (
-        <FlashList
-            data={props.data}
-            renderItem={({item}) => (
-                <View style={styles.centerContainer}>
-                    <Icon name={item.icon} size={styles.text.fontSize} />
-                    <Link style={styles.titleLink} href={item.href}>
-                        {item.linkText}
-                    </Link>
-                </View>
-            )}
-            style={styles.list}
-        />
+        <View style={styles.list}>
+            {items}
+        </View>
     );
 }

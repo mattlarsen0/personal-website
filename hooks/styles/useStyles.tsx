@@ -100,8 +100,7 @@ const initStyles = (): Styles => {
             fontFamily: 'Oswald-Regular',
         },
         list: {
-            margin: 10,
-            flex: 1
+            margin: 10
         },
         link: linkStyles,
         titleLink: {
