@@ -46,35 +46,33 @@ export default function Index() {
 
     return (
     <PageLayoutView>
-      <ScrollView>
-        <Text style={styles.h1}>Welcome to Matt Larsen's {appName}!</Text>
-        <View style={styles.centerContainer}>
-          <Text style={styles.h2}>Hire Me (Contact):&nbsp;</Text>
-          <Link style={styles.titleLink} href="mailto:matt.larsen0@gmail.com">matt.larsen0@gmail.com</Link>
-        </View>
-        <View style={styles.centerContainer}>
-          <Text style={styles.titleText}>Built with React Native, checkout my code here:&nbsp;</Text>
-          <Link style={styles.titleLink} href='https://github.com/mattlarsen0/personal-website/'>https://github.com/mattlarsen0/personal-website/</Link>
-        </View>
-        <View style={styles.centerContainer}>
-          <Text style={styles.titleText}>Download it for Android here:&nbsp;</Text>
-          <Link style={styles.titleLink} href='https://github.com/mattlarsen0/personal-website/raw/refs/heads/main/latestAndroidBuild.zip'>
-            <Icon name="download" />
-          </Link>
-        </View>
-        <View style={styles.centerContainer}>
-          <Text style={styles.titleText}>Read my resume below, try out </Text>
-          <Link href="/(snake)" style={styles.titleLink}>S-N-A-K-E</Link>
-          <Text style={styles.titleText}> and {refreshText} to change colors!</Text>
-        </View>
-        <View style={{ alignItems: 'center', margin: 20 }}>
-          <Resume />
-        </View>
-        <Text style={styles.h3}>
-          This website was built with:
-        </Text>
-        <TechList data={techList}/>
-      </ScrollView>
+      <Text style={styles.h1}>Welcome to Matt Larsen's {appName}!</Text>
+      <View style={styles.centerContainer}>
+        <Text style={styles.h2}>Hire Me (Contact):&nbsp;</Text>
+        <Link style={styles.titleLink} href="mailto:matt.larsen0@gmail.com">matt.larsen0@gmail.com</Link>
+      </View>
+      <View style={styles.centerContainer}>
+        <Text style={styles.titleText}>Built with React Native, checkout my code here:&nbsp;</Text>
+        <Link style={styles.titleLink} href='https://github.com/mattlarsen0/personal-website/'>https://github.com/mattlarsen0/personal-website/</Link>
+      </View>
+      <View style={styles.centerContainer}>
+        <Text style={styles.titleText}>Download it for Android here:&nbsp;</Text>
+        <Link style={styles.titleLink} href='https://github.com/mattlarsen0/personal-website/raw/refs/heads/main/latestAndroidBuild.zip'>
+          <Icon name="download" />
+        </Link>
+      </View>
+      <View style={styles.centerContainer}>
+        <Text style={styles.titleText}>Read my resume below, try out </Text>
+        <Link href="/(snake)" style={styles.titleLink}>S-N-A-K-E</Link>
+        <Text style={styles.titleText}> and {refreshText} to change colors!</Text>
+      </View>
+      <View style={{ alignItems: 'center', margin: 20 }}>
+        <Resume />
+      </View>
+      <Text style={styles.h3}>
+        This website was built with:
+      </Text>
+      <TechList data={techList}/>
     </PageLayoutView>
     );
 }
