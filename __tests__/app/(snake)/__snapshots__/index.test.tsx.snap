@@ -34,7 +34,6 @@ exports[`<Snake3d> should render component 1`] = `
             }
           }
         />
-         
       </View>
     </RCTScrollView>
   </View>

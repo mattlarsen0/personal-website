@@ -36,6 +36,7 @@ const initStyles = (): Styles => {
         zIndex: styleConstants.zIndex.content,
         flex: 1,
         alignItems: 'center',
+        flexBasis: 'auto'
     };
 
     const linkStyles: TextStyle = {

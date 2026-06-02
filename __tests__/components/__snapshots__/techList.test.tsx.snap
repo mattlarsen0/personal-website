@@ -2,314 +2,106 @@
 
 exports[`<TechList> should render component 1`] = `
 <View
-  collapsable={false}
-  onLayout={[Function]}
   style={
     {
       "backgroundColor": "#FFFFFF",
-      "flex": 1,
-      "overflow": "hidden",
     }
   }
 >
-  <RCTScrollView
-    collapsable={false}
-    maintainVisibleContentPosition={
-      {
-        "minIndexForVisible": 0,
+  <View>
+    <div
+      className="fontAwesome5"
+      style={
+        {
+          "color": "#000000",
+          "fontSize": 24,
+        }
       }
-    }
-    onScroll={[Function]}
-    scrollEventThrottle={0.0001}
-  >
-    <View>
-      <View
-        style={
-          {
-            "height": 0,
-            "left": 0,
-            "position": "absolute",
-            "top": 1000000,
-          }
+    />
+    <a
+      className="link"
+    />
+  </View>
+  <View>
+    <div
+      className="fontAwesome5"
+      style={
+        {
+          "color": "#000000",
+          "fontSize": 24,
         }
-      />
-      <View
-        style={
-          {
-            "height": 0,
-            "width": undefined,
-          }
+      }
+    />
+    <a
+      className="link"
+    />
+  </View>
+  <View>
+    <div
+      className="fontAwesome5"
+      style={
+        {
+          "color": "#000000",
+          "fontSize": 24,
         }
-      />
-      <View
-        style={
-          {
-            "height": 0,
-            "marginLeft": undefined,
-            "marginTop": 0,
-            "opacity": 1,
-            "width": undefined,
-          }
-        }
-      >
-        <View
-          index={0}
-          onLayout={[Function]}
-          style={
-            {
-              "flexDirection": "column",
-              "height": undefined,
-              "left": 0,
-              "maxHeight": undefined,
-              "maxWidth": undefined,
-              "minHeight": undefined,
-              "minWidth": undefined,
-              "position": "absolute",
-              "top": 0,
-              "width": 0,
-            }
-          }
-        >
-          <View>
-            <div
-              className="fontAwesome5"
-              style={
-                {
-                  "color": "#000000",
-                  "fontSize": 24,
-                }
-              }
-            />
-            <a
-              className="link"
-            />
-          </View>
-        </View>
-        <View
-          index={1}
-          onLayout={[Function]}
-          style={
-            {
-              "flexDirection": "column",
-              "height": undefined,
-              "left": 0,
-              "maxHeight": undefined,
-              "maxWidth": undefined,
-              "minHeight": undefined,
-              "minWidth": undefined,
-              "position": "absolute",
-              "top": 0,
-              "width": 0,
-            }
-          }
-        >
-          <View>
-            <div
-              className="fontAwesome5"
-              style={
-                {
-                  "color": "#000000",
-                  "fontSize": 24,
-                }
-              }
-            />
-            <a
-              className="link"
-            />
-          </View>
-        </View>
-        <View
-          index={2}
-          onLayout={[Function]}
-          style={
-            {
-              "flexDirection": "column",
-              "height": undefined,
-              "left": 0,
-              "maxHeight": undefined,
-              "maxWidth": undefined,
-              "minHeight": undefined,
-              "minWidth": undefined,
-              "position": "absolute",
-              "top": 0,
-              "width": 0,
-            }
-          }
-        >
-          <View>
-            <div
-              className="fontAwesome5"
-              style={
-                {
-                  "color": "#000000",
-                  "fontSize": 24,
-                }
-              }
-            />
-            <a
-              className="link"
-            />
-          </View>
-        </View>
-      </View>
-    </View>
-  </RCTScrollView>
+      }
+    />
+    <a
+      className="link"
+    />
+  </View>
 </View>
 `;
 
 exports[`<TechList> should render component with props 1`] = `
 <View
-  collapsable={false}
-  onLayout={[Function]}
   style={
     {
       "backgroundColor": "#FFFFFF",
-      "flex": 1,
-      "overflow": "hidden",
     }
   }
 >
-  <RCTScrollView
-    collapsable={false}
-    maintainVisibleContentPosition={
-      {
-        "minIndexForVisible": 0,
+  <View>
+    <div
+      className="fontAwesome5"
+      style={
+        {
+          "color": "#000000",
+          "fontSize": 24,
+        }
       }
-    }
-    onScroll={[Function]}
-    scrollEventThrottle={0.0001}
-  >
-    <View>
-      <View
-        style={
-          {
-            "height": 0,
-            "left": 0,
-            "position": "absolute",
-            "top": 1000000,
-          }
+    />
+    <a
+      className="link"
+    />
+  </View>
+  <View>
+    <div
+      className="fontAwesome5"
+      style={
+        {
+          "color": "#000000",
+          "fontSize": 24,
         }
-      />
-      <View
-        style={
-          {
-            "height": 0,
-            "width": undefined,
-          }
+      }
+    />
+    <a
+      className="link"
+    />
+  </View>
+  <View>
+    <div
+      className="fontAwesome5"
+      style={
+        {
+          "color": "#000000",
+          "fontSize": 24,
         }
-      />
-      <View
-        style={
-          {
-            "height": 0,
-            "marginLeft": undefined,
-            "marginTop": 0,
-            "opacity": 1,
-            "width": undefined,
-          }
-        }
-      >
-        <View
-          index={0}
-          onLayout={[Function]}
-          style={
-            {
-              "flexDirection": "column",
-              "height": undefined,
-              "left": 0,
-              "maxHeight": undefined,
-              "maxWidth": undefined,
-              "minHeight": undefined,
-              "minWidth": undefined,
-              "position": "absolute",
-              "top": 0,
-              "width": 0,
-            }
-          }
-        >
-          <View>
-            <div
-              className="fontAwesome5"
-              style={
-                {
-                  "color": "#000000",
-                  "fontSize": 24,
-                }
-              }
-            />
-            <a
-              className="link"
-            />
-          </View>
-        </View>
-        <View
-          index={1}
-          onLayout={[Function]}
-          style={
-            {
-              "flexDirection": "column",
-              "height": undefined,
-              "left": 0,
-              "maxHeight": undefined,
-              "maxWidth": undefined,
-              "minHeight": undefined,
-              "minWidth": undefined,
-              "position": "absolute",
-              "top": 0,
-              "width": 0,
-            }
-          }
-        >
-          <View>
-            <div
-              className="fontAwesome5"
-              style={
-                {
-                  "color": "#000000",
-                  "fontSize": 24,
-                }
-              }
-            />
-            <a
-              className="link"
-            />
-          </View>
-        </View>
-        <View
-          index={2}
-          onLayout={[Function]}
-          style={
-            {
-              "flexDirection": "column",
-              "height": undefined,
-              "left": 0,
-              "maxHeight": undefined,
-              "maxWidth": undefined,
-              "minHeight": undefined,
-              "minWidth": undefined,
-              "position": "absolute",
-              "top": 0,
-              "width": 0,
-            }
-          }
-        >
-          <View>
-            <div
-              className="fontAwesome5"
-              style={
-                {
-                  "color": "#000000",
-                  "fontSize": 24,
-                }
-              }
-            />
-            <a
-              className="link"
-            />
-          </View>
-        </View>
-      </View>
-    </View>
-  </RCTScrollView>
+      }
+    />
+    <a
+      className="link"
+    />
+  </View>
 </View>
 `;
