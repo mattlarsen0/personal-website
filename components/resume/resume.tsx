@@ -15,7 +15,7 @@ export default function Resume() {
             <HR />
             <ResumeList
                 data={[
-                    'Developed full stack features using C#, JavaScript, AWS and Azure frameworks and backend services in an agile environment, enhancing e-commerce platforms for multiple brands',
+                    'Developed full stack features using C#, JavaScript, AWS and Azure frameworks in an agile environment, enhancing e-commerce platforms for multiple brands',
                     'Mentored junior developers through pair programming and knowledge transfer sessions, fostering team growth and code quality.',
                     'Conducted code reviews and wrote tests to ensure maintainable and robust software releases.',
                     'Managed database operations and contributed to system scalability and performance.',
