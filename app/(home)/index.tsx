@@ -52,11 +52,11 @@ export default function Index() {
         <Link style={styles.titleLink} href="mailto:matt.larsen0@gmail.com">matt.larsen0@gmail.com</Link>
       </View>
       <View style={styles.centerContainer}>
-        <Text style={styles.titleText}>Built with React Native, checkout my code here:&nbsp;</Text>
+        <Text style={styles.titleText}>Built with React Native, checkout my code:&nbsp;</Text>
         <Link style={styles.titleLink} href='https://github.com/mattlarsen0/personal-website/'>https://github.com/mattlarsen0/personal-website/</Link>
       </View>
       <View style={styles.centerContainer}>
-        <Text style={styles.titleText}>Download it for Android here:&nbsp;</Text>
+        <Text style={styles.titleText}>Download for Android:&nbsp;</Text>
         <Link style={styles.titleLink} href='https://github.com/mattlarsen0/personal-website/raw/refs/heads/main/latestAndroidBuild.zip'>
           <Icon name="download" />
         </Link>
