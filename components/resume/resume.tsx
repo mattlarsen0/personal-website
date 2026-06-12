@@ -79,7 +79,7 @@ export default function Resume() {
                     'Deployed software, maintained JIRA workflows, and authored technical documentation.'
                 ]}
             />
-            <Text style={styles.h3}>AWS Lambda Node Upgrades - January 2024 to June 2024</Text>
+            <Text style={styles.h3}>Personal Website (mattsoftware.dev) - May 2025 to Present</Text>
             <ResumeList
                 data={[
                     'Designed and developed a personal portfolio website and Android application using React Native and TypeScript.',
